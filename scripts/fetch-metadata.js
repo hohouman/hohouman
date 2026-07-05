@@ -88,16 +88,29 @@ async function getDoubanData(doubanId, type, url) {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
     await page.setViewport({ width: 1920, height: 1080 });
     
-    // 添加额外的请求头来模拟真实浏览器
+    // 添加更多的请求头来模拟真实浏览器
     await page.setExtraHTTPHeaders({
       'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+      'Upgrade-Insecure-Requests': '1',
+      'Cache-Control': 'max-age=0'
+    });
+    
+    // 添加 cookies 来绕过部分反爬虫检测
+    await page.setCookie({
+      name: 'll',
+      value: '1082896593',
+      domain: '.douban.com',
+      path: '/'
     });
     
     const host = type === 'movie' ? 'movie' : type === 'book' ? 'book' : 'music';
     const pageUrl = `https://${host}.douban.com/subject/${doubanId}/`;
     
     console.log(`正在访问豆瓣页面：${pageUrl}`);
+    
+    // 添加随机延迟以避免过于频繁的请求
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 2000 + 1000));
     
     await page.goto(pageUrl, {
       waitUntil: 'networkidle2',
@@ -111,8 +124,10 @@ async function getDoubanData(doubanId, type, url) {
     
     // 检查是否有反爬虫提示
     const pageTitle = await page.title();
-    if (pageTitle.includes('访问太频繁') || pageTitle.includes('验证码')) {
-      console.error(`豆瓣反爬虫检测：${pageTitle}`);
+    console.log(`页面标题: ${pageTitle}`);
+    
+    if (pageTitle.includes('访问太频繁') || pageTitle.includes('验证码') || pageTitle === '豆瓣') {
+      console.error(`豆瓣反爬虫检测：${pageTitle} - 可能需要手动验证或稍后再试`);
       await browser.close();
       return null;
     }
@@ -266,25 +281,44 @@ async function getDoubanData(doubanId, type, url) {
         }
       }
 
-      // 改进描述提取 - 根据类型使用不同的选择器
+        // 改进描述提取 - 根据类型使用不同的选择器
       let desc = '';
       
       if (type === 'movie') {
-        // 电影描述：优先从 v:summary 获取
+        // 电影描述：尝试多个选择器
+        // 1. 优先从 v:summary 获取
         const summaryEl = document.querySelector('[property="v:summary"]');
-        if (summaryEl) {
+        if (summaryEl && summaryEl.textContent.trim()) {
           desc = summaryEl.textContent.trim();
         } else {
-          // 尝试从 .related-info 获取
-          const relatedInfo = document.querySelector('.related-info .indent');
-          if (relatedInfo) {
-            desc = relatedInfo.textContent.trim();
+          // 2. 尝试从 #link-report-intra 获取（你提供的HTML中的结构）
+          const linkReportIntra = document.querySelector('#link-report-intra');
+          if (linkReportIntra && linkReportIntra.textContent.trim()) {
+            desc = linkReportIntra.textContent.trim();
+          } else {
+            // 3. 尝试从 .related-info .indent 获取
+            const relatedInfoIndent = document.querySelector('.related-info .indent');
+            if (relatedInfoIndent && relatedInfoIndent.textContent.trim()) {
+              desc = relatedInfoIndent.textContent.trim();
+            } else {
+              // 4. 尝试从任何包含 "剧情简介" 的 h2 附近的区域获取
+              const allH2 = document.querySelectorAll('h2');
+              for (const h2 of allH2) {
+                if (h2.textContent.includes('剧情简介')) {
+                  const parent = h2.closest('.related-info, .indent');
+                  if (parent) {
+                    desc = parent.textContent.trim();
+                    break;
+                  }
+                }
+              }
+            }
           }
         }
       } else if (type === 'book') {
         // 书籍描述：从 .intro div 获取
-        const introDiv = document.querySelector('#link-report .intro, .indent .intro');
-        if (introDiv) {
+        const introDiv = document.querySelector('.intro, #link-report .intro, .indent .intro');
+        if (introDiv && introDiv.textContent.trim()) {
           // 获取所有段落并拼接
           const paragraphs = introDiv.querySelectorAll('p');
           if (paragraphs.length > 0) {
@@ -295,26 +329,32 @@ async function getDoubanData(doubanId, type, url) {
         } else {
           // 备用：尝试从其他位置获取
           const summaryAll = document.querySelector('.related-info .all.hidden, .summary .all.hidden');
-          if (summaryAll) {
+          if (summaryAll && summaryAll.textContent.trim()) {
             desc = summaryAll.textContent.trim();
           }
         }
       } else if (type === 'album') {
         // 专辑描述：从相关区域获取
         const summaryEl = document.querySelector('[property="v:summary"]');
-        if (summaryEl) {
+        if (summaryEl && summaryEl.textContent.trim()) {
           desc = summaryEl.textContent.trim();
         } else {
           const relatedInfo = document.querySelector('.related-info');
-          if (relatedInfo) {
+          if (relatedInfo && relatedInfo.textContent.trim()) {
             desc = relatedInfo.textContent.trim();
           }
         }
       }
       
-      // 限制描述长度
-      if (desc && desc.length > 500) {
-        desc = desc.substring(0, 500) + '...';
+      // 清理和限制描述长度
+      
+      if (desc) {
+        // 移除多余的空格和换行
+        desc = desc.replace(/\s+/g, ' ').trim();
+        // 限制描述长度
+        if (desc.length > 500) {
+          desc = desc.substring(0, 500) + '...';
+        }
       }
 
       return {
