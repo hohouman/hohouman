@@ -154,6 +154,13 @@ async function getDoubanData(doubanId, type, url) {
 
       const infoDiv = document.getElementById('info');
       const infoText = infoDiv ? infoDiv.innerText : '';
+      
+      // 调试：输出info div的内容
+      console.log('=== DEBUG INFO ===');
+      console.log('Type:', type);
+      console.log('Info text length:', infoText.length);
+      console.log('Info text preview:', infoText.substring(0, 200));
+      console.log('==================');
 
       let releaseDate = '';
       let director = [];
@@ -163,46 +170,61 @@ async function getDoubanData(doubanId, type, url) {
       let publisher = [];
 
       if (type === 'movie') {
-        // 提取电影信息
-        const dateMatch = infoText.match(/上映日期:\\s*([^\n\r]+)/);
+        // 提取电影信息 - 使用更宽松的正则表达式
+        const dateMatch = infoText.match(/上映日期[:\uff1a]\\s*([^\n\r]+)/);
         releaseDate = dateMatch ? dateMatch[1].trim() : '';
 
-        const directorMatch = infoText.match(/导演:\\s*([^\n\r]+)/);
+        const directorMatch = infoText.match(/导演[:\uff1a]\\s*([^\n\r]+)/);
         if (directorMatch) {
           director = [directorMatch[1].trim()];
         }
 
-        const actorMatch = infoText.match(/主演:\\s*([^\n\r]+)/);
+        const actorMatch = infoText.match(/主演[:\uff1a]\\s*([^\n\r]+)/);
         if (actorMatch) {
           actors = actorMatch[1].split('/').map(a => a.trim()).filter(Boolean);
         }
+        
+        // 调试输出
+        console.log('Movie - Release:', releaseDate);
+        console.log('Movie - Director:', director);
+        console.log('Movie - Actors:', actors);
       } else if (type === 'book') {
-        // 提取书籍信息
-        const dateMatch = infoText.match(/出版年:\\s*([^\n\r]+)/);
+        // 提取书籍信息 - 使用更宽松的正则表达式
+        const dateMatch = infoText.match(/出版年[:\uff1a]\\s*([^\n\r]+)/);
         releaseDate = dateMatch ? dateMatch[1].trim() : '';
 
-        const authorMatch = infoText.match(/作者:\\s*([^\n\r]+)/);
+        const authorMatch = infoText.match(/作者[:\uff1a]\\s*([^\n\r]+)/);
         if (authorMatch) {
           author = authorMatch[1].split('/').map(item => item.trim()).filter(Boolean);
         }
         
-        const publisherMatch = infoText.match(/出版社:\\s*([^\n\r]+)/);
+        const publisherMatch = infoText.match(/出版社[:\uff1a]\\s*([^\n\r]+)/);
         if (publisherMatch) {
           publisher = [publisherMatch[1].trim()];
         }
+        
+        // 调试输出
+        console.log('Book - Release:', releaseDate);
+        console.log('Book - Author:', author);
+        console.log('Book - Publisher:', publisher);
       } else if (type === 'album') {
-        const dateMatch = infoText.match(/发行时间:\\s*([^\n\r]+)/);
+        const dateMatch = infoText.match(/发行时间[:\uff1a]\\s*([^\n\r]+)/);
         releaseDate = dateMatch ? dateMatch[1].trim() : '';
 
-        const artistMatch = infoText.match(/表演者:\\s*([^\n\r]+)/);
+        const artistMatch = infoText.match(/表演者[:\uff1a]\\s*([^\n\r]+)/);
         if (artistMatch) {
           artist = artistMatch[1].split('/').map(item => item.trim()).filter(Boolean);
         }
 
-        const publisherMatch = infoText.match(/出版者:\\s*([^\n\r]+)/);
+        const publisherMatch = infoText.match(/出版者[:\uff1a]\\s*([^\n\r]+)/);
         if (publisherMatch) {
           publisher = [publisherMatch[1].trim()];
         }
+        
+        // 调试输出
+        console.log('Album - Release:', releaseDate);
+        console.log('Album - Artist:', artist);
+        console.log('Album - Publisher:', publisher);
       }
 
       // 改进描述提取
@@ -231,6 +253,14 @@ async function getDoubanData(doubanId, type, url) {
         artist: artist,
         publisher: publisher,
         description: desc,
+        _debug: {
+          infoTextLength: infoText.length,
+          infoTextPreview: infoText.substring(0, 300),
+          hasDirector: director.length > 0,
+          hasAuthor: author.length > 0,
+          hasArtist: artist.length > 0,
+          hasReleaseDate: !!releaseDate
+        }
       };
     }, type);
 
@@ -239,6 +269,16 @@ async function getDoubanData(doubanId, type, url) {
     if (!data.title) {
       console.log(`未找到豆瓣${type} ID ${doubanId} 的数据`);
       return null;
+    }
+    
+    // 输出调试信息
+    if (data._debug) {
+      console.log(`=== 豆瓣${type}调试信息 ===`);
+      console.log(`Info文本长度: ${data._debug.infoTextLength}`);
+      console.log(`Info预览: ${data._debug.infoTextPreview}`);
+      console.log(`有导演/作者/艺术家: ${data._debug.hasDirector}/${data._debug.hasAuthor}/${data._debug.hasArtist}`);
+      console.log(`有发行日期: ${data._debug.hasReleaseDate}`);
+      console.log(`=========================`);
     }
 
     return {

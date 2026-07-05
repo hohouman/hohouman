@@ -582,16 +582,17 @@ img {
 }
 
 .content-tabs {
-  position: relative;
-  z-index: 6;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.9rem clamp(1rem, 3vw, 1.75rem) 0.8rem;
+  gap: 0.4rem;
+  padding: 0.75rem clamp(0.8rem, 2vw, 1.5rem) 0.65rem;
   width: min(100%, 62rem);
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 16px;
   background: color-mix(in srgb, rgba(var(--theme-color-rgb), 0.08) 35%, rgba(255, 252, 247, 0.4));
   border: 1px solid rgba(var(--theme-color-rgb), 0.1);
   backdrop-filter: blur(18px);
@@ -602,12 +603,14 @@ img {
   border: 1px solid transparent;
   background: transparent;
   color: var(--ink-soft);
-  padding: 0.8rem 1rem;
+  padding: 0.65rem 0.85rem;
   border-radius: 999px;
   font: inherit;
   font-weight: 700;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .content-tab:hover {
