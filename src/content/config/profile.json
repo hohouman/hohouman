@@ -1,0 +1,14 @@
+{
+  "name": "Your Name",
+  "bio": "A passionate content curator sharing my journey through games, movies, books, and more.",
+  "avatar": "/src/assets/avatar.jpg",
+  "wallpaper": "/src/assets/wallpaper.jpg",
+  "social": {
+    "github": "https://github.com/username",
+    "email": "mailto:you@example.com",
+    "twitter": "https://x.com/username",
+    "instagram": "https://instagram.com/username",
+    "telegram": "https://t.me/username",
+    "facebook": "https://facebook.com/username"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "logbook",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^4.15.10",
+    "sharp": "^0.33.5",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "puppeteer": "^23.4.0"
+  }
+}

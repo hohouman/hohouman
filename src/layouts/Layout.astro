@@ -1,0 +1,327 @@
+/**
+ * 使用Canvas从图片中提取主色调
+ * @param imageUrl - 图片URL
+ * @returns 十六进制颜色值
+ */
+export async function useColorThief(imageUrl: string): Promise<string | null> {
+  try {
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.src = imageUrl;
+    
+    return new Promise((resolve) => {
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve(null);
+          return;
+        }
+        
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        
+        // 计算平均颜色
+        let r = 0, g = 0, b = 0, count = 0;
+        for (let i = 0; i < data.length; i += 4 * 100) {
+          r += data[i];
+          g += data[i + 1];
+          b += data[i + 2];
+          count++;
+        }
+        
+        if (count > 0) {
+          r = Math.floor(r / count);
+          g = Math.floor(g / count);
+          b = Math.floor(b / count);
+          // 转换为十六进制
+          const hex = ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+          resolve(`#${hex}`);
+        } else {
+          resolve(null);
+        }
+      };
+      
+      img.onerror = () => {
+        resolve(null);
+      };
+    });
+  } catch (error) {
+    console.error('Color extraction failed:', error);
+    return null;
+  }
+}
+---
+// 导入必要的Astro功能
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+// 加载配置数据
+import profile from '../content/config/profile.json';
+import { useColorThief } from '../utils/color-thief';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  children: import('astro').JSX.Element;
+}
+
+const { title, description, image, children } = Astro.props;
+const wallpaper = profile.wallpaper || '/src/assets/wallpaper.jpg';
+const dominantColor = await useColorThief(wallpaper);
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title ? `${title} - ${profile.blogTitle}` : profile.blogTitle}</title>
+  <meta name="description" content={description || profile.bio} />
+  {image ? <meta property="og:image" content={image} /> : null}
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <!-- 引入Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style is:global>
+    :root {
+      --dominant-color: #{dominantColor || '6c5ce7'};
+      --dominant-color-rgb: #{dominantColor?.substring(1).match(/.{2}/g)?.map(c => parseInt(c, 16)).join(', ') || '108, 92, 231'};
+      --background-start: rgba(0, 0, 0, 0.7);
+      --background-end: rgba(0, 0, 0, 0.9);
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+      --card-bg: rgba(30, 30, 30, 0.8);
+      --border-radius: 12px;
+      --transition-speed: 0.4s;
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--background-start), var(--background-end));
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all var(--transition-speed) ease;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      background: linear-gradient(45deg, #fff, var(--dominant-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: color var(--transition-speed) ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--dominant-color);
+      transition: width var(--transition-speed) ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--dominant-color);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 1;
+      transition: opacity var(--transition-speed) ease, filter var(--transition-speed) ease;
+    }
+    
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      padding: 2rem;
+      z-index: 10;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .main-content {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+    }
+    
+    .section {
+      padding: 6rem 2rem;
+      position: relative;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer a {
+      color: var(--dominant-color);
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        gap: 1.5rem;
+      }
+      
+      .nav-link {
+        font-size: 0.9rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section {
+        padding: 4rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img src={wallpaper} alt="背景" class="hero-background" id="hero-bg" />
+    <div class="hero-content">
+      <slot name="hero" />
+    </div>
+  </div>
+  
+  <header class="header" id="header">
+    <a href="/" class="logo">{profile.blogTitle}</a>
+    <nav class="nav-links">
+      <a href="/games" class="nav-link">游戏</a>
+      <a href="/movies" class="nav-link">电影</a>
+      <a href="/books" class="nav-link">书籍</a>
+      <a href="/other" class="nav-link">其他</a>
+    </nav>
+  </header>
+  
+  <main class="main-content">
+    <div id="page-content">
+      <slot />
+    </div>
+  </main>
+  
+  <Footer />
+  
+  <script>
+    // 监听滚动事件，改变头部透明度和背景效果
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.getElementById('header');
+      const heroBg = document.getElementById('hero-bg');
+      
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const opacityFactor = Math.min(scrollPosition / 300, 1);
+        
+        // 减少背景图片透明度
+        heroBg.style.opacity = 1 - opacityFactor;
+        heroBg.style.filter = `blur(${opacityFactor * 5}px)`;
+        
+        // 根据滚动位置添加阴影
+        if (scrollPosition > 50) {
+          header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+          header.style.background = 'rgba(0, 0, 0, 0.8)';
+        } else {
+          header.style.boxShadow = 'none';
+          header.style.background = 'rgba(0, 0, 0, 0.2)';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
