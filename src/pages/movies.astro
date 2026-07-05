@@ -1,43 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import profile from '../config/profile.json';
+import moviesData from '../content/_generated/movies.json';
 
-// 读取生成的电影数据
-let movies = [];
-try {
-  const moviesResponse = await fetch(new URL('../content/_generated/movies.json', import.meta.url));
-  if (moviesResponse.ok) {
-    const moviesData = await moviesResponse.json();
-    movies = Array.isArray(moviesData) ? moviesData : (moviesData.items || []);
-  }
-} catch (error) {
-  console.log('No movies data found, using empty array');
-}
+const movies = Array.isArray(moviesData) ? moviesData : (moviesData.items || []);
 ---
 
 <Layout title="Movies" wallpaper={profile.wallpaper}>
-  <slot name="hero" slot="hero">
+  <div slot="hero" class="page-hero">
+    <p class="page-kicker">Collection / Movies</p>
     <h1>Movies</h1>
-  </slot>
-  
-  <section class="container">
-    <h2>My Movie Collection</h2>
+    <p>把电影记录做成一页带注释的影单，让每部作品都更像一个被妥善归档的瞬间。</p>
+    <div class="pill-row">
+      <span class="stat-chip">{movies.length} items</span>
+      <span class="stat-chip">Poster-led cards</span>
+      <span class="stat-chip">Cinematic spacing</span>
+    </div>
+  </div>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <div>
+        <p class="section-eyebrow">Library</p>
+        <h2 class="section-title">My Movie Collection</h2>
+      </div>
+      <p class="section-lead">更克制的留白和更明确的信息层级，会让影单本身更像一份认真整理过的笔记。</p>
+    </div>
+
     {movies.length > 0 ? (
-      <div class="grid">
-        {movies.map(movie => (
-          <div class="card" key={movie.id}>
-            {movie.localCoverPath && <img src={movie.localCoverPath} alt={movie.title} />}
-            <h3>{movie.title}</h3>
-            <p>{movie.description}</p>
-            <div class="meta">
-              <span>Director: {Array.isArray(movie.director) ? movie.director.join(', ') : movie.director}</span>
-              <span>Release: {movie.releaseDate}</span>
+      <div class="collection-grid">
+        {movies.map((movie) => (
+          <article class="entry-card" key={movie.id}>
+            <div class="entry-card__media">
+              {movie.localCoverPath ? <img src={movie.localCoverPath} alt={movie.title} loading="lazy" /> : null}
             </div>
-          </div>
+            <div class="entry-card__body">
+              <span class="card-tag">Movie</span>
+              <h3 class="entry-card__title">{movie.title}</h3>
+              {movie.description ? <p class="entry-card__desc">{movie.description}</p> : <p class="entry-card__desc">No description provided.</p>}
+              <div class="entry-card__meta">
+                <div><strong>Director:</strong> {Array.isArray(movie.director) ? movie.director.join(', ') : movie.director || 'Unknown'}</div>
+                <div><strong>Release:</strong> {movie.releaseDate || 'TBA'}</div>
+              </div>
+            </div>
+          </article>
         ))}
       </div>
     ) : (
-      <p>No movies added yet. Check back later!</p>
+      <div class="empty-state">No movies added yet. Check back later!</div>
     )}
   </section>
 </Layout>

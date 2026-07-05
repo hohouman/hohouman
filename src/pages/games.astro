@@ -1,44 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import profile from '../config/profile.json';
+import gamesData from '../content/_generated/games.json';
 
-// 读取生成的游戏数据
-let games = [];
-try {
-  const gamesResponse = await fetch(new URL('../content/_generated/games.json', import.meta.url));
-  if (gamesResponse.ok) {
-    const gamesData = await gamesResponse.json();
-    games = Array.isArray(gamesData) ? gamesData : (gamesData.items || []);
-  }
-} catch (error) {
-  console.log('No games data found, using empty array');
-}
+const games = Array.isArray(gamesData) ? gamesData : (gamesData.items || []);
 ---
 
 <Layout title="Games" wallpaper={profile.wallpaper}>
-  <slot name="hero" slot="hero">
+  <div slot="hero" class="page-hero">
+    <p class="page-kicker">Collection / Games</p>
     <h1>Games</h1>
-  </slot>
-  
-  <section class="container">
-    <h2>My Game Collection</h2>
+    <p>把正在玩、想补完和已经通关的游戏放进同一个更有秩序的清单里。</p>
+    <div class="pill-row">
+      <span class="stat-chip">{games.length} items</span>
+      <span class="stat-chip">Steam / Epic</span>
+      <span class="stat-chip">Cover-first layout</span>
+    </div>
+  </div>
+
+  <section class="section-block">
+    <div class="section-heading">
+      <div>
+        <p class="section-eyebrow">Library</p>
+        <h2 class="section-title">My Game Collection</h2>
+      </div>
+      <p class="section-lead">封面、简介和发行信息采用同一节奏，减少噪音，突出作品本身。</p>
+    </div>
+
     {games.length > 0 ? (
-      <div class="grid">
-        {games.map(game => (
-          <div class="card" key={game.id}>
-            {game.localCoverPath && <img src={game.localCoverPath} alt={game.title} />}
-            <h3>{game.title}</h3>
-            <p>{game.description}</p>
-            <div class="meta">
-              <span>Developer: {Array.isArray(game.developer) ? game.developer.join(', ') : game.developer}</span>
-              <span>Publisher: {Array.isArray(game.publisher) ? game.publisher.join(', ') : game.publisher}</span>
-              <span>Release: {game.releaseDate}</span>
+      <div class="collection-grid">
+        {games.map((game) => (
+          <article class="entry-card" key={game.id}>
+            <div class="entry-card__media">
+              {game.localCoverPath ? <img src={game.localCoverPath} alt={game.title} loading="lazy" /> : null}
             </div>
-          </div>
+            <div class="entry-card__body">
+              <span class="card-tag">Game</span>
+              <h3 class="entry-card__title">{game.title}</h3>
+              {game.description ? <p class="entry-card__desc">{game.description}</p> : <p class="entry-card__desc">No description provided.</p>}
+              <div class="entry-card__meta">
+                <div><strong>Developer:</strong> {Array.isArray(game.developer) ? game.developer.join(', ') : game.developer || 'Unknown'}</div>
+                <div><strong>Publisher:</strong> {Array.isArray(game.publisher) ? game.publisher.join(', ') : game.publisher || 'Unknown'}</div>
+                <div><strong>Release:</strong> {game.releaseDate || 'TBA'}</div>
+              </div>
+            </div>
+          </article>
         ))}
       </div>
     ) : (
-      <p>No games added yet. Check back later!</p>
+      <div class="empty-state">No games added yet. Check back later!</div>
     )}
   </section>
 </Layout>
