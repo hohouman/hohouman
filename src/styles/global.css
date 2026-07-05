@@ -284,22 +284,26 @@ img {
 
 .site-footer {
   width: min(var(--content-width), calc(100% - 2rem));
+  max-width: 62rem; /* 与菜单栏宽度保持一致 */
   margin: 1rem auto 2rem;
   padding: 1rem 1.25rem;
   border-radius: 18px;
-  color: var(--ink-soft);
+  /* 提高文字对比度，确保可读性 */
+  color: rgba(255, 247, 239, 0.9);
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   /* 与主面板统一的Acrylic材质 */
   background: linear-gradient(
     180deg,
-    rgba(var(--theme-color-rgb), 0.1) 0%,
-    rgba(var(--theme-color-rgb), 0.06) 100%
+    rgba(var(--theme-color-rgb), 0.12) 0%,
+    rgba(var(--theme-color-rgb), 0.08) 100%
   );
   backdrop-filter: blur(40px) saturate(200%);
   -webkit-backdrop-filter: blur(40px) saturate(200%);
-  border: 1px solid rgba(var(--theme-color-rgb), 0.18);
+  border: 1px solid rgba(var(--theme-color-rgb), 0.2);
   box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    0 8px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
   text-align: center;
 }
 
@@ -627,7 +631,8 @@ img {
   justify-content: center;
   gap: 0.4rem;
   padding: 0.75rem clamp(0.8rem, 2vw, 1.5rem) 0.65rem;
-  width: min(100%, 62rem);
+  /* 与page-frame和site-footer保持统一的宽度 */
+  width: min(var(--content-width), calc(100% - 2rem));
   margin: 0 auto;
   border-radius: 20px;
   /* 增强的Acrylic毛玻璃效果 */
