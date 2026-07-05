@@ -1,14 +1,14 @@
 {
-  "name": "Your Name",
-  "bio": "A passionate content curator sharing my journey through games, movies, books, and more.",
-  "avatar": "/src/assets/avatar.jpg",
-  "wallpaper": "/src/assets/wallpaper.jpg",
+  "name": "雷顿",
+  "bio": "网名出自我小时候最喜欢的儿童读物，“那是一段小有遗憾的幸福时光”。",
+  "avatar": "https://file.houman.top/leidun.png",
+  "wallpaper": "https://file.houman.top/大神士郎.jpg",
   "social": {
-    "github": "https://github.com/username",
-    "email": "mailto:you@example.com",
-    "twitter": "https://x.com/username",
-    "instagram": "https://instagram.com/username",
-    "telegram": "https://t.me/username",
-    "facebook": "https://facebook.com/username"
+    "github": "https://github.com/hohouman",
+    "email": "ho@houman.top",
+    "twitter": "",
+    "instagram": "",
+    "telegram": "",
+    "facebook": ""
   }
 }
