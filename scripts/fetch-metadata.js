@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const CONTENT_DIR = path.join(__dirname, '../src/content');
-const CONFIG_DIR = path.join(CONTENT_DIR, 'config'); // 配置文件目录
+const CONFIG_DIR = path.join(__dirname, '../src/config'); // 配置文件目录
 const GENERATED_DIR = path.join(CONTENT_DIR, '_generated');
 const PUBLIC_GENERATED_DIR = path.join(__dirname, '../public/generated');
 
