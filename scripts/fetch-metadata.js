@@ -22,74 +22,44 @@ await fs.mkdir(PUBLIC_GENERATED_DIR, { recursive: true });
  */
 async function getSteamData(appId) {
   try {
-    const response = await fetch(`https://store.steampowered.com/api/appdetails?appids=${appId}`);
-    const data = await response.json();
-    const appData = data[appId]?.data;
+    // 优先尝试简体中文 (schinese)，然后繁体中文 (tchinese)，最后默认语言
+    const languages = ['schinese', 'tchinese', ''];
     
-    if (!appData) {
-      console.log(`未找到Steam应用ID ${appId} 的数据`);
-      return null;
+    for (const lang of languages) {
+      try {
+        const url = lang 
+          ? `https://store.steampowered.com/api/appdetails?appids=${appId}&l=${lang}`
+          : `https://store.steampowered.com/api/appdetails?appids=${appId}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        const appData = data[appId]?.data;
+        
+        if (appData) {
+          console.log(`使用${lang || '默认'}语言获取Steam数据`);
+          return {
+            id: appId,
+            title: appData.name,
+            developer: appData.developers,
+            publisher: appData.publishers,
+            releaseDate: appData.release_date.date,
+            description: appData.short_description,
+            coverUrl: appData.header_image,
+            posterUrl: `https://cdn.akamai.steamstatic.com/steam/apps/${appId}/library_600x900.jpg`,
+            type: 'game',
+            platform: 'steam'
+          };
+        }
+      } catch (error) {
+        console.log(`尝试${lang || '默认'}语言失败:`, error.message);
+        continue;
+      }
     }
-
-    return {
-      id: appId,
-      title: appData.name,
-      developer: appData.developers,
-      publisher: appData.publishers,
-      releaseDate: appData.release_date.date,
-      description: appData.short_description,
-      coverUrl: appData.header_image,
-      posterUrl: `https://cdn.akamai.steamstatic.com/steam/apps/${appId}/library_600x900.jpg`,
-      type: 'game',
-      platform: 'steam'
-    };
+    
+    console.log(`未找到Steam应用ID ${appId} 的数据`);
+    return null;
   } catch (error) {
     console.error(`获取Steam数据失败 ${appId}:`, error.message);
-    return null;
-  }
-}
-
-async function getEpicData(productSlug) {
-  try {
-    const response = await fetch(`https://store.epicgames.com/p/${productSlug}`, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept-Language': 'en-US,en;q=0.9'
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const html = await response.text();
-
-    // 使用更可靠的 meta 标签解析
-    const titleMatch = html.match(/<meta property="og:title" content="([^"]+)"/i) || 
-                       html.match(/<title[^>]*>(.*?)<\/title>/i);
-    const title = titleMatch ? titleMatch[1].replace(' | Epic Games Store', '').trim() : productSlug;
-
-    // 提取封面图 URL (使用 og:image meta 标签)
-    const coverMatch = html.match(/<meta property="og:image" content="([^"]+)"/i) ||
-                       html.match(/<meta name="twitter:image" content="([^"]+)"/i);
-    let coverUrl = '';
-    if (coverMatch) {
-      coverUrl = coverMatch[1];
-    }
-
-    return {
-      id: productSlug,
-      title: title,
-      developer: [],
-      publisher: ['Epic Games'],
-      releaseDate: new Date().toISOString(),
-      description: '',
-      coverUrl: coverUrl,
-      type: 'game',
-      platform: 'epic'
-    };
-  } catch (error) {
-    console.error(`获取 Epic Games 数据失败 ${productSlug}:`, error.message);
     return null;
   }
 }
@@ -338,7 +308,14 @@ async function downloadAndConvertImage(url, fileName, options = {}) {
   if (!url) return null;
 
   try {
-    const response = await fetch(url);
+    // 为豆瓣图片添加特殊的请求头以避免防盗链问题
+    const headers = {};
+    if (url.includes('doubanio.com') || url.includes('douban.com')) {
+      headers['Referer'] = '';
+      headers['Referrer-Policy'] = 'no-referrer';
+    }
+    
+    const response = await fetch(url, { headers });
     
     if (!response.ok) {
       throw new Error(`Failed to download image: ${response.statusText}`);
@@ -375,15 +352,6 @@ function parseUrl(url) {
       const match = parsedUrl.pathname.match(/\/app\/(\d+)/);
       if (match) {
         return { platform: 'steam', id: match[1], url };
-      }
-    }
-    
-    // Epic Games
-    if (parsedUrl.hostname.includes('epicgames.com')) {
-      const segments = parsedUrl.pathname.split('/');
-      const slugIndex = segments.indexOf('p');
-      if (slugIndex !== -1 && segments[slugIndex + 1]) {
-        return { platform: 'epic', id: segments[slugIndex + 1], url };
       }
     }
     
@@ -446,8 +414,6 @@ async function processUrl(url, existingDataMap) {
 
   if (parsed.platform === 'steam') {
     data = await getSteamData(parsed.id);
-  } else if (parsed.platform === 'epic') {
-    data = await getEpicData(parsed.id);
   } else if (parsed.platform === 'douban') {
     data = await getDoubanData(parsed.id, parsed.type);
   } else if (parsed.platform === 'musicbrainz') {
