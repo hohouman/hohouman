@@ -134,6 +134,11 @@ function getSocialIcon(platform) {
         </div>
       </section>
     </div>
+    
+    <!-- 向下箭头按钮 -->
+    <a href="#collections" class="hero-scroll-link" aria-label="滚动到内容区域">
+      <span class="hero-scroll-link__arrow">↓</span>
+    </a>
   </div>
 
   <section class="stack home-stage" id="collections">
@@ -318,6 +323,29 @@ function getSocialIcon(platform) {
     const viewer = document.querySelector('[data-content-viewer]');
     const tabs = Array.from(document.querySelectorAll('[data-view]'));
     const panels = Array.from(document.querySelectorAll('[data-panel]'));
+    
+    // 处理向下箭头按钮的点击事件
+    const scrollLink = document.querySelector('.hero-scroll-link');
+    if (scrollLink) {
+      scrollLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        
+        // 获取content-tabs元素
+        const contentTabs = document.getElementById('content-tabs');
+        if (!contentTabs) return;
+        
+        // 计算content-tabs距离文档顶部的精确位置
+        const rect = contentTabs.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = rect.top + scrollTop;
+        
+        // 平滑滚动到目标位置
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      });
+    }
 
     if (viewer && tabs.length && panels.length) {
       const keys = tabs.map((tab) => tab.dataset.view);
