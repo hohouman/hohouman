@@ -12,6 +12,7 @@
     "coverUrl": "https://img3.doubanio.com/view/subject/s/public/s29478473.jpg",
     "type": "book",
     "platform": "douban",
-    "localCoverPath": null
+    "url": "https://book.douban.com/subject/26275998/",
+    "localCoverPath": "/generated/book_26275998_cover.webp"
   }
 ]

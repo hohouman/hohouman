@@ -12,6 +12,7 @@
     "coverUrl": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2528103085.webp",
     "type": "movie",
     "platform": "douban",
-    "localCoverPath": null
+    "url": "https://movie.douban.com/subject/26754880/",
+    "localCoverPath": "/generated/movie_26754880_cover.webp"
   }
 ]
