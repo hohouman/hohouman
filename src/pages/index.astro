@@ -343,9 +343,19 @@ function getSocialIcon(platform) {
 
       const getCurrentKey = () => viewer.dataset.activeView || 'games';
 
+      const move = (direction) => {
+        const currentKey = getCurrentKey();
+        const currentIndex = keys.indexOf(currentKey);
+        const nextIndex = direction === 'next'
+          ? (currentIndex + 1) % keys.length
+          : (currentIndex - 1 + keys.length) % keys.length;
+        setActive(keys[nextIndex] || 'games');
+      };
+
       tabs.forEach((tab) => {
         tab.addEventListener('click', () => setActive(tab.dataset.view || 'games'));
       });
+
 
       setActive('games');
     }
