@@ -1,8 +1,8 @@
 ```
 # Generated files (but track JSON data, ignore only raw images if any)
-src/content/_generated/*.webp
-src/content/_generated/*.jpg
-src/content/_generated/*.png
+# src/content/_generated/*.webp
+# src/content/_generated/*.jpg
+# src/content/_generated/*.png
 
 # Build output
 dist/
