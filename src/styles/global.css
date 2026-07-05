@@ -627,7 +627,8 @@ img {
   flex-wrap: nowrap;
   justify-content: center;
   gap: 0.4rem;
-  padding: 0.75rem clamp(0.8rem, 2vw, 1.5rem) 0.65rem;
+  /* 调整padding使其与page-frame的内边距一致 */
+  padding: 0.75rem clamp(1.25rem, 3vw, 2rem) 0.65rem;
   /* 与page-frame和site-footer保持统一的宽度 */
   width: min(var(--content-width), calc(100% - 2rem));
   margin: 0 auto;
@@ -1103,19 +1104,22 @@ img {
 
 .entry-card__desc {
   margin: 0;
-  color: var(--ink-soft);
+  /* 提高文字对比度 */
+  color: rgba(255, 247, 239, 0.85);
   font-size: 0.95rem;
 }
 
 .entry-card__meta {
   display: grid;
   gap: 0.45rem;
-  color: var(--ink-soft);
+  /* 提高文字对比度 */
+  color: rgba(255, 247, 239, 0.8);
   font-size: 0.88rem;
 }
 
 .entry-card__meta strong {
-  color: var(--ink);
+  /* 标签文字使用更高对比度 */
+  color: rgba(255, 247, 239, 0.95);
   font-weight: 600;
 }
 
@@ -1135,7 +1139,9 @@ img {
 }
 
 .prose-card :where(p, li) {
-  color: var(--ink-soft);
+  /* 提高文字对比度，确保在毛玻璃背景下可读 */
+  color: rgba(255, 247, 239, 0.9);
+  font-weight: 400;
 }
 
 .prose-card :where(ul, ol) {
