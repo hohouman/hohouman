@@ -4,6 +4,9 @@ src/content/_generated/*.webp
 src/content/_generated/*.jpg
 src/content/_generated/*.png
 
+# Build output
+dist/
+
 # Dependencies
 node_modules/
 
