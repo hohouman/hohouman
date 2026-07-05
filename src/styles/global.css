@@ -790,10 +790,6 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.showcase-card--album:not(:has(.entry-card__media)) {
-  grid-template-columns: 1fr;
-  min-height: 11rem;
-}
 
 .showcase-card--wide-media {
   grid-template-columns: 1fr;

@@ -252,43 +252,49 @@ function getSocialIcon(platform) {
               <h3>{panelCopy.albums.title}</h3>
               <p>{panelCopy.albums.desc}</p>
             </div>
-            <div class="content-panel__notes">
-              {albumCards.map((item) => (
-                item.url ? (
-                  <a href={item.url} target="_blank" style="text-decoration: none; color: inherit;">
-                    <article class="showcase-card showcase-card--album">
-                      {item.localCoverPath ? (
+            {albumCards.length > 0 ? (
+              <div class="content-panel__list">
+                {albumCards.map((item) => (
+                  item.url ? (
+                    <a href={item.url} target="_blank" style="text-decoration: none; color: inherit;">
+                      <article class={`showcase-card${item.localCoverPath ? '' : ' showcase-card--wide-media'}`}>
                         <div class="entry-card__media">
-                          <img src={item.localCoverPath} alt={item.title} loading="lazy" />
+                          {item.localCoverPath ? <img src={item.localCoverPath} alt={item.title} loading="lazy" /> : null}
                         </div>
-                      ) : null}
+                        <div class="entry-card__body">
+                          <span class="card-tag">{panelCopy.albums.tag}</span>
+                          <h3 class="entry-card__title">{item.title}</h3>
+                          {item.description ? <p class="entry-card__desc">{item.description}</p> : <p class="entry-card__desc">No description provided.</p>}
+                          <div class="entry-card__meta">
+                            {item.artist && <div><strong>Artist:</strong> {Array.isArray(item.artist) ? item.artist.join(', ') : item.artist}</div>}
+                            {item.publisher && <div><strong>Publisher:</strong> {Array.isArray(item.publisher) ? item.publisher.join(', ') : item.publisher}</div>}
+                            {item.releaseDate && <div><strong>Release:</strong> {item.releaseDate}</div>}
+                          </div>
+                        </div>
+                      </article>
+                    </a>
+                  ) : (
+                    <article class={`showcase-card${item.localCoverPath ? '' : ' showcase-card--wide-media'}`}>
+                      <div class="entry-card__media">
+                        {item.localCoverPath ? <img src={item.localCoverPath} alt={item.title} loading="lazy" /> : null}
+                      </div>
                       <div class="entry-card__body">
                         <span class="card-tag">{panelCopy.albums.tag}</span>
                         <h3 class="entry-card__title">{item.title}</h3>
-                        {item.artist ? <p class="entry-card__meta-line"><strong>Artist:</strong> {Array.isArray(item.artist) ? item.artist.join(', ') : item.artist}</p> : null}
-                        {item.releaseDate ? <p class="entry-card__meta-line"><strong>Release:</strong> {item.releaseDate}</p> : null}
-                        <p class="entry-card__desc">{item.description || item.desc}</p>
+                        {item.description ? <p class="entry-card__desc">{item.description}</p> : <p class="entry-card__desc">No description provided.</p>}
+                        <div class="entry-card__meta">
+                          {item.artist && <div><strong>Artist:</strong> {Array.isArray(item.artist) ? item.artist.join(', ') : item.artist}</div>}
+                          {item.publisher && <div><strong>Publisher:</strong> {Array.isArray(item.publisher) ? item.publisher.join(', ') : item.publisher}</div>}
+                          {item.releaseDate && <div><strong>Release:</strong> {item.releaseDate}</div>}
+                        </div>
                       </div>
                     </article>
-                  </a>
-                ) : (
-                  <article class="showcase-card showcase-card--album">
-                    {item.localCoverPath ? (
-                      <div class="entry-card__media">
-                        <img src={item.localCoverPath} alt={item.title} loading="lazy" />
-                      </div>
-                    ) : null}
-                    <div class="entry-card__body">
-                      <span class="card-tag">{panelCopy.albums.tag}</span>
-                      <h3 class="entry-card__title">{item.title}</h3>
-                      {item.artist ? <p class="entry-card__meta-line"><strong>Artist:</strong> {Array.isArray(item.artist) ? item.artist.join(', ') : item.artist}</p> : null}
-                      {item.releaseDate ? <p class="entry-card__meta-line"><strong>Release:</strong> {item.releaseDate}</p> : null}
-                      <p class="entry-card__desc">{item.description || item.desc}</p>
-                    </div>
-                  </article>
-                )
-              ))}
-            </div>
+                  )
+                ))}
+              </div>
+            ) : (
+              <div class="empty-state">No albums added yet. Check back later!</div>
+            )}
           </section>
 
           <section class="content-panel" data-panel="other">

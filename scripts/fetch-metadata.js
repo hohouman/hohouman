@@ -266,19 +266,54 @@ async function getDoubanData(doubanId, type, url) {
         }
       }
 
-      // 改进描述提取
-      let desc = extractText('[property="v:summary"]');
-      if (!desc) {
-        const summaryAll = document.querySelector('.related-info .all.hidden, .summary .all.hidden');
-        if (summaryAll) {
-          desc = summaryAll.textContent.trim();
+      // 改进描述提取 - 根据类型使用不同的选择器
+      let desc = '';
+      
+      if (type === 'movie') {
+        // 电影描述：优先从 v:summary 获取
+        const summaryEl = document.querySelector('[property="v:summary"]');
+        if (summaryEl) {
+          desc = summaryEl.textContent.trim();
         } else {
-          desc = extractText('.related-info') || extractText('.summary');
+          // 尝试从 .related-info 获取
+          const relatedInfo = document.querySelector('.related-info .indent');
+          if (relatedInfo) {
+            desc = relatedInfo.textContent.trim();
+          }
+        }
+      } else if (type === 'book') {
+        // 书籍描述：从 .intro div 获取
+        const introDiv = document.querySelector('#link-report .intro, .indent .intro');
+        if (introDiv) {
+          // 获取所有段落并拼接
+          const paragraphs = introDiv.querySelectorAll('p');
+          if (paragraphs.length > 0) {
+            desc = Array.from(paragraphs).map(p => p.textContent.trim()).join('\n\n');
+          } else {
+            desc = introDiv.textContent.trim();
+          }
+        } else {
+          // 备用：尝试从其他位置获取
+          const summaryAll = document.querySelector('.related-info .all.hidden, .summary .all.hidden');
+          if (summaryAll) {
+            desc = summaryAll.textContent.trim();
+          }
+        }
+      } else if (type === 'album') {
+        // 专辑描述：从相关区域获取
+        const summaryEl = document.querySelector('[property="v:summary"]');
+        if (summaryEl) {
+          desc = summaryEl.textContent.trim();
+        } else {
+          const relatedInfo = document.querySelector('.related-info');
+          if (relatedInfo) {
+            desc = relatedInfo.textContent.trim();
+          }
         }
       }
       
       // 限制描述长度
-      if (desc.length > 500) {
+      if (desc && desc.length > 500) {
         desc = desc.substring(0, 500) + '...';
       }
 
