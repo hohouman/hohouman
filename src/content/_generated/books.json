@@ -3,11 +3,15 @@
     "id": "26275998",
     "title": "寒武再临",
     "developer": [],
+    "director": [],
+    "author": [],
+    "artist": [],
     "publisher": [],
-    "releaseDate": "2014-12",
+    "releaseDate": "",
     "description": "",
-    "coverUrl": "",
+    "coverUrl": "https://img3.doubanio.com/view/subject/s/public/s29478473.jpg",
     "type": "book",
-    "platform": "douban"
+    "platform": "douban",
+    "localCoverPath": null
   }
 ]
