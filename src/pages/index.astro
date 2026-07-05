@@ -80,17 +80,6 @@ function getSocialIcon(platform) {
           </a>
         ))}
       </div>
-
-      <div class="hero-pill-row hero-pill-row--links" aria-label="收藏整理">
-        <span class="hero-pill-label">收藏整理</span>
-        <a class="hero-pill-link" href="/">博客站点</a>
-        <a class="hero-pill-link" href={profile.social.github}>其他站点</a>
-        <a class="hero-pill-link" href={`mailto:${profile.social.email}`}>联系我</a>
-      </div>
-
-      <div class="hero-pill-row">
-        <span class="stat-chip">图书 / 电影 / 游戏 / 专辑</span>
-      </div>
     </section>
 
     <a href="#content-tabs" class="hero-scroll-link" aria-label="滚动到下一页">
@@ -109,16 +98,6 @@ function getSocialIcon(platform) {
         ))}
       </div>
 
-      <div class="content-stage__header">
-        <div class="content-stage__title-row">
-          <div>
-            <p class="section-eyebrow">Second page</p>
-            <h2>游戏、电影、书籍、专辑与其他自我介绍</h2>
-          </div>
-          <p class="content-stage__subtitle">默认进入游戏视图，顶部菜单和底部左右按钮都可以切换。</p>
-        </div>
-      </div>
-
       <div class="content-viewer" data-content-viewer>
         <div class="content-viewer__panels">
           <section class="content-panel" data-panel="games" data-active="true">
@@ -130,7 +109,7 @@ function getSocialIcon(platform) {
             {games.length > 0 ? (
               <div class="content-panel__list">
                 {games.map((game) => (
-                  <article class="entry-card">
+                  <article class="entry-card entry-card--compact">
                     <div class="entry-card__media">
                       {game.localCoverPath ? <img src={game.localCoverPath} alt={game.title} loading="lazy" /> : null}
                     </div>
@@ -161,7 +140,7 @@ function getSocialIcon(platform) {
             {movies.length > 0 ? (
               <div class="content-panel__list">
                 {movies.map((movie) => (
-                  <article class="entry-card">
+                  <article class="entry-card entry-card--compact">
                     <div class="entry-card__media">
                       {movie.localCoverPath ? <img src={movie.localCoverPath} alt={movie.title} loading="lazy" /> : null}
                     </div>
@@ -191,7 +170,7 @@ function getSocialIcon(platform) {
             {books.length > 0 ? (
               <div class="content-panel__list">
                 {books.map((book) => (
-                  <article class="entry-card">
+                  <article class="entry-card entry-card--compact">
                     <div class="entry-card__media">
                       {book.localCoverPath ? <img src={book.localCoverPath} alt={book.title} loading="lazy" /> : null}
                     </div>
@@ -221,7 +200,7 @@ function getSocialIcon(platform) {
             </div>
             <div class="content-panel__notes">
               {albumNotes.map((item) => (
-                <article class="entry-card">
+                <article class="entry-card entry-card--compact">
                   <div class="entry-card__body">
                     <span class="card-tag">Album</span>
                     <h3 class="entry-card__title">{item.title}</h3>
@@ -246,7 +225,6 @@ function getSocialIcon(platform) {
 
         <div class="content-panel__controls">
           <button type="button" class="content-nav-button" data-step="prev" aria-label="上一项">←</button>
-          <div class="content-nav-status"><strong>游戏</strong><span>默认页</span></div>
           <button type="button" class="content-nav-button" data-step="next" aria-label="下一项">→</button>
         </div>
       </div>
@@ -258,7 +236,6 @@ function getSocialIcon(platform) {
   const viewer = document.querySelector('[data-content-viewer]');
   const tabs = Array.from(document.querySelectorAll('[data-view]'));
   const panels = Array.from(document.querySelectorAll('[data-panel]'));
-  const status = document.querySelector('.content-nav-status');
   const labelByKey = {
     games: '游戏',
     movies: '电影',
@@ -267,7 +244,7 @@ function getSocialIcon(platform) {
     other: '其他',
   };
 
-  if (viewer && tabs.length && panels.length && status) {
+  if (viewer && tabs.length && panels.length) {
     const keys = tabs.map((tab) => tab.dataset.view);
 
     const setActive = (key) => {
@@ -280,8 +257,6 @@ function getSocialIcon(platform) {
         panel.dataset.active = panel.dataset.panel === key ? 'true' : 'false';
       });
 
-      const title = labelByKey[key] || '游戏';
-      status.innerHTML = `<strong>${title}</strong><span>默认页</span>`;
       viewer.dataset.activeView = key;
     };
 

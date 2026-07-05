@@ -30,7 +30,7 @@ const books = Array.isArray(booksData) ? booksData : (booksData.items || []);
     {books.length > 0 ? (
       <div class="collection-grid">
         {books.map((book) => (
-          <article class="entry-card" key={book.id}>
+          <article class="entry-card entry-card--compact" key={book.id}>
             <div class="entry-card__media">
               {book.localCoverPath ? <img src={book.localCoverPath} alt={book.title} loading="lazy" /> : null}
             </div>
