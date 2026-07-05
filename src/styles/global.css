@@ -264,6 +264,9 @@ img {
 }
 
 .page-frame--landing {
+  /* 与content-tabs和site-footer保持统一的宽度 */
+  width: min(var(--content-width), calc(100% - 2rem));
+  margin: 0 auto;
   padding: 0 0 clamp(1.25rem, 3vw, 2rem);
   /* Acrylic/Aero 毛玻璃效果 */
   background: linear-gradient(
