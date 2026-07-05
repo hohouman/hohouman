@@ -325,16 +325,12 @@ function getSocialIcon(platform) {
       scrollLink.addEventListener('click', (event) => {
         event.preventDefault();
         
-        // 获取当前激活的面板
-        const activePanel = document.querySelector('[data-panel][data-active="true"]');
-        if (!activePanel) return;
-        
-        // 获取该面板中的section-eyebrow元素
-        const sectionEyebrow = activePanel.querySelector('.section-eyebrow');
-        if (!sectionEyebrow) return;
+        // 获取content-tabs元素
+        const contentTabs = document.getElementById('content-tabs');
+        if (!contentTabs) return;
         
         // 计算元素相对于文档顶部的绝对位置
-        const rect = sectionEyebrow.getBoundingClientRect();
+        const rect = contentTabs.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const targetPosition = rect.top + scrollTop;
         
