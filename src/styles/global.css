@@ -286,24 +286,18 @@ img {
   width: min(var(--content-width), calc(100% - 2rem));
   max-width: 62rem; /* 与菜单栏宽度保持一致 */
   margin: 1rem auto 2rem;
-  padding: 1rem 1.25rem;
-  border-radius: 18px;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  /* 去掉背景遮罩，只保留文字 */
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
   /* 提高文字对比度，确保可读性 */
-  color: rgba(255, 247, 239, 0.9);
-  font-weight: 500;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  /* 与主面板统一的Acrylic材质 */
-  background: linear-gradient(
-    180deg,
-    rgba(var(--theme-color-rgb), 0.12) 0%,
-    rgba(var(--theme-color-rgb), 0.08) 100%
-  );
-  backdrop-filter: blur(40px) saturate(200%);
-  -webkit-backdrop-filter: blur(40px) saturate(200%);
-  border: 1px solid rgba(var(--theme-color-rgb), 0.2);
-  box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: rgba(255, 247, 239, 0.85);
+  font-weight: 400;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 
