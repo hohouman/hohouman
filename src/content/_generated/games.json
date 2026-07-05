@@ -14,6 +14,7 @@
     "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/264710/library_600x900.jpg",
     "type": "game",
     "platform": "steam",
-    "localCoverPath": "/generated/game_264710_cover.webp"
+    "localCoverPath": "/generated/game_264710_cover.webp",
+    "localPosterPath": "/generated/game_264710_poster.webp"
   }
 ]
