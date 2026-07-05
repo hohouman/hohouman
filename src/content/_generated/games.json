@@ -14,7 +14,7 @@
     "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/264710/library_600x900.jpg",
     "type": "game",
     "platform": "steam",
-    "url": "https://store.steampowered.com/app/264710/Subnautica/",
+    "url": "https://store.steampowered.com/app/264710",
     "localCoverPath": "/generated/game_264710_cover.webp",
     "localPosterPath": "/generated/game_264710_poster.webp"
   },
@@ -33,13 +33,13 @@
     "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/870780/library_600x900.jpg",
     "type": "game",
     "platform": "steam",
-    "url": "https://store.steampowered.com/app/870780/____Control_Ultimate_Edition/",
+    "url": "https://store.steampowered.com/app/870780",
     "localCoverPath": "/generated/game_870780_cover.webp",
     "localPosterPath": "/generated/game_870780_poster.webp"
   },
   {
     "id": "493340",
-    "title": "雲霄飛車之星",
+    "title": "过山车之星",
     "developer": [
       "Frontier Developments",
       "Aspyr (Mac)"
@@ -49,7 +49,7 @@
       "Aspyr (Mac)"
     ],
     "releaseDate": "2016 年 11 月 17 日",
-    "description": "Planet Coaster® – 雲霄飛車遊樂園模擬遊戲的明日之星來了！打造你的雲霄飛車遊樂園帝國，為數量驚人的遊客們帶來驚喜、歡樂和刺激。盡情發揮你的創意，並將成就分享給全世界。",
+    "description": "Planet Coaster® — 过山车公园模拟游戏的明日之光重磅来袭！建造您的过山车公园帝国，为人们带来难以置信的惊奇、欢乐和刺激 — 放飞您的想象力，与世界分享您的成就。",
     "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/header.jpg?t=1782480201",
     "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/493340/library_600x900.jpg",
     "type": "game",
@@ -139,5 +139,28 @@
     "url": "https://store.steampowered.com/app/391220",
     "localCoverPath": "/generated/game_391220_cover.webp",
     "localPosterPath": "/generated/game_391220_poster.webp"
+  },
+  {
+    "id": "203160",
+    "title": "Tomb Raider Game of the Year",
+    "developer": [
+      "Crystal Dynamics",
+      "Eidos-Montréal",
+      "Feral Interactive (Mac)",
+      "Nixxes"
+    ],
+    "publisher": [
+      "Crystal Dynamics",
+      "Feral Interactive (Mac)"
+    ],
+    "releaseDate": "2013 年 3 月 4 日",
+    "description": "《古墓丽影》探索了劳拉·克劳馥紧张的起源故事，以及她从年轻女人变为坚强生存者的成长过程。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/203160/9e67774e97cdd155f287146e62611eb445514ac6/header.jpg?t=1765220424",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/203160/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/203160",
+    "localCoverPath": "/generated/game_203160_cover.webp",
+    "localPosterPath": "/generated/game_203160_poster.webp"
   }
 ]
