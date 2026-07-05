@@ -58,8 +58,12 @@ const albumNotes = albums.length > 0 ? albums : [
               <div class="entry-card__body">
                 <span class="card-tag">Album</span>
                 <h3 class="entry-card__title">{item.title}</h3>
-                {item.artist ? <p class="entry-card__meta-line"><strong>Artist:</strong> {Array.isArray(item.artist) ? item.artist.join(', ') : item.artist}</p> : null}
-                {item.releaseDate ? <p class="entry-card__meta-line"><strong>Release:</strong> {item.releaseDate}</p> : null}
+                {item.artist && item.artist.length > 0 ? (
+                  <p class="entry-card__meta-line"><strong>Artist:</strong> {Array.isArray(item.artist) ? item.artist.join(', ') : item.artist}</p>
+                ) : null}
+                {item.releaseDate ? (
+                  <p class="entry-card__meta-line"><strong>Release:</strong> {item.releaseDate}</p>
+                ) : null}
                 <p class="entry-card__desc">{item.description || item.desc}</p>
               </div>
             </article>

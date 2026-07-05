@@ -647,7 +647,7 @@ img {
   gap: 0.3rem;
   padding: 1.15rem 1.25rem;
   border-radius: 18px;
-  background: rgba(255, 252, 247, 0.72);
+  background: rgba(255, 252, 247, 0.58);
   border: 1px solid rgba(var(--theme-color-rgb), 0.12);
   box-shadow: 0 12px 28px rgba(30, 22, 18, 0.08);
 }
@@ -697,7 +697,7 @@ img {
   overflow: hidden;
   border: 1px solid rgba(var(--theme-color-rgb), 0.12);
   border-radius: 14px;
-  background: rgba(255, 252, 247, 0.92);
+  background: rgba(255, 252, 247, 0.85);
   box-shadow: 0 12px 32px rgba(35, 24, 19, 0.08);
 }
 
@@ -787,7 +787,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.25rem 0 0;
+  padding: 0.25rem 1.5rem 0;
 }
 
 .content-nav-button {
@@ -795,7 +795,7 @@ img {
   height: 3.2rem;
   border-radius: 999px;
   border: 1px solid rgba(var(--theme-color-rgb), 0.18);
-  background: rgba(255, 252, 247, 0.42);
+  background: rgba(255, 252, 247, 0.35);
   color: var(--ink);
   font-size: 1.2rem;
   cursor: pointer;
@@ -804,7 +804,7 @@ img {
 
 .content-nav-button:hover {
   transform: translateY(-1px);
-  background: rgba(255, 252, 247, 0.68);
+  background: rgba(255, 252, 247, 0.55);
 }
 
 .collection-grid--featured {
