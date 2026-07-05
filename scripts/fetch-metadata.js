@@ -66,6 +66,86 @@ async function getSteamData(appId, url) {
 }
 
 /**
+ * 解决豆瓣的JavaScript挑战
+ * @param {Page} page - Puppeteer页面对象
+ * @returns {Promise<boolean>} 是否成功解决挑战
+ */
+async function solveDoubanChallenge(page) {
+  try {
+    // 检查是否有挑战表单
+    const hasChallengeForm = await page.$('#sec');
+    if (!hasChallengeForm) {
+      return true; // 没有挑战，直接返回成功
+    }
+
+    console.log('检测到豆瓣反爬虫挑战，正在解决...');
+
+    // 在页面上下文中执行挑战计算
+    const solved = await page.evaluate(async () => {
+      // SHA-512 哈希函数
+      function sha512(string) {
+        return new Promise((resolve, reject) => {
+          let buffer = (new TextEncoder).encode(string);
+          crypto.subtle.digest('SHA-512', buffer.buffer).then(result => {
+            resolve(Array.from(new Uint8Array(result)).map(
+              c => c.toString(16).padStart(2, '0')
+            ).join(''));
+          }, reject);
+        });
+      }
+
+      // 计算nonce
+      async function process(data, difficulty = 4) {
+        let hash;
+        let nonce = 0;
+        const targetSubStr = Array(difficulty + 1).join('0');
+
+        do {
+          nonce += 1;
+          hash = await sha512(data + nonce);
+        } while (hash.substr(0, difficulty) !== targetSubStr);
+        
+        return nonce;
+      }
+
+      // 获取挑战数据
+      const cha = document.querySelector("#cha").value;
+      
+      // 计算解决方案
+      const sol = await process(cha);
+      
+      // 填充解决方案
+      document.querySelector("#sol").value = sol;
+      
+      return true;
+    });
+
+    if (solved) {
+      console.log('挑战计算完成，提交表单...');
+      
+      // 提交表单
+      await page.evaluate(() => {
+        document.querySelector("#sec").requestSubmit();
+      });
+
+      // 等待页面跳转和加载
+      await page.waitForNavigation({ 
+        waitUntil: 'networkidle2',
+        timeout: 30000 
+      });
+
+      console.log('✓ 挑战解决成功，页面已加载');
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    console.error('解决挑战失败:', error.message);
+    return false;
+  }
+}
+
+/**
  * 从豆瓣获取电影/书籍数据
  */
 async function getDoubanData(doubanId, type, url) {
@@ -112,10 +192,20 @@ async function getDoubanData(doubanId, type, url) {
     // 添加随机延迟以避免过于频繁的请求
     await new Promise(resolve => setTimeout(resolve, Math.random() * 2000 + 1000));
     
+    // 先加载页面（不等待networkidle2，因为可能会被挑战拦截）
     await page.goto(pageUrl, {
-      waitUntil: 'networkidle2',
+      waitUntil: 'domcontentloaded',
       timeout: 30000
     });
+
+    // 解决挑战（如果有）
+    const challengeSolved = await solveDoubanChallenge(page);
+    
+    if (!challengeSolved) {
+      console.error('无法解决豆瓣挑战');
+      await browser.close();
+      return null;
+    }
     
     // 等待页面完全加载
     await page.waitForSelector('#content', { timeout: 10000 }).catch(() => {
@@ -126,8 +216,8 @@ async function getDoubanData(doubanId, type, url) {
     const pageTitle = await page.title();
     console.log(`页面标题: ${pageTitle}`);
     
-    if (pageTitle.includes('访问太频繁') || pageTitle.includes('验证码') || pageTitle === '豆瓣') {
-      console.error(`豆瓣反爬虫检测：${pageTitle} - 可能需要手动验证或稍后再试`);
+    if (pageTitle.includes('访问太频繁') || pageTitle.includes('验证码')) {
+      console.error(`豆瓣反爬虫检测：${pageTitle}`);
       await browser.close();
       return null;
     }
