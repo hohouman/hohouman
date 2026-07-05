@@ -1,0 +1,41 @@
+---
+// 导入页面布局组件
+import Layout from '../layouts/Layout.astro';
+
+// 加载个人资料配置数据
+import profile from '../config/profile.json';
+---
+
+<Layout title="Home" wallpaper={profile.wallpaper}>
+  <slot name="hero" slot="hero">
+    <div class="hero-text">
+      <h1>{profile.name}</h1>
+      <p>{profile.bio}</p>
+      <div class="social-links">
+        {Object.entries(profile.social).map(([platform, url]) => (
+          <a 
+            href={url as string} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn-outline"
+            key={platform}
+          >
+            {platform.charAt(0).toUpperCase() + platform.slice(1)}
+          </a>
+        ))}
+      </div>
+    </div>
+  </slot>
+  
+  <div class="nav-tabs">
+    <a href="/games" class="nav-tab">Games</a>
+    <a href="/movies" class="nav-tab">Movies</a>
+    <a href="/books" class="nav-tab">Books</a>
+    <a href="/other" class="nav-tab">Other</a>
+  </div>
+  
+  
+  <slot name="footer" slot="footer">
+    © 2026 {profile.name}. Powered by <a href="https://github.com/hohouman/logbook">logbook</a> · Hosted on Cloudflare
+  </slot>
+</Layout>

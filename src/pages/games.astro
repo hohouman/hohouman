@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import profile from '../config/profile.json';
+
+// 读取生成的游戏数据
+let games = [];
+try {
+  const gamesResponse = await fetch(new URL('../content/_generated/games.json', import.meta.url));
+  if (gamesResponse.ok) {
+    const gamesData = await gamesResponse.json();
+    games = Array.isArray(gamesData) ? gamesData : (gamesData.items || []);
+  }
+} catch (error) {
+  console.log('No games data found, using empty array');
+}
+---
+
+<Layout title="Games" wallpaper={profile.wallpaper}>
+  <slot name="hero" slot="hero">
+    <h1>Games</h1>
+  </slot>
+  
+  <section class="container">
+    <h2>My Game Collection</h2>
+    {games.length > 0 ? (
+      <div class="grid">
+        {games.map(game => (
+          <div class="card" key={game.id}>
+            {game.localCoverPath && <img src={game.localCoverPath} alt={game.title} />}
+            <h3>{game.title}</h3>
+            <p>{game.description}</p>
+            <div class="meta">
+              <span>Developer: {Array.isArray(game.developer) ? game.developer.join(', ') : game.developer}</span>
+              <span>Publisher: {Array.isArray(game.publisher) ? game.publisher.join(', ') : game.publisher}</span>
+              <span>Release: {game.releaseDate}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p>No games added yet. Check back later!</p>
+    )}
+  </section>
+</Layout>

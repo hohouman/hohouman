@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import profile from '../config/profile.json';
+
+// 读取生成的电影数据
+let movies = [];
+try {
+  const moviesResponse = await fetch(new URL('../content/_generated/movies.json', import.meta.url));
+  if (moviesResponse.ok) {
+    const moviesData = await moviesResponse.json();
+    movies = Array.isArray(moviesData) ? moviesData : (moviesData.items || []);
+  }
+} catch (error) {
+  console.log('No movies data found, using empty array');
+}
+---
+
+<Layout title="Movies" wallpaper={profile.wallpaper}>
+  <slot name="hero" slot="hero">
+    <h1>Movies</h1>
+  </slot>
+  
+  <section class="container">
+    <h2>My Movie Collection</h2>
+    {movies.length > 0 ? (
+      <div class="grid">
+        {movies.map(movie => (
+          <div class="card" key={movie.id}>
+            {movie.localCoverPath && <img src={movie.localCoverPath} alt={movie.title} />}
+            <h3>{movie.title}</h3>
+            <p>{movie.description}</p>
+            <div class="meta">
+              <span>Director: {Array.isArray(movie.director) ? movie.director.join(', ') : movie.director}</span>
+              <span>Release: {movie.releaseDate}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p>No movies added yet. Check back later!</p>
+    )}
+  </section>
+</Layout>

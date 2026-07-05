@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import profile from '../config/profile.json';
+
+// 读取生成的书籍数据
+let books = [];
+try {
+  const booksResponse = await fetch(new URL('../content/_generated/books.json', import.meta.url));
+  if (booksResponse.ok) {
+    const booksData = await booksResponse.json();
+    books = Array.isArray(booksData) ? booksData : (booksData.items || []);
+  }
+} catch (error) {
+  console.log('No books data found, using empty array');
+}
+---
+
+<Layout title="Books" wallpaper={profile.wallpaper}>
+  <slot name="hero" slot="hero">
+    <h1>Books</h1>
+  </slot>
+  
+  <section class="container">
+    <h2>My Book Collection</h2>
+    {books.length > 0 ? (
+      <div class="grid">
+        {books.map(book => (
+          <div class="card" key={book.id}>
+            {book.localCoverPath && <img src={book.localCoverPath} alt={book.title} />}
+            <h3>{book.title}</h3>
+            <p>{book.description}</p>
+            <div class="meta">
+              <span>Author: {Array.isArray(book.developer) ? book.developer.join(', ') : book.developer}</span>
+              <span>Publisher: {Array.isArray(book.publisher) ? book.publisher.join(', ') : book.publisher}</span>
+              <span>Release: {book.releaseDate}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p>No books added yet. Check back later!</p>
+    )}
+  </section>
+</Layout>

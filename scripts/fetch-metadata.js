@@ -8,9 +8,9 @@ import sharp from 'sharp';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 数据目录路径
+// 数据目录路径 - 现在指向新的config目录
 const CONTENT_DIR = path.join(__dirname, '../src/content');
-const CONFIG_DIR = path.join(CONTENT_DIR, 'config');
+const CONFIG_DIR = path.join(__dirname, '../src/config'); // 修改为新的config目录
 const GENERATED_DIR = path.join(CONTENT_DIR, '_generated');
 
 // 确保生成目录存在
@@ -213,6 +213,7 @@ async function downloadAndConvertImage(url, fileName) {
       .webp({ quality: 80 })
       .toBuffer();
 
+    // 存储在生成的目录中
     const imagePath = path.join(GENERATED_DIR, fileName);
     await fs.writeFile(imagePath, optimizedImageBuffer);
     
@@ -304,7 +305,7 @@ async function processUrl(url, existingDataMap) {
   // 下载并转换封面图片
   if (data.coverUrl) {
     const ext = path.extname(data.coverUrl).split('.')[1] || 'webp';
-    const fileName = `${data.type}_${data.id}_cover.webp`;
+    const fileName = `${data.type}_${data.id}_${Date.now()}.${ext}`;
     const imagePath = await downloadAndConvertImage(data.coverUrl, fileName);
     data.localCoverPath = imagePath;
   }
@@ -347,7 +348,7 @@ async function main() {
         continue;
       }
 
-      // 读取现有生成的数据
+      // 读取现有生成的数据 - 修改为使用新的数据目录
       const generatedFile = path.join(GENERATED_DIR, configFile);
       let existingData = [];
       let existingDataMap = {};
@@ -387,7 +388,7 @@ async function main() {
         newItem.platform === item.platform && newItem.id === item.id
       ))];
 
-      // 写入生成的文件
+      // 写入生成的文件 - 使用新的数据目录
       await fs.writeFile(generatedFile, JSON.stringify(allResults, null, 2));
       console.log(`完成处理 ${configFile}，共 ${allResults.length} 条数据 (${results.length} 条新数据)`);
     }

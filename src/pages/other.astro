@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OtherContent from '../content/other.md';
+import profile from '../config/profile.json';
+---
+
+<Layout title="Other" wallpaper={profile.wallpaper}>
+  <slot name="hero" slot="hero">
+    <h1>Other Interests</h1>
+  </slot>
+  
+  <section class="container">
+    <OtherContent />
+  </section>
+</Layout>
