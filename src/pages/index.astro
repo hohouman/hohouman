@@ -150,7 +150,7 @@ function getSocialIcon(platform) {
         <div class="content-viewer__panels">
           <section class="content-panel" data-panel="games" data-active="true">
             <div class="content-panel__summary">
-              <p class="section-eyebrow">{panelCopy.games.eyebrow}</p>
+              <p class="section-eyebrow" id="section-eyebrow-games">{panelCopy.games.eyebrow}</p>
               <h3>{panelCopy.games.title}</h3>
               <p>{panelCopy.games.desc}</p>
             </div>
@@ -183,7 +183,7 @@ function getSocialIcon(platform) {
 
           <section class="content-panel" data-panel="movies">
             <div class="content-panel__summary">
-              <p class="section-eyebrow">{panelCopy.movies.eyebrow}</p>
+              <p class="section-eyebrow" id="section-eyebrow-movies">{panelCopy.movies.eyebrow}</p>
               <h3>{panelCopy.movies.title}</h3>
               <p>{panelCopy.movies.desc}</p>
             </div>
@@ -215,7 +215,7 @@ function getSocialIcon(platform) {
 
           <section class="content-panel" data-panel="books">
             <div class="content-panel__summary">
-              <p class="section-eyebrow">{panelCopy.books.eyebrow}</p>
+              <p class="section-eyebrow" id="section-eyebrow-books">{panelCopy.books.eyebrow}</p>
               <h3>{panelCopy.books.title}</h3>
               <p>{panelCopy.books.desc}</p>
             </div>
@@ -248,7 +248,7 @@ function getSocialIcon(platform) {
 
           <section class="content-panel" data-panel="albums">
             <div class="content-panel__summary">
-              <p class="section-eyebrow">{panelCopy.albums.eyebrow}</p>
+              <p class="section-eyebrow" id="section-eyebrow-albums">{panelCopy.albums.eyebrow}</p>
               <h3>{panelCopy.albums.title}</h3>
               <p>{panelCopy.albums.desc}</p>
             </div>
@@ -299,7 +299,7 @@ function getSocialIcon(platform) {
 
           <section class="content-panel" data-panel="other">
             <div class="content-panel__summary">
-              <p class="section-eyebrow">{panelCopy.other.eyebrow}</p>
+              <p class="section-eyebrow" id="section-eyebrow-other">{panelCopy.other.eyebrow}</p>
               <h3>{panelCopy.other.title}</h3>
               <p>{panelCopy.other.desc}</p>
             </div>
@@ -318,6 +318,31 @@ function getSocialIcon(platform) {
     const viewer = document.querySelector('[data-content-viewer]');
     const tabs = Array.from(document.querySelectorAll('[data-view]'));
     const panels = Array.from(document.querySelectorAll('[data-panel]'));
+    
+    // 处理向下箭头按钮的点击事件
+    const scrollLink = document.querySelector('.hero-scroll-link');
+    if (scrollLink) {
+      scrollLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        
+        // 获取当前激活的面板
+        const activePanel = document.querySelector('[data-panel][data-active="true"]');
+        if (!activePanel) return;
+        
+        // 获取该面板中的section-eyebrow元素
+        const sectionEyebrow = activePanel.querySelector('.section-eyebrow');
+        if (!sectionEyebrow) return;
+        
+        // 使用offsetTop获取元素相对于文档顶部的精确位置
+        const targetPosition = sectionEyebrow.offsetTop;
+        
+        // 平滑滚动到目标位置
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      });
+    }
 
     if (viewer && tabs.length && panels.length) {
       const keys = tabs.map((tab) => tab.dataset.view);
@@ -358,7 +383,6 @@ function getSocialIcon(platform) {
       tabs.forEach((tab) => {
         tab.addEventListener('click', () => setActive(tab.dataset.view || 'games'));
       });
-
 
       setActive('games');
     }
