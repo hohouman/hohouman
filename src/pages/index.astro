@@ -104,8 +104,10 @@ function getSocialIcon(platform) {
 
 <Layout title="Home" wallpaper={profile.wallpaper} heroFullscreen={true}>
   <div slot="hero" class="landing-hero">
-    <section class="profile-panel profile-panel--landing">
+    <div class="profile-badge-wrapper">
       <div class="profile-panel__badge">Personal homepage</div>
+    </div>
+    <section class="profile-panel profile-panel--landing">
       <div class="profile-panel__header">
         <img src={profile.avatar} alt={profile.name} class="profile-avatar" />
         <div>
@@ -132,7 +134,6 @@ function getSocialIcon(platform) {
     </section>
 
     <a href="#content-tabs" class="hero-scroll-link" aria-label="滚动到下一页">
-      <span class="hero-scroll-link__label">Scroll</span>
       <span class="hero-scroll-link__arrow" aria-hidden="true">↓</span>
     </a>
   </div>

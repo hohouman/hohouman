@@ -288,6 +288,29 @@ img {
   gap: 1.25rem;
   width: 100%;
   min-height: calc(100svh - 4rem);
+  position: relative;
+}
+
+.profile-badge-wrapper {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.profile-panel__badge {
+  display: inline-flex;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(255, 247, 239, 0.15);
+  color: rgba(255, 247, 239, 0.95);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 247, 239, 0.2);
 }
 
 .landing-hero__grid {
@@ -316,20 +339,6 @@ img {
 .profile-panel--landing {
   max-width: 52rem;
   margin: 0 auto;
-}
-
-.profile-panel__badge {
-  display: inline-flex;
-  width: fit-content;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(255, 247, 239, 0.18);
-  color: rgba(255, 247, 239, 0.92);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  backdrop-filter: blur(8px);
 }
 
 .profile-panel__header {
@@ -513,14 +522,13 @@ img {
 .hero-scroll-link {
   position: absolute;
   left: 50%;
-  bottom: 2.5rem;
+  bottom: 2rem;
   transform: translateX(-50%);
-  display: inline-grid;
-  gap: 0.15rem;
-  place-items: center;
-  width: 3.4rem;
-  height: 3.4rem;
-  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
   border-radius: 999px;
   border: 1px solid rgba(var(--theme-color-rgb), 0.28);
   background: rgba(29, 19, 15, 0.42);
@@ -534,16 +542,8 @@ img {
   background: rgba(29, 19, 15, 0.58);
 }
 
-.hero-scroll-link__label {
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.75;
-}
-
 .hero-scroll-link__arrow {
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1;
 }
 
@@ -669,7 +669,7 @@ img {
 }
 
 .content-panel__list {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 450px));
   justify-content: center;
 }
 
@@ -690,15 +690,15 @@ img {
 
 .showcase-card {
   display: grid;
-  grid-template-columns: minmax(7rem, 30%) minmax(0, 1fr);
-  min-height: 9rem;
-  max-width: 420px;
+  grid-template-columns: minmax(6.5rem, 28%) minmax(0, 1fr);
+  min-height: 8.5rem;
+  max-width: 450px;
   width: 100%;
   overflow: hidden;
   border: 1px solid rgba(var(--theme-color-rgb), 0.12);
-  border-radius: 16px;
-  background: rgba(255, 252, 247, 0.82);
-  box-shadow: 0 16px 36px rgba(35, 24, 19, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 252, 247, 0.85);
+  box-shadow: 0 12px 32px rgba(35, 24, 19, 0.08);
 }
 
 .showcase-card .entry-card__media {
