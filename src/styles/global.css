@@ -647,7 +647,7 @@ img {
   gap: 0.3rem;
   padding: 1.15rem 1.25rem;
   border-radius: 18px;
-  background: rgba(255, 252, 247, 0.65);
+  background: rgba(255, 252, 247, 0.72);
   border: 1px solid rgba(var(--theme-color-rgb), 0.12);
   box-shadow: 0 12px 28px rgba(30, 22, 18, 0.08);
 }
@@ -669,12 +669,12 @@ img {
 }
 
 .content-panel__list {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 450px));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 480px));
   justify-content: center;
 }
 
 .content-panel__notes {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 320px));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
   justify-content: center;
 }
 
@@ -690,14 +690,14 @@ img {
 
 .showcase-card {
   display: grid;
-  grid-template-columns: minmax(6.5rem, 28%) minmax(0, 1fr);
-  min-height: 8.5rem;
-  max-width: 450px;
+  grid-template-columns: minmax(7rem, 30%) minmax(0, 1fr);
+  min-height: 10rem;
+  max-width: 480px;
   width: 100%;
   overflow: hidden;
   border: 1px solid rgba(var(--theme-color-rgb), 0.12);
   border-radius: 14px;
-  background: rgba(255, 252, 247, 0.85);
+  background: rgba(255, 252, 247, 0.92);
   box-shadow: 0 12px 32px rgba(35, 24, 19, 0.08);
 }
 
@@ -727,11 +727,11 @@ img {
 
 .showcase-card .entry-card__desc {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 .showcase-card .entry-card__meta {
