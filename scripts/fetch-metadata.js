@@ -8,9 +8,8 @@ import sharp from 'sharp';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 数据目录路径 - 现在指向新的config目录
 const CONTENT_DIR = path.join(__dirname, '../src/content');
-const CONFIG_DIR = path.join(__dirname, '../src/config'); // 修改为新的config目录
+const CONFIG_DIR = path.join(CONTENT_DIR, 'config'); // 配置文件目录
 const GENERATED_DIR = path.join(CONTENT_DIR, '_generated');
 const PUBLIC_GENERATED_DIR = path.join(__dirname, '../public/generated');
 
@@ -50,27 +49,32 @@ async function getSteamData(appId) {
   }
 }
 
-/**
- * 从Epic Games获取游戏数据
- */
 async function getEpicData(productSlug) {
   try {
-    const response = await fetch(`https://store.epicgames.com/p/${productSlug}`);
-    
+    const response = await fetch(`https://store.epicgames.com/p/${productSlug}`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept-Language': 'en-US,en;q=0.9'
+      }
+    });
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const html = await response.text();
-    // 简单的解析方式，实际可能需要更复杂的解析
-    const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
+
+    // 使用更可靠的 meta 标签解析
+    const titleMatch = html.match(/<meta property="og:title" content="([^"]+)"/i) || 
+                       html.match(/<title[^>]*>(.*?)<\/title>/i);
     const title = titleMatch ? titleMatch[1].replace(' | Epic Games Store', '').trim() : productSlug;
 
-    // 提取封面图URL (简化处理)
-    const coverMatch = html.match(/"image":"([^"]*\.jpg|png|jpeg)"/i);
+    // 提取封面图 URL (使用 og:image meta 标签)
+    const coverMatch = html.match(/<meta property="og:image" content="([^"]+)"/i) ||
+                       html.match(/<meta name="twitter:image" content="([^"]+)"/i);
     let coverUrl = '';
     if (coverMatch) {
-      coverUrl = coverMatch[1].replace(/\\u002F/g, '/');
+      coverUrl = coverMatch[1];
     }
 
     return {
@@ -85,7 +89,7 @@ async function getEpicData(productSlug) {
       platform: 'epic'
     };
   } catch (error) {
-    console.error(`获取Epic Games数据失败 ${productSlug}:`, error.message);
+    console.error(`获取 Epic Games 数据失败 ${productSlug}:`, error.message);
     return null;
   }
 }
@@ -94,19 +98,53 @@ async function getEpicData(productSlug) {
  * 从豆瓣获取电影/书籍数据
  */
 async function getDoubanData(doubanId, type) {
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
+      '--window-size=1920,1080'
+    ]
+  });
+  
   try {
-    const browser = await puppeteer.launch({ 
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
     const page = await browser.newPage();
     
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
-    const host = type === 'movie' ? 'movie' : type === 'book' ? 'book' : 'music';
-    await page.goto(`https://${host}.douban.com/subject/${doubanId}/`, { 
-      waitUntil: 'networkidle2',
-      timeout: 30000 
+    // 设置更真实的 User-Agent 和 viewport
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    await page.setViewport({ width: 1920, height: 1080 });
+    
+    // 添加额外的请求头来模拟真实浏览器
+    await page.setExtraHTTPHeaders({
+      'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
     });
+    
+    const host = type === 'movie' ? 'movie' : type === 'book' ? 'book' : 'music';
+    const url = `https://${host}.douban.com/subject/${doubanId}/`;
+    
+    console.log(`正在访问豆瓣页面：${url}`);
+    
+    await page.goto(url, {
+      waitUntil: 'networkidle2',
+      timeout: 30000
+    });
+    
+    // 等待页面完全加载
+    await page.waitForSelector('#content', { timeout: 10000 }).catch(() => {
+      console.log(`页面加载超时，但仍尝试提取数据`);
+    });
+    
+    // 检查是否有反爬虫提示
+    const pageTitle = await page.title();
+    if (pageTitle.includes('访问太频繁') || pageTitle.includes('验证码')) {
+      console.error(`豆瓣反爬虫检测：${pageTitle}`);
+      await browser.close();
+      return null;
+    }
 
     // 获取页面数据
     const data = await page.evaluate((type) => {
@@ -123,12 +161,29 @@ async function getDoubanData(doubanId, type) {
       const titleEl = document.querySelector('h1 span[property="v:itemreviewed"]');
       const title = titleEl ? titleEl.textContent.trim() : extractText('h1') || '';
 
-      const coverImg = document.querySelector('#mainpic .nbgnbg img');
-      const coverUrl = coverImg ? coverImg.getAttribute('src') : extractAttribute('#mainpic .nbgnbg a img', 'src');
+      // 改进封面图提取逻辑
+      let coverUrl = '';
+      const coverImg = document.querySelector('#mainpic img');
+      if (coverImg) {
+        coverUrl = coverImg.getAttribute('src') || coverImg.getAttribute('data-lazy');
+      }
+      
+      // 如果没有找到，尝试其他选择器
+      if (!coverUrl) {
+        const coverLink = document.querySelector('#mainpic a');
+        if (coverLink) {
+          coverUrl = coverLink.getAttribute('href');
+        }
+      }
+      
+      // 清理豆瓣图片 URL（移除 douban.com 的反盗链参数）
+      if (coverUrl && coverUrl.includes('douban.com')) {
+        coverUrl = coverUrl.replace(/\\?.*$/, ''); // 移除查询参数
+      }
 
       const infoDiv = document.getElementById('info');
       const infoText = infoDiv ? infoDiv.innerText : '';
-      
+
       let releaseDate = '';
       let director = [];
       let actors = [];
@@ -138,43 +193,62 @@ async function getDoubanData(doubanId, type) {
 
       if (type === 'movie') {
         // 提取电影信息
-        const dateMatch = infoText.match(/上映日期:\s*([^\n\r]+)/);
+        const dateMatch = infoText.match(/上映日期:\\s*([^\n\r]+)/);
         releaseDate = dateMatch ? dateMatch[1].trim() : '';
-        
-        const directorMatch = infoText.match(/导演:\s*([^\n\r]+)/);
+
+        const directorMatch = infoText.match(/导演:\\s*([^\n\r]+)/);
         if (directorMatch) {
           director = [directorMatch[1].trim()];
         }
-        
-        const actorMatch = infoText.match(/主演:\s*([^\n\r]+)/);
+
+        const actorMatch = infoText.match(/主演:\\s*([^\n\r]+)/);
         if (actorMatch) {
-          actors = actorMatch[1].split('/').map(a => a.trim());
+          actors = actorMatch[1].split('/').map(a => a.trim()).filter(Boolean);
         }
       } else if (type === 'book') {
         // 提取书籍信息
-        const dateMatch = infoText.match(/出版年:\s*([^\n\r]+)/);
+        const dateMatch = infoText.match(/出版年:\\s*([^\n\r]+)/);
         releaseDate = dateMatch ? dateMatch[1].trim() : '';
-        
-        const authorMatch = infoText.match(/作者:\s*([^\n\r]+)/);
+
+        const authorMatch = infoText.match(/作者:\\s*([^\n\r]+)/);
         if (authorMatch) {
           author = authorMatch[1].split('/').map(item => item.trim()).filter(Boolean);
         }
+        
+        const publisherMatch = infoText.match(/出版社:\\s*([^\n\r]+)/);
+        if (publisherMatch) {
+          publisher = [publisherMatch[1].trim()];
+        }
       } else if (type === 'album') {
-        const dateMatch = infoText.match(/发行时间:\s*([^\n\r]+)/);
+        const dateMatch = infoText.match(/发行时间:\\s*([^\n\r]+)/);
         releaseDate = dateMatch ? dateMatch[1].trim() : '';
 
-        const artistMatch = infoText.match(/表演者:\s*([^\n\r]+)/);
+        const artistMatch = infoText.match(/表演者:\\s*([^\n\r]+)/);
         if (artistMatch) {
           artist = artistMatch[1].split('/').map(item => item.trim()).filter(Boolean);
         }
 
-        const publisherMatch = infoText.match(/出版者:\s*([^\n\r]+)/);
+        const publisherMatch = infoText.match(/出版者:\\s*([^\n\r]+)/);
         if (publisherMatch) {
           publisher = [publisherMatch[1].trim()];
         }
       }
 
-      const desc = extractText('.related-info .all.hidden') || extractText('.related-info') || extractText('[property="v:summary"]');
+      // 改进描述提取
+      let desc = extractText('[property="v:summary"]');
+      if (!desc) {
+        const summaryAll = document.querySelector('.related-info .all.hidden, .summary .all.hidden');
+        if (summaryAll) {
+          desc = summaryAll.textContent.trim();
+        } else {
+          desc = extractText('.related-info') || extractText('.summary');
+        }
+      }
+      
+      // 限制描述长度
+      if (desc.length > 500) {
+        desc = desc.substring(0, 500) + '...';
+      }
 
       return {
         title: title,
@@ -211,6 +285,7 @@ async function getDoubanData(doubanId, type) {
       platform: 'douban'
     };
   } catch (error) {
+    await browser.close().catch(() => {});
     console.error(`获取豆瓣${type}数据失败 ${doubanId}:`, error.message);
     return null;
   }
