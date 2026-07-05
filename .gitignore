@@ -1,6 +1,8 @@
 ```
-# Generated files
-src/content/_generated/
+# Generated files (but track JSON data, ignore only raw images if any)
+src/content/_generated/*.webp
+src/content/_generated/*.jpg
+src/content/_generated/*.png
 
 # Dependencies
 node_modules/
