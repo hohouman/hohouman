@@ -333,8 +333,10 @@ function getSocialIcon(platform) {
         const sectionEyebrow = activePanel.querySelector('.section-eyebrow');
         if (!sectionEyebrow) return;
         
-        // 使用offsetTop获取元素相对于文档顶部的精确位置
-        const targetPosition = sectionEyebrow.offsetTop;
+        // 计算元素相对于文档顶部的绝对位置
+        const rect = sectionEyebrow.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = rect.top + scrollTop;
         
         // 平滑滚动到目标位置
         window.scrollTo({
