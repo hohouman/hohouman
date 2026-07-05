@@ -338,8 +338,8 @@ function getSocialIcon(platform) {
         }
         
         tabs.forEach((tab) => tab.setAttribute('aria-selected', 'false'));
-        Object.values(tabsMap).forEach((panel) => panel.classList.remove('is-active'));
-        tabsMap[key].classList.add('is-active');
+        panels.forEach((panel) => panel.removeAttribute('data-active'));
+        tabsMap[key].setAttribute('data-active', 'true');
         const activeTab = tabs.find((t) => t.dataset.view === key);
         if (activeTab) activeTab.setAttribute('aria-selected', 'true');
         setCurrentKey(key);
