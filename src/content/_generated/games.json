@@ -162,5 +162,430 @@
     "url": "https://store.steampowered.com/app/203160",
     "localCoverPath": "/generated/game_203160_cover.webp",
     "localPosterPath": "/generated/game_203160_poster.webp"
+  },
+  {
+    "id": "620",
+    "title": "Portal 2",
+    "developer": [
+      "Valve"
+    ],
+    "publisher": [
+      "Valve"
+    ],
+    "releaseDate": "2011 年 4 月 18 日",
+    "description": "“终身测试计划”现已升级，您可以为您自己或您的好友设计合作谜题！",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/header.jpg?t=1745363004",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/620/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/620",
+    "localCoverPath": "/generated/game_620_cover.webp",
+    "localPosterPath": "/generated/game_620_poster.webp"
+  },
+  {
+    "id": "750920",
+    "title": "Shadow of the Tomb Raider: Definitive Edition",
+    "developer": [
+      "Eidos-Montréal",
+      "Crystal Dynamics",
+      "Nixxes",
+      "Feral Interactive (Mac)",
+      "Feral interactive (Linux)"
+    ],
+    "publisher": [
+      "Crystal Dynamics",
+      "Feral Interactive (Mac)",
+      "Feral interactive (Linux)"
+    ],
+    "releaseDate": "2018 年 9 月 14 日",
+    "description": "劳拉·克劳馥一路狂奔，拯救世界免遭玛雅预言中的天灾摧毁，她终将迎接命运，成长为命中注定的古墓侠盗。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/750920/header.jpg?t=1765239925",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/750920/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/750920",
+    "localCoverPath": "/generated/game_750920_cover.webp",
+    "localPosterPath": "/generated/game_750920_poster.webp"
+  },
+  {
+    "id": "1962700",
+    "title": "Subnautica 2：异星水域",
+    "developer": [
+      "Unknown Worlds Entertainment"
+    ],
+    "publisher": [
+      "Unknown Worlds Entertainment"
+    ],
+    "releaseDate": "2026 年 5 月 14 日",
+    "description": "《Subnautica 2：异星水域》是背景设定在全新外星世界的水下生存冒险游戏，由Unknown Worlds倾力打造。可以单人游玩，也可以与好友组队开启四人合作模式。建造专属基地，制作不同工具，适应环境，水下求生。探索未知世界，揭开深海中隐藏的谜团。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1962700/998f14fffb6e9917639ce4ba992c7e9f4a0157b5/header_schinese.jpg?t=1780372044",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1962700/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1962700",
+    "localCoverPath": "/generated/game_1962700_cover.webp",
+    "localPosterPath": "/generated/game_1962700_poster.webp"
+  },
+  {
+    "id": "428660",
+    "title": "Deliver Us The Moon",
+    "developer": [
+      "KeokeN Interactive"
+    ],
+    "publisher": [
+      "Wired Productions"
+    ],
+    "releaseDate": "2019 年 10 月 10 日",
+    "description": "Deliver Us The Moon 是一个科幻惊悚游戏，以地球自然资源枯竭的近未来末世为背景。一名孤独的宇航员被送上月球，执行拯救人类免于灭绝的关键任务。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/428660/e7b4937585969091d5a986edb8aaa0d191c1fca3/header.jpg?t=1782220662",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/428660/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/428660",
+    "localCoverPath": "/generated/game_428660_cover.webp",
+    "localPosterPath": "/generated/game_428660_poster.webp"
+  },
+  {
+    "id": "1345890",
+    "title": "火星孤征",
+    "developer": [
+      "KeokeN Interactive"
+    ],
+    "publisher": [
+      "Frontier Foundry"
+    ],
+    "releaseDate": "2023 年 2 月 2 日",
+    "description": "《火星孤征》是一款氛围独特的科幻冒险游戏，玩家将挑战悬疑感十足的高风险任务，来找回被神秘的Outward偷走的方舟殖民船。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1345890/header_schinese.jpg?t=1738323432",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1345890/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1345890",
+    "localCoverPath": "/generated/game_1345890_cover.webp",
+    "localPosterPath": "/generated/game_1345890_poster.webp"
+  },
+  {
+    "id": "480490",
+    "title": "Prey",
+    "developer": [
+      "Arkane Studios"
+    ],
+    "publisher": [
+      "Bethesda Softworks"
+    ],
+    "releaseDate": "2017 年 5 月 4 日",
+    "description": "In Prey, you awaken aboard Talos I, a space station orbiting the moon in the year 2032. You are the key subject of an experiment meant to alter humanity forever – but things have gone terribly wrong. The space station has been overrun by hostile aliens and you are now being hunted.",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/480490/header.jpg?t=1750785331",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/480490/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/480490",
+    "localCoverPath": "/generated/game_480490_cover.webp",
+    "localPosterPath": "/generated/game_480490_poster.webp"
+  },
+  {
+    "id": "1927720",
+    "title": "Monument Valley",
+    "developer": [
+      "ustwo games"
+    ],
+    "publisher": [
+      "ustwo games"
+    ],
+    "releaseDate": "2022 年 7 月 12 日",
+    "description": "与沉默公主艾达一起踏上宽恕之旅，穿越不可能的幻境，解开虚幻的谜题。操纵纪念碑，创造不断延展的路径来探索新的、超现实神秘世界，体验这款发人沉思，让人平静的益智游戏。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1927720/45a4e828b5d2e3bd4068c68bae0a41c745a5e2dc/header.jpg?t=1762967584",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1927720/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1927720",
+    "localCoverPath": "/generated/game_1927720_cover.webp",
+    "localPosterPath": "/generated/game_1927720_poster.webp"
+  },
+  {
+    "id": "1927740",
+    "title": "Monument Valley 2",
+    "developer": [
+      "ustwo games"
+    ],
+    "publisher": [
+      "ustwo games"
+    ],
+    "releaseDate": "2022 年 7 月 12 日",
+    "description": "在了解“神圣几何”的秘密中，探索梦幻般的路径和令人愉快的谜题。 跟随 Ro，享受她在成为母亲之旅中的感人故事。操纵纪念碑，扩展路径来探索新的、超现实神秘世界，重新发现独立精神。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1927740/b92c8beb26541dc75c6aa97d222cffad0765baf5/header.jpg?t=1762967686",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1927740/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1927740",
+    "localCoverPath": "/generated/game_1927740_cover.webp",
+    "localPosterPath": "/generated/game_1927740_poster.webp"
+  },
+  {
+    "id": "3132930",
+    "title": "纪念碑谷 3",
+    "developer": [
+      "ustwo games"
+    ],
+    "publisher": [
+      "ustwo games"
+    ],
+    "releaseDate": "2025 年 7 月 22 日",
+    "description": "Noor雀屏中选成为了神圣之光的守护者，随后踏上一场神秘的冒险之旅，在令人费解的幻象与视觉艺术谜题之后，将揭开怎样的秘密？等待你的是希望，还是幻想……",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3132930/153c36f1a117ec9d94d02c7aa6c6470c94ff348d/header_schinese.jpg?t=1775663813",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/3132930/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/3132930",
+    "localCoverPath": "/generated/game_3132930_cover.webp",
+    "localPosterPath": "/generated/game_3132930_poster.webp"
+  },
+  {
+    "id": "322450",
+    "title": "FRAMED Collection",
+    "developer": [
+      "Loveshack Entertainment"
+    ],
+    "publisher": [
+      "Fellow Traveller"
+    ],
+    "releaseDate": "2018 年 5 月 17 日",
+    "description": "这是一个将鲜活可动的漫画书内容重新拼接制作的黑暗风格间谍冒险故事。FRAMED 合集是包含FRAMED和FRAMED2两作广受好评并屡获殊荣的黑暗色调益智游戏的合集版。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322450/header.jpg?t=1757944393",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/322450/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/322450",
+    "localCoverPath": "/generated/game_322450_cover.webp",
+    "localPosterPath": "/generated/game_322450_poster.webp"
+  },
+  {
+    "id": "3590",
+    "title": "Plants vs. Zombies GOTY Edition",
+    "developer": [
+      "PopCap Games, Inc."
+    ],
+    "publisher": [
+      "PopCap Games, Inc.",
+      "Electronic Arts"
+    ],
+    "releaseDate": "2009 年 5 月 5 日",
+    "description": "来自曾开发过宝石迷阵和幻幻球的宝开公司的全新动作策略游戏！ 可怕的僵尸即将入侵你的家，唯一的防御方式就是你栽种的植物！武装你的植物，切换他们不同的功能，诸如强悍的豌豆射手或樱桃炸弹，更加快速有效的将僵尸阻挡在入侵的道路上。不同的敌人，不同的玩法构成五种不同的游戏模式，加之夕阳、浓雾以及泳池之类的障碍增加了其挑战性，奇特的游戏乐趣永无止境！ 独特的五种游戏模式：冒险，迷你，益智，生存，再加上毫无压力的禅境花园 多达 50 个的冒险模式关卡设定，从白天到夜晚再到浓雾，从房顶到游泳池，场景变化多样 游戏共有 26 种不同的僵尸敌人，包括撑杆僵尸，潜水僵尸和开着车子的雪橇车僵尸等，使游戏更具挑战性 49 种功能强大，互不相同的植物，并可收集硬币购买宠物蜗牛，升级道具等多种道具！",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3590/header.jpg?t=1777394124",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/3590/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/3590",
+    "localCoverPath": "/generated/game_3590_cover.webp",
+    "localPosterPath": "/generated/game_3590_poster.webp"
+  },
+  {
+    "id": "108710",
+    "title": "Alan Wake",
+    "developer": [
+      "Remedy Entertainment"
+    ],
+    "publisher": [
+      "Remedy Entertainment"
+    ],
+    "releaseDate": "2012 年 2 月 16 日",
+    "description": "在黑暗笼罩的亮瀑镇，推动艾伦韦克濒临的理智进行战斗，解开其中的疑团并拯救他的爱人。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/108710/9c1728f937c2a7e632b447b02e442f6a5d88515c/header.jpg?t=1769717716",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/108710/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/108710",
+    "localCoverPath": "/generated/game_108710_cover.webp",
+    "localPosterPath": "/generated/game_108710_poster.webp"
+  },
+  {
+    "id": "1332010",
+    "title": "Stray",
+    "developer": [
+      "BlueTwelve Studio"
+    ],
+    "publisher": [
+      "Annapurna Interactive"
+    ],
+    "releaseDate": "2022 年 7 月 19 日",
+    "description": "一只孤身离群的流浪猫迷失在了一座被遗忘的网络城市里，它必须解开一个古老的谜团才能逃离出去，找到回家的路。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1332010/71daca1910d664d31240b9623a495e0c0828807f/header.jpg?t=1779927784",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1332010/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1332010",
+    "localCoverPath": "/generated/game_1332010_cover.webp",
+    "localPosterPath": "/generated/game_1332010_poster.webp"
+  },
+  {
+    "id": "278360",
+    "title": "A Story About My Uncle",
+    "developer": [
+      "Gone North Games"
+    ],
+    "publisher": [
+      "Coffee Stain Publishing"
+    ],
+    "releaseDate": "2014 年 5 月 28 日",
+    "description": "A Story About My Uncle is a first person platforming adventure game about a boy who searches for his lost uncle, and ends up in a world he couldn’t imagine existed. The movement is a crucial part of the games core gameplay – focusing on swinging through the world with a grappling hook that gives the player a wonderful sense of speed and...",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/278360/header.jpg?t=1589403981",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/278360/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/278360",
+    "localCoverPath": "/generated/game_278360_cover.webp",
+    "localPosterPath": "/generated/game_278360_poster.webp"
+  },
+  {
+    "id": "1178830",
+    "title": "光明记忆：无限",
+    "developer": [
+      "FYQD-Studio"
+    ],
+    "publisher": [
+      "FYQD-Studio",
+      "PLAYISM"
+    ],
+    "releaseDate": "2021 年 11 月 11 日",
+    "description": "《光明记忆：无限》国内游戏开发者&quot;飞燕群岛&quot;最新作品。2036年世界各地的天空上突然出现了异象，一个巨型的黑洞出现天空中吞噬着山脉和古建筑，科学家们无法解释这些现象，事件背后牵连着世界的存亡。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1178830/header_schinese.jpg?t=1734415707",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1178830/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1178830",
+    "localCoverPath": "/generated/game_1178830_cover.webp",
+    "localPosterPath": "/generated/game_1178830_poster.webp"
+  },
+  {
+    "id": "400",
+    "title": "Portal",
+    "developer": [
+      "Valve"
+    ],
+    "publisher": [
+      "Valve"
+    ],
+    "releaseDate": "2007 年 10 月 10 日",
+    "description": "Portal™ 是 Valve 新开发的单人游戏。故事背景设定在神秘的光圈科技实验室，Portal 已被誉为业界最具创意的新游戏，它将为玩家带来数十小时独一无二的游戏体验。 此游戏旨在改变玩家在特定环境中处理、应付和推测可能性情况的方法；与 Half-Life® 2 的“重力枪”开辟在特定环境下处理目标的新方法类似。 玩家必须通过空间打开前往操纵物体和谜题的入口，解决物理难题和挑战。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/400/header.jpg?t=1745368554",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/400/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/400",
+    "localCoverPath": "/generated/game_400_cover.webp",
+    "localPosterPath": "/generated/game_400_poster.webp"
+  },
+  {
+    "id": "2358720",
+    "title": "黑神话：悟空",
+    "developer": [
+      "Game Science"
+    ],
+    "publisher": [
+      "Game Science"
+    ],
+    "releaseDate": "2024 年 8 月 19 日",
+    "description": "《黑神话：悟空》是一款以中国神话为背景的动作角色扮演游戏。你将扮演一位“天命人”，为了探寻昔日传说的真相，踏上一条充满危险与惊奇的西游之路。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/header_schinese.jpg?t=1760601605",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/2358720/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/2358720",
+    "localCoverPath": "/generated/game_2358720_cover.webp",
+    "localPosterPath": "/generated/game_2358720_poster.webp"
+  },
+  {
+    "id": "999220",
+    "title": "Amnesia: Rebirth",
+    "developer": [
+      "Frictional Games"
+    ],
+    "publisher": [
+      "Frictional Games"
+    ],
+    "releaseDate": "2020 年 10 月 20 日",
+    "description": "又一个堕入黑暗的后裔，来自标志性的《失忆症》系列游戏制作团队。穿越悲哀与绝望的痛彻心扉之旅，探索人类坚韧的极限。还提供了冒险模式，适合那些想要体验剧情和冒险，却不想要恐怖元素的玩家。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/999220/header.jpg?t=1752056337",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/999220/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/999220",
+    "localCoverPath": "/generated/game_999220_cover.webp",
+    "localPosterPath": "/generated/game_999220_poster.webp"
+  },
+  {
+    "id": "617290",
+    "title": "遗迹：灰烬重生",
+    "developer": [
+      "Gunfire Games"
+    ],
+    "publisher": [
+      "Arc Games",
+      "THQ Nordic"
+    ],
+    "releaseDate": "2019 年 8 月 19 日",
+    "description": "The world has been thrown into chaos by an ancient evil from another dimension. As one of the last remnants of humanity, you must set out alone or alongside up to two other survivors to face down hordes of deadly enemies to try to carve a foothold, rebuild, and retake what was lost.",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/617290/header.jpg?t=1764657526",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/617290/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/617290",
+    "localCoverPath": "/generated/game_617290_cover.webp",
+    "localPosterPath": "/generated/game_617290_poster.webp"
+  },
+  {
+    "id": "1282100",
+    "title": "遗迹2",
+    "developer": [
+      "Gunfire Games"
+    ],
+    "publisher": [
+      "Arc Games",
+      "THQ Nordic"
+    ],
+    "releaseDate": "2023 年 7 月 25 日",
+    "description": "《Remnant II®》是畅销游戏《Remnant: From the Ashes》的续作。在本作中，人类幸存者将再次深陷可怕的世界，对抗新的邪恶怪物和神一般的敌人头目。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1282100/header.jpg?t=1764659459",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1282100/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1282100",
+    "localCoverPath": "/generated/game_1282100_cover.webp",
+    "localPosterPath": "/generated/game_1282100_poster.webp"
+  },
+  {
+    "id": "1097150",
+    "title": "糖豆人",
+    "developer": [
+      "Mediatonic"
+    ],
+    "releaseDate": "2020 年 8 月 3 日",
+    "description": "《糖豆人》是一款免费跨平台大规模多人游玩的派对乱斗游戏。你要和其他竞争者一起，在愈加夸张混乱的障碍赛回合中一较高下，最后只会有一名幸运赢家！",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1097150/header.jpg?t=1698763175",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/1097150/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/1097150",
+    "localCoverPath": "/generated/game_1097150_cover.webp",
+    "localPosterPath": "/generated/game_1097150_poster.webp"
+  },
+  {
+    "id": "427290",
+    "title": "Vampyr",
+    "developer": [
+      "DONTNOD Entertainment"
+    ],
+    "publisher": [
+      "Focus Entertainment"
+    ],
+    "releaseDate": "2018 年 6 月 4 日",
+    "description": "伦敦，1918 年。你是刚刚受拥化身的吸血鬼，乔纳森·里德医生。作为一名医生，你必须找到一种治疗方法，解救饱受流感折磨的市民们。作为一名吸血鬼，你的命运已经被诅咒，不得不将曾经发誓救助的人们当作食物。",
+    "coverUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/427290/header.jpg?t=1773669973",
+    "posterUrl": "https://cdn.akamai.steamstatic.com/steam/apps/427290/library_600x900.jpg",
+    "type": "game",
+    "platform": "steam",
+    "url": "https://store.steampowered.com/app/427290",
+    "localCoverPath": "/generated/game_427290_cover.webp",
+    "localPosterPath": "/generated/game_427290_poster.webp"
   }
 ]
