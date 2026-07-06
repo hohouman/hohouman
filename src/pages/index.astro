@@ -353,10 +353,20 @@ function getSocialIcon(platform) {
       const setActive = (key) => {
         if (!key || !tabsMap[key]) return;
         
-        // 重置滚动位置到内容区域顶部，避免菜单栏遮挡
-        const viewerElement = document.querySelector('.content-viewer');
-        if (viewerElement) {
-          viewerElement.scrollTop = 0;
+        // 滚动页面使content-tabs恰好位于视口顶部
+        const contentTabs = document.getElementById('content-tabs');
+        if (contentTabs) {
+          const rect = contentTabs.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const targetPosition = rect.top + scrollTop;
+          
+          // 只有当tabs不在视口顶部时才滚动
+          if (rect.top < -10 || rect.top > 10) {
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
         }
         
         tabs.forEach((tab) => tab.setAttribute('aria-selected', 'false'));
