@@ -827,8 +827,9 @@ img {
 .showcase-card--tall .entry-card__media {
   width: 100%;
   height: 100%;
-  padding: 1rem; /* 内边距让图片不贴边 */
-  /* 移除独立背景，使用父容器背景 */
+  padding: 0.75rem;
+  /* 保持背景以显示毛玻璃效果 */
+  background: inherit; /* 继承父容器背景 */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -849,6 +850,8 @@ img {
   padding: 1rem 1.25rem;
   justify-content: flex-start;
   overflow-y: auto; /* 内容过多时可滚动 */
+  /* 添加分隔线区分图片区和内容区 */
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .showcase-card--tall .entry-card__title {
@@ -921,7 +924,8 @@ img {
   width: 100%;
   aspect-ratio: 1 / 1; /* 固定1:1正方形 */
   padding: 1rem;
-  /* 移除独立背景，使用父容器背景 */
+  /* 保持背景以显示毛玻璃效果 */
+  background: inherit; /* 继承父容器背景 */
   overflow: hidden;
   display: flex;
   align-items: center;
