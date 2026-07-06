@@ -804,6 +804,59 @@ img {
   color: rgba(255, 247, 239, 0.9);
 }
 
+/* Markdown 表格样式 */
+.prose-card table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.prose-card thead {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.prose-card th,
+.prose-card td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 247, 239, 0.9);
+}
+
+.prose-card th {
+  font-weight: 600;
+  color: rgba(255, 247, 239, 1);
+}
+
+.prose-card tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.prose-card tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Markdown 引用块样式 */
+.prose-card blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--theme-color, #6c5ce7);
+  border-radius: 0 12px 12px 0;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 247, 239, 0.85);
+  font-style: italic;
+}
+
+.prose-card blockquote p {
+  margin: 0;
+  color: inherit;
+}
+
 .prose-card--plain {
   padding: 1.5rem 1.75rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
