@@ -405,7 +405,7 @@
     "type": "movie",
     "platform": "douban",
     "url": "https://movie.douban.com/subject/26817136/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/movie_26817136_cover.webp"
   },
   {
     "id": "2129132",
@@ -505,7 +505,7 @@
     "type": "movie",
     "platform": "douban",
     "url": "https://movie.douban.com/subject/1418189/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/movie_1418189_cover.webp"
   },
   {
     "id": "26606743",

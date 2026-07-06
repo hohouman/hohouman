@@ -672,40 +672,82 @@ async function getMusicBrainzAlbumData(releaseId, url) {
 async function downloadAndConvertImage(url, fileName, options = {}) {
   if (!url) return null;
 
-  try {
-    // 为豆瓣图片添加特殊的请求头以避免防盗链问题
-    const headers = {};
-    if (url.includes('doubanio.com') || url.includes('douban.com')) {
-      // 设置Referer为豆瓣网站，绕过防盗链
-      headers['Referer'] = 'https://www.douban.com/';
-      headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
-    }
-    
-    const response = await fetch(url, { headers });
-    
-    if (!response.ok) {
-      console.warn(`图片下载失败 (${response.status}): ${url}`);
-      throw new Error(`Failed to download image: ${response.statusText}`);
-    }
+  const maxRetries = 3;
+  let lastError = null;
 
-    const imageBuffer = Buffer.from(await response.arrayBuffer());
-    
-    // 使用sharp将图片转换为WebP格式并优化
-    const optimizedImageBuffer = await sharp(imageBuffer)
-      .resize(options.width || 500, options.height || 750, { fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 80 })
-      .toBuffer();
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      // 为豆瓣图片添加特殊的请求头以避免防盗链问题
+      const headers = {};
+      if (url.includes('doubanio.com') || url.includes('douban.com')) {
+        // 设置Referer为豆瓣网站，绕过防盗链
+        headers['Referer'] = 'https://www.douban.com/';
+        headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
+      }
+      
+      const response = await fetch(url, { 
+        headers,
+        timeout: 30000 // 添加超时设置
+      });
+      
+      if (!response.ok) {
+        console.warn(`图片下载失败 (尝试 ${attempt}/${maxRetries}, 状态码: ${response.status}): ${url}`);
+        
+        // 如果是403或404错误,不再重试
+        if (response.status === 403 || response.status === 404) {
+          console.error(`图片不可用 (${response.status}),跳过重试: ${url}`);
+          return null;
+        }
+        
+        lastError = new Error(`Failed to download image: ${response.statusText}`);
+        
+        // 如果不是最后一次尝试,等待后重试
+        if (attempt < maxRetries) {
+          const delay = Math.pow(2, attempt) * 1000; // 指数退避: 2s, 4s, 8s
+          console.log(`等待 ${delay}ms 后重试...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          continue;
+        }
+        
+        throw lastError;
+      }
 
-    // 存储在公开目录中，静态构建后可直接访问。
-    const imagePath = path.join(PUBLIC_GENERATED_DIR, fileName);
-    await fs.writeFile(imagePath, optimizedImageBuffer);
-    
-    console.log(`✓ 图片下载成功: ${fileName}`);
-    return `/generated/${fileName}`;
-  } catch (error) {
-    console.error(` 下载或转换图片失败 ${url}:`, error.message);
-    return null;
+      const imageBuffer = Buffer.from(await response.arrayBuffer());
+      
+      // 验证图片数据是否有效
+      if (imageBuffer.length === 0) {
+        throw new Error('下载的图片数据为空');
+      }
+      
+      // 使用sharp将图片转换为WebP格式并优化
+      const optimizedImageBuffer = await sharp(imageBuffer)
+        .resize(options.width || 500, options.height || 750, { fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 80 })
+        .toBuffer();
+
+      // 存储在公开目录中，静态构建后可直接访问。
+      const imagePath = path.join(PUBLIC_GENERATED_DIR, fileName);
+      await fs.writeFile(imagePath, optimizedImageBuffer);
+      
+      console.log(`✓ 图片下载成功 (尝试 ${attempt}/${maxRetries}): ${fileName}`);
+      return `/generated/${fileName}`;
+    } catch (error) {
+      lastError = error;
+      console.error(`下载或转换图片失败 (尝试 ${attempt}/${maxRetries}) ${url}:`, error.message);
+      
+      // 如果不是最后一次尝试,等待后重试
+      if (attempt < maxRetries) {
+        const delay = Math.pow(2, attempt) * 1000; // 指数退避
+        console.log(`等待 ${delay}ms 后重试...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+    }
   }
+
+  // 所有重试都失败了
+  console.error(`✗ 图片下载最终失败,已重试${maxRetries}次: ${url}`);
+  return null;
 }
 
 /**
@@ -763,6 +805,73 @@ function parseUrl(url) {
 }
 
 /**
+ * 判断是否需要刷新数据
+ * @param {Object} parsed - 解析后的URL信息
+ * @param {Object} item - 现有的数据项
+ * @returns {boolean} 是否需要刷新
+ */
+function shouldRefreshItem(parsed, item) {
+  // 如果不存在数据，需要刷新
+  if (!item) return true;
+
+  // Steam游戏：检查海报URL和本地海报文件
+  if (parsed.platform === 'steam') {
+    if (!item.posterUrl || !item.localPosterPath) {
+      return true;
+    }
+  }
+
+  // 豆瓣电影：检查导演、封面和描述
+  if (parsed.type === 'movie') {
+    // director应该是非空数组
+    const hasDirector = Array.isArray(item.director) && item.director.length > 0;
+    // localCoverPath应该存在
+    const hasCover = !!item.localCoverPath;
+    // description应该存在且非空
+    const hasDescription = item.description && item.description.trim().length > 0;
+    
+    if (!hasDirector || !hasCover || !hasDescription) {
+      return true;
+    }
+  }
+
+  // 豆瓣书籍：检查作者、出版社、封面和描述
+  if (parsed.type === 'book') {
+    // author应该是非空数组
+    const hasAuthor = Array.isArray(item.author) && item.author.length > 0;
+    // publisher应该是非空数组
+    const hasPublisher = Array.isArray(item.publisher) && item.publisher.length > 0;
+    // localCoverPath应该存在
+    const hasCover = !!item.localCoverPath;
+    // description应该存在且非空
+    const hasDescription = item.description && item.description.trim().length > 0;
+    
+    if (!hasAuthor || !hasPublisher || !hasCover || !hasDescription) {
+      return true;
+    }
+  }
+
+  // 豆瓣专辑：检查艺术家、出版社、封面和描述
+  if (parsed.type === 'album') {
+    // artist应该是非空数组
+    const hasArtist = Array.isArray(item.artist) && item.artist.length > 0;
+    // publisher应该是非空数组（可选，但建议有）
+    const hasPublisher = Array.isArray(item.publisher) && item.publisher.length > 0;
+    // localCoverPath应该存在
+    const hasCover = !!item.localCoverPath;
+    // description应该存在且非空
+    const hasDescription = item.description && item.description.trim().length > 0;
+    
+    if (!hasArtist || !hasCover || !hasDescription) {
+      return true;
+    }
+  }
+
+  // 所有检查都通过，不需要刷新
+  return false;
+}
+
+/**
  * 处理单个URL
  */
 async function processUrl(url, existingDataMap) {
@@ -807,31 +916,6 @@ async function processUrl(url, existingDataMap) {
   }
 
   return data;
-}
-
-function shouldRefreshItem(parsed, item) {
-  if (!item) return true;
-
-  if (parsed.platform === 'steam' && (!item.posterUrl || !item.localPosterPath)) {
-    return true;
-  }
-
-  if (parsed.type === 'movie' && !item.director) {
-    return true;
-  }
-
-  if (parsed.type === 'book') {
-    // 如果作者、出版社或本地封面为空，需要刷新
-    if (!item.author || !item.publisher || item.publisher.length === 0 || !item.localCoverPath) {
-      return true;
-    }
-  }
-
-  if (parsed.type === 'album' && !item.artist) {
-    return true;
-  }
-
-  return false;
 }
 
 /**

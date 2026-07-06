@@ -544,7 +544,7 @@
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/26595242/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_26595242_cover.webp"
   },
   {
     "id": "26931564",
