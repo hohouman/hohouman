@@ -260,5 +260,471 @@
     "platform": "douban",
     "url": "https://movie.douban.com/subject/20470074/",
     "localCoverPath": "/generated/movie_20470074_cover.webp"
+  },
+  {
+    "id": "1306029",
+    "title": "美丽心灵 A Beautiful Mind",
+    "developer": [
+      "朗·霍华德"
+    ],
+    "director": [
+      "朗·霍华德"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2001-12-13(加州首映)",
+    "description": "本片是关于20世纪伟大数学家小约翰•福布斯-纳什的人物传记片。 小约翰•福布斯-纳什（拉塞尔•克劳）在念研究生时，便发表了著名的博弈理论，该理论虽只有短短26页，却在经济、军事等领域产生了深远的影响。但就在小约翰•福布斯-纳什蜚声国际时，他的出众直觉因为精神分裂症受到困扰，然而这并没阻止他向学术上的最高层进军的步伐，在深爱他的妻子艾丽西亚（珍妮弗•康纳利）的鼓励和帮助下，他走得虽然艰缓，却始终没有停步，而最终，凭借十几年的不懈努力和顽强意志，他如愿以偿。",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1665997400.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/1306029/",
+    "localCoverPath": "/generated/movie_1306029_cover.webp"
+  },
+  {
+    "id": "3075287",
+    "title": "源代码 Source Code",
+    "developer": [
+      "邓肯·琼斯"
+    ],
+    "director": [
+      "邓肯·琼斯"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2011-08-30(中国大陆)",
+    "description": "在阿富汗执行任务的美国空军飞行员科特史蒂文斯上尉（杰克·吉伦哈尔 Jake Gyllenhaal 饰）突然惊醒，发现自己在一辆高速行驶的列车上，而他的身边坐着一个素不相识的女子克里斯蒂安（米歇尔·莫娜汉 Michelle Monaghan 饰）正在与自己讲话。科尔不知自己为什么会在这辆车上，而且他发现自己居然是以另一个人的身份存在，正当他迷惑不解的时候，列车上忽然发生爆炸…… 科特又一次惊醒，发现自己身处一个密闭的太空仓里，有一位女军官古德温（维拉·法米加 Vera Farmiga 饰）正在通过视频和自己对话，并要求自己报告列车上发生的事情。一头雾水的科特还没搞明白是怎么回事时，他又一次被送上那辆列车。这次之后，科特终于明白自己在执行一件任务，负责调查芝加哥火车爆炸案找到恐怖份子并查出他的下一个目标。科特被一次又一次的送上那辆高速列车，每次只有八分钟...",
+    "coverUrl": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p988260245.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/3075287/",
+    "localCoverPath": "/generated/movie_3075287_cover.webp"
+  },
+  {
+    "id": "3793783",
+    "title": "地心引力 Gravity",
+    "developer": [
+      "阿方索·卡隆"
+    ],
+    "director": [
+      "阿方索·卡隆"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2013-11-19(中国大陆)",
+    "description": "深邃浩瀚的外层空间，蔚蓝的地球与深不见底、漆黑一片的宇宙形成鲜明对比。一台隶属美国的空间站，数名宇航人员正进行太空漫步，对所属卫星做着例行检查。初上太空的瑞安·斯通博士（桑德拉·布洛克 Sandra Bullock 饰）在经验丰富的宇航员麦特·科沃斯基（乔治·克鲁尼 George Clooney 饰）的协助下，有条不紊地检查每一个部件。此次是科沃斯基退休前的最后一次飞行，他幽默风趣地活跃着团队的氛围。就在此时，休士顿总部传来骇人消息，不久前行将废弃俄罗斯卫星被导弹击毁，碎片以超过子弹的速度在地球轨道上散开，并意外击中其他卫星，引起连锁反应制造了新的碎片。 瑞安一行遭到碎片重创，有的同伴不幸身亡，而她和科沃斯基失去控制坠入宇宙深处。幸存的二人不得不彼此信赖，拼尽全力朝向故土前进……",
+    "coverUrl": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2159078612.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/3793783/",
+    "localCoverPath": "/generated/movie_3793783_cover.webp"
+  },
+  {
+    "id": "1418834",
+    "title": "断背山 Brokeback Mountain",
+    "developer": [
+      "李安"
+    ],
+    "director": [
+      "李安"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2005-09-02(威尼斯电影节)",
+    "description": "美国怀俄明州的西部，沉默寡言的农夫恩尼斯（希斯•莱杰饰）和热情开朗的牛仔杰克（杰克•吉伦希尔饰)一道被派到山上牧羊，那里人迹罕至，他们只有与羊群为伴，生活单调无味。一个天寒地冻的夜晚，在酒精与荷尔蒙的作用下，他们做了“不该做的事情”，也就此他们在断背山上度过了人生中最美好的时光。 季节性放牧结束，迫于世俗压力，杰克和恩尼斯不舍地与对方分离并各自结婚生子。恩尼斯迎娶了自幼相识的阿尔玛，并有了两个可爱的女儿；杰克到了德州，在妻子露琳家族的扶植下事业顺利，还有了个儿子。虽然彼此真心相应，他们只能每年定期约会。一边知情的阿尔玛痛苦无比，而他们又无法满足一年只有几天的团聚。这时意外发生……",
+    "coverUrl": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2169104127.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/1418834/",
+    "localCoverPath": "/generated/movie_1418834_cover.webp"
+  },
+  {
+    "id": "35611467",
+    "title": "老狐狸",
+    "developer": [
+      "萧雅全"
+    ],
+    "director": [
+      "萧雅全"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2023-11-24(中国台湾)",
+    "description": "故事发生在1990年全民皆股的年代，小男孩廖界（白润音 饰）与父亲廖泰来（刘冠廷 饰）相依为命，他们相信人性本善，没发现世界正在改变。股市飙涨、物价翻倍，有人一夕暴富，有人意识到现实残酷；单纯老实的廖界父子属于后者。不料，他们碰上了聪明狡猾的“老狐狸”（陈慕义 饰），命运道路可能截然不同。财富与良心两条岔路，该怎么选？",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2900908599.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/35611467/",
+    "localCoverPath": "/generated/movie_35611467_cover.webp"
+  },
+  {
+    "id": "25662329",
+    "title": "疯狂动物城 Zootopia",
+    "developer": [
+      "拜伦·霍华德",
+      "瑞奇·摩尔",
+      "杰拉德·布什"
+    ],
+    "director": [
+      "拜伦·霍华德",
+      "瑞奇·摩尔",
+      "杰拉德·布什"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2016-03-04(中国大陆/美国)",
+    "description": "故事发生在一个所有哺乳类动物和谐共存的美好世界中，兔子朱迪（金妮弗·古德温 Ginnifer Goodwin 配音）从小就梦想着能够成为一名惩恶扬善的刑警，凭借着智慧和努力，朱迪成功的从警校中毕业进入了疯狂动物城警察局，殊不知这里是大型肉食类动物的领地，作为第一只，也是唯一的小型食草类动物，朱迪会遇到怎样的故事呢？ 近日里，城中接连发生动物失踪案件，就在全部警员都致力于调查案件真相之时，朱迪却被局长（伊德瑞斯·艾尔巴 Idris Elba 配音）发配成为了一名无足轻重的交警。某日，正在执勤的兔子遇见了名为尼克（杰森·贝特曼 Jason Bateman 配音）的狐狸，两人不打不相识，之后又误打误撞的接受了寻找失踪的水獭先生的任务，如果不能在两天之内找到水獭先生，朱迪就必须自愿离开警局。朱迪找到了尼克，两人联手揭露了一个隐藏在疯狂动物城之中的惊天秘密。",
+    "coverUrl": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2924128964.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/25662329/",
+    "localCoverPath": "/generated/movie_25662329_cover.webp"
+  },
+  {
+    "id": "26817136",
+    "title": "疯狂动物城2 Zootopia 2",
+    "developer": [
+      "杰拉德·布什",
+      "拜伦·霍华德"
+    ],
+    "director": [
+      "杰拉德·布什",
+      "拜伦·霍华德"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2025-11-26(美国/中国大陆)",
+    "description": "一个神秘爬行动物的到来，把温馨的动物城搅动得天翻地覆。面对全新的城市危机，警官兔朱迪（金妮弗·古德温 Ginnifer Goodwin 配音）与狐尼克（杰森·贝特曼 Jason Bateman 配音）将继续携手为保卫动物城而奔波。在追捕行动中，这对老搭档不仅要揭开新角色的神秘面纱，还要前往被迷雾笼罩的新领域，探索未知的地下黑市，一场疯狂动物城的全新冒险即将展开……",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2926605350.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/26817136/",
+    "localCoverPath": null
+  },
+  {
+    "id": "2129132",
+    "title": "超凡蜘蛛侠 The Amazing Spider-Man",
+    "developer": [
+      "马克·韦布"
+    ],
+    "director": [
+      "马克·韦布"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2012-08-27(中国大陆)",
+    "description": "童年的一起突发事件，令彼得·帕克（安德鲁·加菲尔德 Andrew Garfield 饰）和父母生离死别。转眼彼得成为一名高中生，他偶然发现父亲的公文包，并从叔父本（马丁·辛 Martin Sheen 饰）处得到线索，于是启程前往奥斯库公司拜访父亲当年的合作伙伴——科特·康纳斯博士（瑞斯·伊凡斯 Rhys Ifans 饰）。在公司内四处寻找线索的彼得意外被蜘蛛咬了一口，回程途中他的身体发生奇异的变化。在康纳斯博士德引导下，彼得不断了解并发掘体内着超乎寻常的能力，喜怒哀乐，各种意想不到的事情迅速向他袭来。直到某日，他便成了影响深远的超级战士蜘蛛侠。 而城市内也出现了凶恶的蜥蜴人，彼得不平凡的人生就此展开……",
+    "coverUrl": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p1619928534.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/2129132/",
+    "localCoverPath": "/generated/movie_2129132_cover.webp"
+  },
+  {
+    "id": "6082518",
+    "title": "超凡蜘蛛侠2 The Amazing Spider-Man 2",
+    "developer": [
+      "马克·韦布"
+    ],
+    "director": [
+      "马克·韦布"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2014-05-04(中国大陆)",
+    "description": "能力越大，责任越大。蜘蛛侠彼得·帕克（安德鲁·加菲尔德 Andrew Garfield 饰）在全力和犯罪、灾难做斗争的同时，终于迎来了毕业的时刻。可是曾经的一段心结，让他和女友格温·斯坦西（艾玛·斯通 Emma Stone 饰）的关系降至冰点。格温应聘于为全城提供电力的 奥斯本集团公司，同一期间发生的两件事，不由得左右这家公司和彼得等人的命运。奥斯本的掌门人病故，他的儿子哈利（戴恩·德哈恩 Dane DeHaan 饰）以20岁的年龄接受这家市值2000亿美元的巨无霸。另一方面，极度崇拜蜘蛛侠的电力工程师麦克斯·威尔·迪伦（杰米·福克斯 Jamie Foxx 饰）在维修机组时意外身亡，当他再度醒来时发现自己变成了全身充满电能的超人类。 感到受了欺骗的麦克斯与蜘蛛侠在时代广场展开对决，而彼得和哈利的友情也将遭到命运的戏弄……",
+    "coverUrl": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2179858051.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/6082518/",
+    "localCoverPath": "/generated/movie_6082518_cover.webp"
+  },
+  {
+    "id": "1306612",
+    "title": "蜘蛛侠 Spider-Man",
+    "developer": [
+      "山姆·雷米"
+    ],
+    "director": [
+      "山姆·雷米"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2002-08-07(中国大陆)",
+    "description": "彼得 帕克（托比•马奎尔 Tobey Maguire 饰）只是美国一个平凡的高中生，当一次他被蜘蛛博物馆偷跑出来的变种蜘蛛咬了一口之后，彼得的生活彻底改变了。他变得和蜘蛛一样，拥有各种蜘蛛特有的超能力：从手指喷出粘力极强的蜘蛛丝、飞檐走壁等等。彼得兴奋异常，开始利用自己的超能力去赚钱。但当他最爱的叔叔被自己放走的罪犯杀死后，彼得发誓要用自己的超能力去打击犯罪。 彼得好友哈利的父亲诺曼（威廉•达福 Willem Dafoe 饰）是一家生物科技公司的老板，因自己公司生产的飞行器没得到军方首脑赏识而苦恼不堪。一次意外诺曼吸入神经毒气而具有了超能力，引发了自身邪恶的本性，骑着自己研发的飞行器去到处破坏、杀人。彼得化身的蜘蛛侠开始出击了！",
+    "coverUrl": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p457050361.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/1306612/",
+    "localCoverPath": "/generated/movie_1306612_cover.webp"
+  },
+  {
+    "id": "1308570",
+    "title": "蜘蛛侠2 Spider-Man 2",
+    "developer": [
+      "山姆·雷米"
+    ],
+    "director": [
+      "山姆·雷米"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2004-08-05(中国大陆)",
+    "description": "大战绿妖之后，蜘蛛侠帕克（托比•马奎尔 Tobey Maguire 饰）忍痛拒绝了他唯一的挚爱玛丽（克尔斯滕•邓斯特 Kirsten Dunst 饰），因为蜘蛛侠的身份会为自己和亲人带来巨大危险，帕克决定独立承担起蜘蛛侠的责任。 帕克一直在忙于应付各种挑战：学习超能力的灵活运用；在超级英雄与平凡大学生的双重身份下隐藏自我、小心翼翼地生活等等。帕克对玛丽越来越难以自拔，但是作为蜘蛛侠又不能对玛丽展开心扉。 好友哈利因为误会蜘蛛侠而一直处处与其为作对；唯一的亲人婶婶也对蜘蛛侠的真实身份产生了怀疑。同时，新的挑战又出现了：邪恶而强大的章鱼博士。帕克在种种压力下肩负起蜘蛛侠的使命。",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1617867110.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/1308570/",
+    "localCoverPath": "/generated/movie_1308570_cover.webp"
+  },
+  {
+    "id": "1418189",
+    "title": "蜘蛛侠3 Spider-Man 3",
+    "developer": [
+      "山姆·雷米"
+    ],
+    "director": [
+      "山姆·雷米"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2007-05-01(中国大陆)",
+    "description": "蜘蛛侠（托比•马奎尔 Tobey Maguire 饰）在经历了重重考验之后，成为了人人敬仰的正义英雄，抱得美人归。但是，光环下蜘蛛侠，也有自己的心病：他在第一集时放走了小偷导致最亲爱的叔叔被小偷杀死，帕克一直耿耿于怀。 生活顺意的帕克开始变得目中无人，当他再次抓到那个小偷时，残忍地看着他从楼上摔下致死，过后才发现自己惩罚错了人，真凶是“沙人”。当帕克将“沙人”残忍杀死后，帕克心内的阴暗面渐渐在帕克的身体内占据了上风，蜘蛛侠最终演变成邪恶的“毒蜘蛛”！糟糕的是，帕克没有察觉到自身的变化，帕克最终如何摆脱自身的邪恶？",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2923498620.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/1418189/",
+    "localCoverPath": null
+  },
+  {
+    "id": "26606743",
+    "title": "嫌疑人X的献身",
+    "developer": [
+      "苏有朋"
+    ],
+    "director": [
+      "苏有朋"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2017-03-31(中国大陆)",
+    "description": "某天，警方在一座桥下发现一具尸体，死者指纹被人恶意损毁。根据残留的蛛丝马迹信息，警方将死者的身份锁定在名叫傅坚的男子身上，进而追查到他的前妻陈婧（林心如 饰）。虽然警方百般调查，却始终查不到陈婧的丝毫纰漏。万般无奈，警长罗淼找到在刑警学院任职的物理天才唐川（王凯 饰）。唐川则进而得知，当年与他在学校时学业不相上下的同窗石泓（张鲁一 饰）就住在陈婧隔壁。石泓现时在某中学担任数学老师，他的生活枯燥，了无生趣，似乎只有陈婧是他生命中的一道阳光。为了保护心中的女神，他不惜一切…… 本片根据日本推理作家东野圭吾的同名小说改编。",
+    "coverUrl": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2448676053.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/26606743/",
+    "localCoverPath": "/generated/movie_26606743_cover.webp"
+  },
+  {
+    "id": "26311973",
+    "title": "唐人街探案",
+    "developer": [
+      "陈思诚"
+    ],
+    "director": [
+      "陈思诚"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2015-12-31(中国大陆)",
+    "description": "天赋异禀的结巴少年秦风（刘昊然 饰）警校落榜，被姥姥遣送泰国找远房表舅——号称“唐人街第一神探”，实则猥琐的大叔唐仁（王宝强 饰）散心。不想一夜花天酒地后，唐仁沦为离奇凶案嫌疑人，不得不和秦风亡命天涯……穷追不舍的警探黄兰登（陈赫 饰）、无敌幸运的警察坤泰（肖央 饰）、穷凶极恶的匪帮三人组、高深莫测的唐人街教父、美艳风骚的老板娘阿香（佟丽娅 饰）等悉数登场！七天！唐仁、秦风必须取长补短、同仇敌忾！他们能否躲避警察追捕、匪帮追杀、黑帮围剿，在短短七天内，完成找到失落的黄金并查明真凶，为自己洗清罪名这些逆天的任务？",
+    "coverUrl": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2302930556.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/26311973/",
+    "localCoverPath": "/generated/movie_26311973_cover.webp"
+  },
+  {
+    "id": "26698897",
+    "title": "唐人街探案2",
+    "developer": [
+      "陈思诚"
+    ],
+    "director": [
+      "陈思诚"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2018-02-16(中国大陆)",
+    "description": "突然得到唐仁（王宝强 饰）即将结婚的消息，喜出望外的秦风（刘昊然 饰）匆忙登上飞往美国纽约的班机。谁知落地后很快发现，这不过是唐仁诓他过来的谎言。唐仁把秦风带到了一座豪华宅邸，这里早已云集包括野田昊（妻木夫聪 饰）在内的数位世界顶尖侦探。把他们召集到这里的是北美华人堂口老大七叔（曾江 饰），就在不久前他的宝贝孙子被人残忍杀害，不仅如此，尸体还被划出Y字形伤口，心脏不翼而飞。七叔悲愤交加，悬赏500万势要抓住杀人真凶。 扑朔迷离的凶案现场和作案手法，以及高额的赏金，让这群身怀绝技的侦探们跃跃欲试，他们摩拳擦掌，迎接挑战……",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2512717519.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/26698897/",
+    "localCoverPath": "/generated/movie_26698897_cover.webp"
+  },
+  {
+    "id": "27619748",
+    "title": "唐人街探案3",
+    "developer": [
+      "陈思诚"
+    ],
+    "director": [
+      "陈思诚"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2021-02-12(中国大陆)",
+    "description": "为了争夺东京新唐人街的开发权，东南亚帮派与日本黑帮组织黑龙会纷争不断。为了避免冲突升级，合作共赢，东南亚商会会长苏察维邀请黑龙会头目渡边胜（三浦友和 饰）谈判。谈判地点设在四面环水的日式茶室，室内只有双方头目而已。谁知谈判开始没多久，室内就传来惨叫声。众人涌入后发现，苏察维被打碎的屏风玻璃杀害，而躺在一旁的渡边胜则满手鲜血。突发意外将双方敌意再度拉至顶点，为了证明清白，渡边通过侦探野田昊（妻木夫聪 饰）找来了秦风（刘昊然 饰）和唐仁（王宝强 饰），试图揭开密实杀人案的真相。 危机四伏的东京街头，这三个绝命侦探抽丝剥茧发现了令人难以置信的事实……",
+    "coverUrl": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2622388983.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/27619748/",
+    "localCoverPath": "/generated/movie_27619748_cover.webp"
+  },
+  {
+    "id": "21339377",
+    "title": "湖畔的陌生人 L'Inconnu du lac",
+    "developer": [
+      "阿兰·吉罗迪"
+    ],
+    "director": [
+      "阿兰·吉罗迪"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2013-05-17(戛纳电影节)",
+    "description": "炎热的夏天，在以男性“钓鱼”著称的湖畔度假胜地， 平静湛蓝的湖水下暗潮涌动。英俊的中年男子弗兰克（Pierre Deladonchamps 饰）周旋于两个男人之间：肥胖风趣的亨利（Patrick d'Assumçao 饰）让他感到非常投缘，两人建立起无话不谈的友谊；美如雕像的迈克尔（Christophe Paou 饰） 让他一见倾心，两人发生肉体上的澎湃激情。然而在连场激战后弗兰克逐渐发现迈克尔神秘而危险的一面，湖畔的一桩凶杀案更让一切变得扑朔迷离。弗兰克无法抵挡迈克尔的吸引，其实早已投入感情的亨利也被卷入其中。究竟该就此抽身，还是放纵欲望铤而走险？ 本片获得第66届戛纳电影节酷儿棕榈大奖和一种关注单元的最佳导演奖，是年度由内到外的赤裸话题大作。情欲和悬念紧紧相扣，阴郁和激情兼而有之。静谧湖水中心灵与肉体交缠鏖战，直至最后一刻。",
+    "coverUrl": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p1987924821.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/21339377/",
+    "localCoverPath": "/generated/movie_21339377_cover.webp"
+  },
+  {
+    "id": "25816274",
+    "title": "无法触碰的爱 どうしても触れたくない",
+    "developer": [
+      "天野千寻"
+    ],
+    "director": [
+      "天野千寻"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2014-05-31(日本)",
+    "description": "嶋俊亚纪（米原幸佑 饰）是一名同性恋者，有着十分灰暗的过去。他的性取向在曾经工作过的公司里遭到了曝光，因此受到了同事和上司的排挤和鄙视，最终丢掉了工作。从此以后，他十分小心的隐藏着自己的真心，害怕从前遭遇的一切再度上演。 好不容易找到了一份新的工作，亚纪发誓这一次绝对不会再搞砸了。去新公司上班的第一天，亚纪就在电梯里遇到了一个喝得醉醺醺的奇怪的男人，而这个男人正是他的上司外川阳介（谷口贤志 饰）。虽然见面的第一印象并不好，但在之后的工作和合作中，亚纪发现阳介其实是一个非常有担当负责人的男人，奇妙的电波相互吸引这两人，导致他们最终抵达了伦理的边界。",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2180800539.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/25816274/",
+    "localCoverPath": "/generated/movie_25816274_cover.webp"
+  },
+  {
+    "id": "1308779",
+    "title": "后天 The Day After Tomorrow",
+    "developer": [
+      "罗兰·艾默里奇"
+    ],
+    "director": [
+      "罗兰·艾默里奇"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2004-05-28(中国大陆/美国)",
+    "description": "美国气候学家杰克（丹尼斯•奎德 Dennis Quaid 饰）认为，温室效应正在引发地球的大灾难，北极冰川的融化，会让地球回到冰河世纪那样的劫难。他的提醒并没有引起美国当局的重视，一切都已经太晚：飓风、冰雹、洪水、冰山融化、极度严寒，一系列的地球巨变引发了一场不可挽救的灾难。美国政府组织北纬30度的民众转移到赤道周围，场面一片混乱。更糟糕的是，杰克的儿子，正困在曼哈顿的图书馆里，靠烧书生火来维持体温。大家怎样才能逃过这场灭顶的灾祸？冰天雪地的地球何时才能回暖？",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2209602029.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/1308779/",
+    "localCoverPath": "/generated/movie_1308779_cover.webp"
+  },
+  {
+    "id": "3168101",
+    "title": "毒液：致命守护者 Venom",
+    "developer": [
+      "鲁本·弗雷斯彻"
+    ],
+    "director": [
+      "鲁本·弗雷斯彻"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2018-11-09(中国大陆)",
+    "description": "艾迪（汤姆·哈迪 Tom Hardy 饰）是一位深受观众喜爱的新闻记者，和女友安妮（米歇尔·威廉姆斯 Michelle Williams 饰）相恋多年，彼此之间感情十分要好。安妮是一名律师，接手了生命基金会的案件，在女友的邮箱里，艾迪发现了基金会老板德雷克（里兹·阿迈德 Riz Ahmed 饰）不为人知的秘密。为此，艾迪不仅丢了工作，女友也离他而去。 之后，生命基金会的朵拉博士（珍妮·斯蕾特 Jenny Slate 饰）找到了艾迪，希望艾迪能够帮助她阻止德雷克疯狂的罪行。在生命基金会的实验室里，艾迪发现了德雷克进行人体实验的证据，并且在误打误撞之中被外星生命体毒液附身。回到家后，艾迪和毒液之间形成了共生关系，他们要应对的是德雷克派出的一波又一波杀手。",
+    "coverUrl": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2537158013.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/3168101/",
+    "localCoverPath": "/generated/movie_3168101_cover.webp"
+  },
+  {
+    "id": "30382416",
+    "title": "毒液2 Venom: Let There Be Carnage",
+    "developer": [
+      "安迪·瑟金斯"
+    ],
+    "director": [
+      "安迪·瑟金斯"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2021-10-01(美国)",
+    "description": "电影讲述了外星共生体“毒液”与宿主埃迪（汤姆·哈迪 饰）这对“最佳拍档”遇上致命反派共生体“卡内奇”（伍迪·哈里森 饰），超级英雄和邪恶反派的宿命之战即将开始。",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2675102928.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/30382416/",
+    "localCoverPath": "/generated/movie_30382416_cover.webp"
+  },
+  {
+    "id": "35087675",
+    "title": "毒液：最后一舞 Venom: The Last Dance",
+    "developer": [
+      "凯莉·马塞尔"
+    ],
+    "director": [
+      "凯莉·马塞尔"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2024-10-23(中国大陆)",
+    "description": "毒液和埃迪（汤姆·哈迪 Tom Hardy 饰）迎来至暗时刻。一边是人类神秘组织的穷追猛打，一边是外星共生体大军入侵地球，他们一心同体，花式解锁海陆空作战新形态。面对两边的疯狂追捕，这对亡命搭档将被迫做出毁灭性决定，为他们的最后一舞拉下帷幕。",
+    "coverUrl": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2914269857.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/35087675/",
+    "localCoverPath": "/generated/movie_35087675_cover.webp"
+  },
+  {
+    "id": "30401194",
+    "title": "你好世界 HELLO WORLD",
+    "developer": [
+      "伊藤智彦"
+    ],
+    "director": [
+      "伊藤智彦"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2021-06-11(中国大陆)",
+    "description": "在京都居住的内向男高中生直实（北村匠海 配音）的面前，突然出现从10年后穿越而来26岁的自己（松坂桃李 配音）。未来的直实告诉他，自己不久便会与瑠璃（滨边美波 配音）相爱，可是之后烟花大会时她却会因为一场事故意外离世。 为了拯救爱人，16岁的直实卷入了这场现实与虚拟的记忆世界，经历了一系列超乎想象的事情。即使世界毁灭，我也想再见你一面。",
+    "coverUrl": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2654818960.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/30401194/",
+    "localCoverPath": "/generated/movie_30401194_cover.webp"
   }
 ]
