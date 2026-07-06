@@ -187,8 +187,6 @@ async function getDoubanData(doubanId, type, url) {
     const host = type === 'movie' ? 'movie' : type === 'book' ? 'book' : 'music';
     const pageUrl = `https://${host}.douban.com/subject/${doubanId}/`;
     
-    console.log(`正在访问豆瓣页面：${pageUrl}`);
-    
     // 添加随机延迟以避免过于频繁的请求
     await new Promise(resolve => setTimeout(resolve, Math.random() * 2000 + 1000));
     
@@ -214,7 +212,6 @@ async function getDoubanData(doubanId, type, url) {
     
     // 检查是否有反爬虫提示
     const pageTitle = await page.title();
-    console.log(`页面标题: ${pageTitle}`);
     
     if (pageTitle.includes('访问太频繁') || pageTitle.includes('验证码')) {
       console.error(`豆瓣反爬虫检测：${pageTitle}`);
@@ -237,15 +234,31 @@ async function getDoubanData(doubanId, type, url) {
       const titleEl = document.querySelector('h1 span[property="v:itemreviewed"]');
       const title = titleEl ? titleEl.textContent.trim() : extractText('h1') || '';
 
-      // 改进封面图提取逻辑
+      // 改进封面图提取逻辑 - 增强版
       let coverUrl = '';
-      const coverImg = document.querySelector('#mainpic img');
-      if (coverImg) {
-        coverUrl = coverImg.getAttribute('src') || coverImg.getAttribute('data-lazy');
+      
+      // 尝试多种选择器来获取封面图
+      const coverSelectors = [
+        '#mainpic img',
+        '#mainpic a img',
+        'a.nbg img',
+        '.nbg img',
+        'img[alt*="封面"]',
+        'img[src*="doubanio.com"]'
+      ];
+      
+      for (const selector of coverSelectors) {
+        const img = document.querySelector(selector);
+        if (img) {
+          coverUrl = img.getAttribute('src') || img.getAttribute('data-lazy') || img.getAttribute('data-src');
+          if (coverUrl && !coverUrl.includes('default')) {
+            break;
+          }
+        }
       }
       
-      // 如果没有找到，尝试其他选择器
-      if (!coverUrl) {
+      // 如果还没找到，尝试从链接获取
+      if (!coverUrl || coverUrl.includes('default')) {
         const coverLink = document.querySelector('#mainpic a');
         if (coverLink) {
           coverUrl = coverLink.getAttribute('href');
@@ -256,6 +269,11 @@ async function getDoubanData(doubanId, type, url) {
       if (coverUrl && coverUrl.includes('douban.com')) {
         coverUrl = coverUrl.replace(/\?.*$/, ''); // 移除查询参数
       }
+      
+      // 确保使用 HTTPS
+      if (coverUrl && coverUrl.startsWith('http://')) {
+        coverUrl = coverUrl.replace('http://', 'https://');
+      }
 
       let releaseDate = '';
       let director = [];
@@ -263,6 +281,9 @@ async function getDoubanData(doubanId, type, url) {
       let author = [];
       let artist = [];
       let publisher = [];
+      
+      // DEBUG: 返回原始HTML用于调试
+      const debugInfoHtml = document.getElementById('info') ? document.getElementById('info').innerHTML.substring(0, 3000) : 'No info div';
 
       // 根据类型使用不同的DOM选择器
       if (type === 'movie') {
@@ -282,36 +303,109 @@ async function getDoubanData(doubanId, type, url) {
         // 提取书籍信息 - 使用DOM选择器
         const infoDiv = document.getElementById('info');
         if (infoDiv) {
-          const spans = infoDiv.querySelectorAll('span');
+          // 获取所有包含.pl类的span元素（这些是字段标签）
+          const labelSpans = infoDiv.querySelectorAll('span.pl');
           
-          for (const span of spans) {
-            const text = span.textContent;
+          for (const labelSpan of labelSpans) {
+            const labelText = labelSpan.textContent.trim();
             
             // 匹配出版年
-            if (text.includes('出版年')) {
+            if (labelText.includes('出版年')) {
               // 获取span后面的文本节点
-              const nextNode = span.nextSibling;
-              if (nextNode && nextNode.nodeType === Node.TEXT_NODE) {
-                const yearMatch = nextNode.textContent.match(/(\d{4}(-\d{1,2})?)/);
-                if (yearMatch) {
-                  releaseDate = yearMatch[0];
+              let nextNode = labelSpan.nextSibling;
+              while (nextNode) {
+                if (nextNode.nodeType === Node.TEXT_NODE) {
+                  const yearMatch = nextNode.textContent.match(/(\d{4}(-\d{1,2}(-\d{1,2})?)?)/);
+                  if (yearMatch) {
+                    releaseDate = yearMatch[0];
+                    break;
+                  }
                 }
+                nextNode = nextNode.nextSibling;
               }
             }
             
             // 匹配作者
-            if (text.trim() === '作者' || text.includes('作者:')) {
-              const link = span.nextElementSibling;
+            if (labelText === '作者' || labelText === '作者:') {
+              // 尝试获取链接形式的作者
+              const link = labelSpan.nextElementSibling;
               if (link && link.tagName === 'A') {
                 author.push(link.textContent.trim());
+              } else {
+                // 如果是纯文本，获取下一个文本节点
+                let nextNode = labelSpan.nextSibling;
+                while (nextNode) {
+                  if (nextNode.nodeType === Node.TEXT_NODE) {
+                    const authorText = nextNode.textContent.trim().replace(/^[:：]\s*/, '');
+                    if (authorText && authorText.length > 0) {
+                      author.push(authorText);
+                      break;
+                    }
+                  }
+                  nextNode = nextNode.nextSibling;
+                }
               }
             }
             
-            // 匹配出版社
-            if (text.includes('出版社')) {
-              const link = span.nextElementSibling;
+            // 匹配出版社 - 改进版：支持链接和纯文本两种形式
+            if (labelText === '出版社' || labelText === '出版社:') {
+              // 首先尝试获取链接形式的出版社
+              const link = labelSpan.nextElementSibling;
               if (link && link.tagName === 'A') {
                 publisher.push(link.textContent.trim());
+              } else {
+                // 如果是纯文本，获取span后面的直接文本节点
+                let nextNode = labelSpan.nextSibling;
+                while (nextNode) {
+                  if (nextNode.nodeType === Node.TEXT_NODE) {
+                    const pubText = nextNode.textContent.trim();
+                    // 清理文本：移除冒号、空格等
+                    const cleanedText = pubText.replace(/^[:：]\s*/, '').replace(/\s+/g, ' ').trim();
+                    
+                    // 检查是否是有效的出版社名称（不是空字符串，不包含特定关键词）
+                    if (cleanedText && 
+                        cleanedText.length > 0 && 
+                        !cleanedText.includes('出品方') && 
+                        !cleanedText.includes('原作名') && 
+                        !cleanedText.includes('ISBN') &&
+                        !cleanedText.includes('统一书号') &&
+                        !cleanedText.includes('定价') &&
+                        !cleanedText.includes('页数') &&
+                        !cleanedText.includes('装帧')) {
+                      publisher.push(cleanedText);
+                      break;
+                    }
+                  }
+                  nextNode = nextNode.nextSibling;
+                }
+              }
+            }
+          }
+          
+          // 额外的出版社提取逻辑：检查"出品方"作为次要出版社
+          const producerLabel = Array.from(infoDiv.querySelectorAll('span.pl')).find(span => 
+            span.textContent.trim() === '出品方' || span.textContent.trim() === '出品方:'
+          );
+          
+          if (producerLabel) {
+            const producerLink = producerLabel.nextElementSibling;
+            if (producerLink && producerLink.tagName === 'A') {
+              const producerName = producerLink.textContent.trim();
+              if (producerName && !publisher.includes(producerName)) {
+                publisher.push(producerName);
+              }
+            } else {
+              // 处理纯文本形式的出品方
+              let nextNode = producerLabel.nextSibling;
+              while (nextNode) {
+                if (nextNode.nodeType === Node.TEXT_NODE) {
+                  const producerText = nextNode.textContent.trim().replace(/^[:：]\s*/, '');
+                  if (producerText && producerText.length > 0 && !publisher.includes(producerText)) {
+                    publisher.push(producerText);
+                    break;
+                  }
+                }
+                nextNode = nextNode.nextSibling;
               }
             }
           }
@@ -457,13 +551,40 @@ async function getDoubanData(doubanId, type, url) {
         artist: artist,
         publisher: publisher,
         description: desc,
+        _debug_info_html: debugInfoHtml,
       };
     }, type);
+
+    // 备用方法：如果publisher为空，尝试从HTML中用正则表达式提取
+    if (type === 'book' && (!data.publisher || data.publisher.length === 0)) {
+      try {
+        const html = await page.content();
+        
+        // 匹配模式：<span class="pl">出版社:</span> XXX<br/> 或 <span class="pl">出版社:</span> XXX
+        const publisherMatch = html.match(/<span\s+class="pl">出版社:<\/span>\s*([^<\n]+)/);
+        
+        if (publisherMatch && publisherMatch[1]) {
+          const extractedPublisher = publisherMatch[1].trim();
+          
+          if (extractedPublisher && extractedPublisher.length > 0) {
+            data.publisher = [extractedPublisher];
+          }
+        } else {
+          // 尝试其他可能的模式
+          const altMatch = html.match(/出版社[:：]\s*([^<\n]+)/);
+          if (altMatch && altMatch[1]) {
+            const altPublisher = altMatch[1].trim();
+            data.publisher = [altPublisher];
+          }
+        }
+      } catch (error) {
+        console.log(`备用出版社提取失败: ${error.message}`);
+      }
+    }
 
     await browser.close();
 
     if (!data.title) {
-      console.log(`未找到豆瓣${type} ID ${doubanId} 的数据`);
       return null;
     }
     
@@ -480,7 +601,7 @@ async function getDoubanData(doubanId, type, url) {
       coverUrl: data.coverUrl,
       type: type,
       platform: 'douban',
-      url: url || pageUrl
+      url: url || pageUrl,
     };
   } catch (error) {
     await browser.close().catch(() => {});
@@ -756,7 +877,7 @@ async function main() {
       // 处理每个URL
       const results = [];
       for (const url of urls) {
-        console.log(`正在处理: ${url}`);
+        // 正在处理URL（日志已移除）
         const result = await processUrl(url, existingDataMap);
         if (result) {
           results.push(result);
@@ -772,7 +893,7 @@ async function main() {
 
       // 写入生成的文件 - 使用新的数据目录
       await fs.writeFile(generatedFile, JSON.stringify(allResults, null, 2));
-      console.log(`完成处理 ${configFile}，共 ${allResults.length} 条数据 (${results.length} 条新数据)`);
+      // 处理完成（日志已移除）
     }
     
     console.log('所有数据处理完成！');
