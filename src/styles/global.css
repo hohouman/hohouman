@@ -805,10 +805,11 @@ img {
   grid-template-columns: minmax(100px, 30%) minmax(0, 1fr) !important;
   width: 100%;
   max-width: 580px;
-  /* 根据2:3封面比例计算：假设图片宽度占30%，高度应该是宽度的1.5倍 */
-  /* 如果图片区域最小120px，那么高度至少需要 120 * 1.5 = 180px（仅图片）+ 内容区约100px = 280px */
-  /* 但为了更好展示，增加到360px */
-  height: 360px;
+  /* 优化高度：图片区(30%宽度)按2:3比例 + 紧凑的内容区 */
+  /* 假设图片区宽度约150px (580 * 0.3 * 0.85考虑padding)，高度 = 150 * 1.5 = 225px */
+  /* 内容区紧凑布局约150px，总高度约375px -> 但实际可以更紧凑 */
+  /* 最终设定为340px，让图片更贴合 */
+  height: 340px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
@@ -849,8 +850,8 @@ img {
 .showcase-card--tall .entry-card__body {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem;
+  gap: 0.4rem; /* 减小间距 */
+  padding: 0.875rem 1rem; /* 减小padding */
   justify-content: flex-start;
   overflow-y: auto; /* 内容过多时可滚动 */
   /* 添加分隔线区分图片区和内容区 */
@@ -867,11 +868,11 @@ img {
 
 .showcase-card--tall .entry-card__desc {
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3; /* 从4行减少到3行 */
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 0.88rem;
-  line-height: 1.55;
+  font-size: 0.85rem; /* 稍微减小字体 */
+  line-height: 1.5;
   color: rgba(255, 247, 239, 0.85);
   margin: 0;
 }
@@ -1140,7 +1141,7 @@ img {
     grid-template-columns: minmax(90px, 28%) minmax(0, 1fr) !important;
     max-width: 100%;
     border-radius: 12px;
-    height: 320px; /* 移动端也增加高度以适配2:3封面 */
+    height: 300px; /* 移动端也降低高度 */
   }
 
   .showcase-card--tall .entry-card__media {
