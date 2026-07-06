@@ -743,16 +743,18 @@ img {
   gap: 1.5rem;
   justify-content: center;
   padding: 0 1rem;
+  /* 与content-tabs保持相同的宽度 */
+  width: min(var(--content-width), calc(100% - 2rem));
+  margin: 0 auto;
 }
 
 .content-panel .entry-card,
 .content-panel .prose-card {
   background: rgba(255, 252, 247, 0.12);
   border-color: rgba(255, 255, 255, 0.18);
-}
-
-.content-panel .entry-card__media {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  /* 与content-tabs保持相同的宽度 */
+  width: min(var(--content-width), calc(100% - 2rem));
+  margin: 0 auto;
 }
 
 .showcase-card {
