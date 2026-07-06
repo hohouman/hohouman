@@ -182,6 +182,26 @@
     "localCoverPath": "/generated/movie_1292679_cover.webp"
   },
   {
+    "id": "35017155",
+    "title": "哥们儿 Bros",
+    "developer": [
+      "尼古拉斯·斯托勒"
+    ],
+    "director": [
+      "尼古拉斯·斯托勒"
+    ],
+    "author": [],
+    "artist": [],
+    "publisher": [],
+    "releaseDate": "2022-09-10(多伦多电影节)",
+    "description": "今年秋天，环球影业将骄傲地推出首部好莱坞主要电影公司制作，关于两名男同志，也许、可能、大概将会坠入爱河的爱情喜剧片。也许吧。不管怎样，他们都会非常忙碌。 喜剧天才比利·艾希纳、杰出的卖座电影导演尼古拉斯·斯托勒以及金牌喜剧导演/制片贾德·阿帕图共同打造《哥儿们》一片，这是一部在这个疯狂世界关于性、爱情及浪漫情怀，极具巧思、心醉神迷和暖心动人的喜剧片。",
+    "coverUrl": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2873251433.webp",
+    "type": "movie",
+    "platform": "douban",
+    "url": "https://movie.douban.com/subject/35017155/",
+    "localCoverPath": "/generated/movie_35017155_cover.webp"
+  },
+  {
     "id": "1308076",
     "title": "蓝宇 藍宇",
     "developer": [
