@@ -821,8 +821,8 @@ function shouldRefreshItem(parsed, item) {
   }
 
   if (parsed.type === 'book') {
-    // 如果作者或出版社为空，需要刷新
-    if (!item.author || !item.publisher || item.publisher.length === 0) {
+    // 如果作者、出版社或本地封面为空，需要刷新
+    if (!item.author || !item.publisher || item.publisher.length === 0 || !item.localCoverPath) {
       return true;
     }
   }

@@ -69,7 +69,8 @@
     ],
     "artist": [],
     "publisher": [
-      "新星出版社"
+      "新星出版社",
+      "天闻角川"
     ],
     "releaseDate": "2023",
     "description": "17岁的少女铃芽，与姨母一同生活在九州的一座平静的港口小镇上。在某日的上学途中，铃芽和一位美男子擦肩而过，他的目的是“寻找门”，于是铃芽追着他来到了山里的废墟。不过，留在那片废墟之中的是一扇孤零零伫立着的老旧白色之门，而铃芽仿佛被什么吸引了一样，向那扇门伸出了手……联系过去、现在与未来，铃芽的闭门故事就此开启。新海诚导演亲自执笔的原作小说！",
@@ -77,7 +78,7 @@
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/36179033/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_36179033_cover.webp"
   },
   {
     "id": "35268372",
@@ -109,7 +110,8 @@
     ],
     "artist": [],
     "publisher": [
-      "南海出版公司"
+      "南海出版公司",
+      "新经典文化"
     ],
     "releaseDate": "2018-5",
     "description": "《幻夜》是东野圭吾的经典长篇小说，《白夜行》的姊妹篇。《幻夜》和《白夜行》千丝万缕的联系一直是读者热衷讨论的话题。 为父亲守夜的晚上，弥漫在水原雅也心中的不是悲伤，而是愤怒。父亲尸骨未寒，狡猾又贪婪的舅舅便想吞并父亲留下的一切，雅也气愤无比，却又无计可施。然而，当晚一场突如其来的地震让一切扭转。 震后的混乱中，雅也看到被压在房梁下正要张嘴求救的舅舅。他胸中突然涌起一股冲动，随后毫不犹豫地捡起旁边的石头，朝舅舅的脑袋砸去。 这样就可以解决一切了，雅也这样想着，准备起身离开。突然，他发现不远处站着一个年轻女子，正圆睁双眼看着他。",
@@ -117,7 +119,7 @@
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/27666929/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_27666929_cover.webp"
   },
   {
     "id": "6953273",
@@ -131,13 +133,13 @@
     "publisher": [
       "上海文化出版社"
     ],
-    "releaseDate": "2011-12",
+    "releaseDate": "2011-12-1",
     "description": "",
     "coverUrl": "https://img1.doubanio.com/view/subject/s/public/s10412319.jpg",
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/6953273/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_6953273_cover.webp"
   },
   {
     "id": "26314932",
@@ -149,15 +151,16 @@
     ],
     "artist": [],
     "publisher": [
-      "百花洲文艺出版社"
+      "百花洲文艺出版社",
+      "天闻角川"
     ],
-    "releaseDate": "2015-3",
+    "releaseDate": "2015-3-1",
     "description": "雨中的清晨， 他和她，邂逅于静谧的庭院。 迷茫但渴望前进的两人， 今后会向何处迈出脚步？ 以成为制鞋师为职业目标的高中生孝雄，喜欢在下雨天的上午溜到公园的日式庭院素描鞋子设计图。某一天，他在这里偶遇一位比他年长的神秘女子——雪野。一开始，身穿职场正装的雪野一些不符合常人的举止让孝雄有些敬而远之，但在之后的下雨天里，两人总是不约而同地在庭院碰面。几次相谈之下，美丽而神秘的雪野与年轻而坚强的孝雄都渐渐地打开自己的心扉，互诉自己的烦恼与理想，两颗年轻的心也渐渐靠近。然而就在此时，孝雄发现雪野其实就是一位曾在自己所在学校掀起轩然大波并不得不离职的古文课老师。备受压力的雪野因此挫折而迷茫，甚至不知道之后的人生该如何继续…… 年轻的孝雄不愿看到雪野继续低迷下去，于是表明了自己的心意，并为她度身定做了第一双女鞋，希望雪野可以借此勇敢地走下去。受到鼓舞的雪野重拾信心... (展开全部)",
     "coverUrl": "https://img1.doubanio.com/view/subject/s/public/s33685399.jpg",
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/26314932/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_26314932_cover.webp"
   },
   {
     "id": "30389525",
@@ -189,7 +192,8 @@
     ],
     "artist": [],
     "publisher": [
-      "百花洲文艺出版社"
+      "百花洲文艺出版社",
+      "天闻角川"
     ],
     "releaseDate": "2019-9",
     "description": "高一那年的夏天，帆高离家出走，出岛来到东京。东京连日降雨不断，在熙熙攘攘的大都市一角，帆高遇到了拥有不可思议能力的少女阳菜。“从现在开始会放晴。”只要祈祷，她就能让天空放晴。在气候调节失控的时代，被命运捉弄的少年和少女选择了自己的生活方式。",
@@ -197,7 +201,7 @@
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/34799480/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_34799480_cover.webp"
   },
   {
     "id": "27598133",
@@ -249,15 +253,16 @@
     ],
     "artist": [],
     "publisher": [
-      "百花洲文艺出版社"
+      "百花洲文艺出版社",
+      "天闻角川"
     ],
-    "releaseDate": "2017-2",
+    "releaseDate": "2017-2-1",
     "description": "生活在东京的高中男生泷以及生活在乡下的高中女生三叶，以做梦为契机交换了灵魂。泷对女孩的身体感到陌生，对未知的乡下生活感到困惑，但还是逐渐习惯了这种感觉。他想更多地了解这具身体的主人——三叶，而“三叶”不同寻常的举止也让身边的人逐渐生疑……",
     "coverUrl": "https://img1.doubanio.com/view/subject/s/public/s29345650.jpg",
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/26972824/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_26972824_cover.webp"
   },
   {
     "id": "10554308",
@@ -269,15 +274,16 @@
     ],
     "artist": [],
     "publisher": [
-      "南海出版公司"
+      "南海出版公司",
+      "新经典文化"
     ],
-    "releaseDate": "2013-1",
+    "releaseDate": "2013-1-1",
     "description": "东野圭吾万千书迷心中的无冕之王 周刊文春推理小说年度BEST10第1名 本格推理小说年度BEST10第2名 《白夜行》是东野圭吾迄今口碑最好的长篇杰作，具备经典名著的一切要素： 一宗离奇命案牵出跨度近20年步步惊心的故事：悲凉的爱情、吊诡的命运、令人发指的犯罪、复杂人性的对决与救赎…… ------------------------------------------------------------------- 1973年，大阪的一栋废弃建筑中发现一名遭利器刺死的男子。案件扑朔迷离，悬而未决。 此后20年间，案件滋生出的恶逐渐萌芽生长，绽放出恶之花。案件相关者的人生逐渐被越来越重的阴影笼罩…… “我的天空里没有太阳，总是黑夜，但并不暗，因为有东西代替了太阳。虽然没有太阳那么明亮，但对我来说已经足够。 凭借着这份光，我便能把黑夜当成白天。 我从... (展开全部)",
     "coverUrl": "https://img1.doubanio.com/view/subject/s/public/s24514468.jpg",
     "type": "book",
     "platform": "douban",
     "url": "https://book.douban.com/subject/10554308/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/book_10554308_cover.webp"
   },
   {
     "id": "35546858",
