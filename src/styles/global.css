@@ -801,8 +801,8 @@ img {
    游戏/电影卡片 - 左右布局（适合2:3竖版封面）
    ============================================ */
 .showcase-card--tall {
-  display: grid;
-  grid-template-columns: minmax(100px, 30%) minmax(0, 1fr);
+  display: grid !important;
+  grid-template-columns: minmax(100px, 30%) minmax(0, 1fr) !important;
   width: 100%;
   max-width: 580px;
   height: 280px; /* 固定高度，确保统一 */
