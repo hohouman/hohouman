@@ -30,10 +30,14 @@ const games = Array.isArray(gamesData) ? gamesData : (gamesData.items || []);
     {games.length > 0 ? (
       <div class="collection-grid">
         {games.map((game) => (
-          <a href={game.url} target="_blank" style="text-decoration: none; color: inherit;">
-            <article class={`entry-card entry-card--compact${game.localPosterPath ? '' : ' entry-card--wide-media'}`} key={game.id}>
+          <a class="collection-link" href={game.url} target="_blank" rel="noreferrer">
+            <article class="entry-card entry-card--portrait" key={game.id}>
               <div class="entry-card__media">
-                {game.localPosterPath || game.localCoverPath ? <img src={game.localPosterPath || game.localCoverPath} alt={game.title} loading="lazy" /> : null}
+                {game.localPosterPath || game.localCoverPath ? (
+                  <img src={game.localPosterPath || game.localCoverPath} alt={game.title} loading="lazy" />
+                ) : (
+                  <div class="entry-card__placeholder">No cover</div>
+                )}
               </div>
               <div class="entry-card__body">
                 <span class="card-tag">Game</span>

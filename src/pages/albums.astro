@@ -48,13 +48,15 @@ const albumNotes = albums.length > 0 ? albums : [
     <div class="collection-grid">
       {albumNotes.map((item) => (
         item.url ? (
-          <a href={item.url} target="_blank" style="text-decoration: none; color: inherit;">
-            <article class={`entry-card${item.localCoverPath ? ' entry-card--compact' : ''}`}>
-              {item.localCoverPath ? (
-                <div class="entry-card__media">
+          <a class="collection-link" href={item.url} target="_blank" rel="noreferrer">
+            <article class="entry-card entry-card--square">
+              <div class="entry-card__media">
+                {item.localCoverPath ? (
                   <img src={item.localCoverPath} alt={item.title} loading="lazy" />
-                </div>
-              ) : null}
+                ) : (
+                  <div class="entry-card__placeholder">No cover</div>
+                )}
+              </div>
               <div class="entry-card__body">
                 <span class="card-tag">Album</span>
                 <h3 class="entry-card__title">{item.title}</h3>
@@ -65,12 +67,14 @@ const albumNotes = albums.length > 0 ? albums : [
             </article>
           </a>
         ) : (
-          <article class={`entry-card${item.localCoverPath ? ' entry-card--compact' : ''}`}>
-            {item.localCoverPath ? (
-              <div class="entry-card__media">
+          <article class="entry-card entry-card--square">
+            <div class="entry-card__media">
+              {item.localCoverPath ? (
                 <img src={item.localCoverPath} alt={item.title} loading="lazy" />
-              </div>
-            ) : null}
+              ) : (
+                <div class="entry-card__placeholder">No cover</div>
+              )}
+            </div>
             <div class="entry-card__body">
               <span class="card-tag">Album</span>
               <h3 class="entry-card__title">{item.title}</h3>

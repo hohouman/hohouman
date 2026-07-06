@@ -157,10 +157,14 @@ function getSocialIcon(platform) {
             {games.length > 0 ? (
               <div class="content-panel__list">
                 {games.map((game) => (
-                  <a href={game.url} target="_blank" style="text-decoration: none; color: inherit;">
-                    <article class="showcase-card--tall">
+                  <a class="collection-link" href={game.url} target="_blank" rel="noreferrer">
+                    <article class="entry-card entry-card--portrait">
                       <div class="entry-card__media">
-                        {game.localPosterPath || game.localCoverPath ? <img src={game.localPosterPath || game.localCoverPath} alt={game.title} loading="lazy" /> : null}
+                        {game.localPosterPath || game.localCoverPath ? (
+                          <img src={game.localPosterPath || game.localCoverPath} alt={game.title} loading="lazy" />
+                        ) : (
+                          <div class="entry-card__placeholder">No cover</div>
+                        )}
                       </div>
                       <div class="entry-card__body">
                         <span class="card-tag">{panelCopy.games.tag}</span>
@@ -190,10 +194,14 @@ function getSocialIcon(platform) {
             {movies.length > 0 ? (
               <div class="content-panel__list">
                 {movies.map((movie) => (
-                  <a href={movie.url} target="_blank" style="text-decoration: none; color: inherit;">
-                    <article class="showcase-card--tall">
+                  <a class="collection-link" href={movie.url} target="_blank" rel="noreferrer">
+                    <article class="entry-card entry-card--portrait">
                       <div class="entry-card__media">
-                        {movie.localCoverPath ? <img src={movie.localCoverPath} alt={movie.title} loading="lazy" /> : null}
+                        {movie.localCoverPath ? (
+                          <img src={movie.localCoverPath} alt={movie.title} loading="lazy" />
+                        ) : (
+                          <div class="entry-card__placeholder">No cover</div>
+                        )}
                       </div>
                       <div class="entry-card__body">
                         <span class="card-tag">{panelCopy.movies.tag}</span>
@@ -222,10 +230,14 @@ function getSocialIcon(platform) {
             {books.length > 0 ? (
               <div class="content-panel__list">
                 {books.map((book) => (
-                  <a href={book.url} target="_blank" style="text-decoration: none; color: inherit;">
-                    <article class="showcase-card--square">
+                  <a class="collection-link" href={book.url} target="_blank" rel="noreferrer">
+                    <article class="entry-card entry-card--square">
                       <div class="entry-card__media">
-                        {book.localCoverPath ? <img src={book.localCoverPath} alt={book.title} loading="lazy" /> : null}
+                        {book.localCoverPath ? (
+                          <img src={book.localCoverPath} alt={book.title} loading="lazy" />
+                        ) : (
+                          <div class="entry-card__placeholder">No cover</div>
+                        )}
                       </div>
                       <div class="entry-card__body">
                         <span class="card-tag">{panelCopy.books.tag}</span>
@@ -256,10 +268,14 @@ function getSocialIcon(platform) {
               <div class="content-panel__list">
                 {albumCards.map((item) => (
                   item.url ? (
-                    <a href={item.url} target="_blank" style="text-decoration: none; color: inherit;">
-                      <article class="showcase-card--square">
+                    <a class="collection-link" href={item.url} target="_blank" rel="noreferrer">
+                      <article class="entry-card entry-card--square">
                         <div class="entry-card__media">
-                          {item.localCoverPath ? <img src={item.localCoverPath} alt={item.title} loading="lazy" /> : null}
+                          {item.localCoverPath ? (
+                            <img src={item.localCoverPath} alt={item.title} loading="lazy" />
+                          ) : (
+                            <div class="entry-card__placeholder">No cover</div>
+                          )}
                         </div>
                         <div class="entry-card__body">
                           <span class="card-tag">{panelCopy.albums.tag}</span>
@@ -274,9 +290,13 @@ function getSocialIcon(platform) {
                       </article>
                     </a>
                   ) : (
-                    <article class="showcase-card--square">
+                    <article class="entry-card entry-card--square">
                       <div class="entry-card__media">
-                        {item.localCoverPath ? <img src={item.localCoverPath} alt={item.title} loading="lazy" /> : null}
+                        {item.localCoverPath ? (
+                          <img src={item.localCoverPath} alt={item.title} loading="lazy" />
+                        ) : (
+                          <div class="entry-card__placeholder">No cover</div>
+                        )}
                       </div>
                       <div class="entry-card__body">
                         <span class="card-tag">{panelCopy.albums.tag}</span>
