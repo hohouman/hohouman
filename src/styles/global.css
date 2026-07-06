@@ -745,19 +745,19 @@ img {
   }
 }
 
-/* 桌面端：游戏/电影3列，书籍/专辑4列 */
+/* 桌面端：自适应列数 */
 @media (min-width: 1024px) {
-  /* 游戏和电影页面 - 3列（因为卡片较宽） */
+  /* 游戏和电影页面 - 自适应列数（根据卡片宽度自动调整） */
   [data-panel="games"] .content-panel__list,
   [data-panel="movies"] .content-panel__list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
   
-  /* 书籍、专辑和其他页面 - 4列（因为卡片较窄） */
+  /* 书籍、专辑和其他页面 - 更密集的列数（因为卡片较窄） */
   [data-panel="books"] .content-panel__list,
   [data-panel="albums"] .content-panel__list,
   [data-panel="other"] .content-panel__list {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 }
 
@@ -765,13 +765,13 @@ img {
 @media (min-width: 1440px) {
   [data-panel="games"] .content-panel__list,
   [data-panel="movies"] .content-panel__list {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   }
   
   [data-panel="books"] .content-panel__list,
   [data-panel="albums"] .content-panel__list,
   [data-panel="other"] .content-panel__list {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }
 
@@ -805,7 +805,10 @@ img {
   grid-template-columns: minmax(100px, 30%) minmax(0, 1fr) !important;
   width: 100%;
   max-width: 580px;
-  height: 280px; /* 固定高度，确保统一 */
+  /* 根据2:3封面比例计算：假设图片宽度占30%，高度应该是宽度的1.5倍 */
+  /* 如果图片区域最小120px，那么高度至少需要 120 * 1.5 = 180px（仅图片）+ 内容区约100px = 280px */
+  /* 但为了更好展示，增加到360px */
+  height: 360px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
@@ -1134,10 +1137,10 @@ img {
 
   /* 移动端卡片优化 - Tall（左右布局，固定高度） */
   .showcase-card--tall {
-    grid-template-columns: minmax(90px, 28%) minmax(0, 1fr);
+    grid-template-columns: minmax(90px, 28%) minmax(0, 1fr) !important;
     max-width: 100%;
     border-radius: 12px;
-    height: 240px; /* 移动端稍矮 */
+    height: 320px; /* 移动端也增加高度以适配2:3封面 */
   }
 
   .showcase-card--tall .entry-card__media {
