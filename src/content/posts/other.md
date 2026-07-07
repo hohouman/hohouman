@@ -44,4 +44,4 @@ title: More about me
 
 抖音号：Lei_dun
 
-<img width="340" height="510" alt="9b0413edff6cce54577cf094693374a0" src="https://file.houman.top/mydouyinqrcode.jpg" />
+<img width="330" alt="9b0413edff6cce54577cf094693374a0" src="https://file.houman.top/mydouyinqrcode.jpg" />
