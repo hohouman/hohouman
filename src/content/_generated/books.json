@@ -607,5 +607,68 @@
     "platform": "douban",
     "url": "https://book.douban.com/subject/26598800/",
     "localCoverPath": "/generated/book_26598800_cover.webp"
+  },
+  {
+    "id": "27139846",
+    "title": "我在未来等你",
+    "developer": [],
+    "director": [],
+    "author": [
+      "刘同"
+    ],
+    "artist": [],
+    "publisher": [
+      "北京联合出版公司",
+      "磨铁图书"
+    ],
+    "releaseDate": "2017-9",
+    "description": "你会不会偶尔产生那种“如果能回到那一年就好了”的念头？觉得回到那一年，以我们当下的见识和心态，很多事都能被改变。 ----------------------------------------------------------------------------------------------------------- 36岁的大学老师郝回归人生不尽如人意，一眼看得到终点。他很想回到自己的17岁，回到那个阳光而天真的时代，重新来过。 一次偶然，他真的回去了。 只不过，他并没有重新来过的机会。 他依然36岁。他成了高三实习班主任。班级里，他遇见了17岁的自己——一塌糊涂的刘大志。郝回归知道刘大志的未来，也知道他的幸与不幸。他想改变他。 然而，当36岁的世故遇见17岁的热血，一切远没有这么简单…… ------------------------... (展开全部)",
+    "coverUrl": "https://img1.doubanio.com/view/subject/s/public/s29543659.jpg",
+    "type": "book",
+    "platform": "douban",
+    "url": "https://book.douban.com/subject/27139846/",
+    "localCoverPath": "/generated/book_27139846_cover.webp"
+  },
+  {
+    "id": "1461903",
+    "title": "何以笙箫默",
+    "developer": [],
+    "director": [],
+    "author": [
+      "顾漫"
+    ],
+    "artist": [],
+    "publisher": [
+      "朝华出版社",
+      "悦读纪"
+    ],
+    "releaseDate": "2007-4",
+    "description": "一段年少时的爱恋，牵出一生的纠缠。大学时代的赵默笙阳光灿烂，对法学系大才子何以琛一见倾心，开朗直率的她拔足倒追，终于使才气出众的他为她停留驻足。然而，不善表达的他终于使她在一次伤心之下远走他乡……",
+    "coverUrl": "https://img9.doubanio.com/view/subject/s/public/s2529195.jpg",
+    "type": "book",
+    "platform": "douban",
+    "url": "https://book.douban.com/subject/1461903/",
+    "localCoverPath": "/generated/book_1461903_cover.webp"
+  },
+  {
+    "id": "1596305",
+    "title": "泡沫之夏",
+    "developer": [],
+    "director": [],
+    "author": [
+      "明晓溪"
+    ],
+    "artist": [],
+    "publisher": [
+      "新世界出版社",
+      "记忆坊"
+    ],
+    "releaseDate": "2006-3",
+    "description": "夏沫和洛熙都是孤儿，少年的他们在养父母家相识，因为童年留在内心的阴影，他们彼此充满戒备和防范。洛熙在夏沫和弟弟参加电视歌唱大赛遇到尴尬状况下为他们解围，两个孩子中间的坚冰在逐渐融化，而深爱夏沫的富家少爷欧辰为了分开两人，把洛熙送到英国留学…… 五年后的洛熙成了拥有无数FANS的天皇巨星，而夏沫作为唱片公司的新晋艺人与他再次相遇，欧辰失忆了，三大主角再度登场，爱恨纠葛，他们之间将会发生怎样的一段故事。",
+    "coverUrl": "https://img3.doubanio.com/view/subject/s/public/s1914522.jpg",
+    "type": "book",
+    "platform": "douban",
+    "url": "https://book.douban.com/subject/1596305/",
+    "localCoverPath": "/generated/book_1596305_cover.webp"
   }
 ]
