@@ -489,9 +489,10 @@ function getSocialIcon(platform) {
     
     // 确保标签始终在卡片上方可见
     badge.style.position = 'absolute';
-    badge.style.top = '-3rem';
+    badge.style.top = '-3.5rem';
     badge.style.left = '50%';
     badge.style.transform = 'translateX(-50%)';
+    badge.style.zIndex = '10';
   };
 
   // 初始化并监听变化

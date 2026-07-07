@@ -319,7 +319,7 @@ img {
   height: 100svh;
   padding: 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .landing-hero-content {
@@ -338,7 +338,7 @@ img {
 
 .profile-badge-wrapper {
   position: absolute;
-  top: -3rem;
+  top: -3.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -387,9 +387,8 @@ img {
 
 .profile-panel--landing {
   position: relative;
-  width: min(85vw, 48rem);
-  max-width: 48rem;
-  min-width: min(280px, 85vw);
+  width: 100%;
+  max-width: min(90vw, 52rem);
   margin: 0 auto;
   padding: clamp(1.5rem, 4vw, 3rem);
   box-sizing: border-box;
@@ -1030,9 +1029,8 @@ img {
 
 @media (max-width: 1024px) {
   .profile-panel--landing {
-    width: fit-content;
+    width: 100%;
     max-width: min(90vw, 45rem);
-    min-width: min(260px, 85vw);
   }
 
   .landing-title {
@@ -1115,7 +1113,7 @@ img {
   }
 
   .profile-panel--landing {
-    width: fit-content;
+    width: 100%;
     max-width: min(75vw, 48rem);
   }
 }
@@ -1137,7 +1135,6 @@ img {
   .profile-panel--landing {
     width: 100%;
     max-width: 100%;
-    min-width: unset;
   }
 }
 
@@ -1178,9 +1175,8 @@ img {
   }
 
   .profile-panel--landing {
-    width: min(95vw, 40rem);
-    max-width: 40rem;
-    min-width: 280px;
+    width: 100%;
+    max-width: min(95vw, 40rem);
     padding: clamp(1rem, 3vw, 1.5rem);
   }
 
