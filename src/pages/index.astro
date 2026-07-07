@@ -461,4 +461,26 @@ function getSocialIcon(platform) {
       // 移除初始化时的setActive调用，避免刷新页面时自动滚动
     }
   });
+
+  // 移动端视口高度修正 - 解决浏览器地址栏动态变化问题
+  const fixMobileViewport = () => {
+    const setVH = () => {
+      // 使用 visualViewport API（更精确）或降级到 innerHeight
+      const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      document.documentElement.style.setProperty('--vh', `${height}px`);
+    };
+
+    setVH();
+    
+    // 监听视口变化
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', setVH);
+    }
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setVH, 100);
+    });
+  };
+
+  fixMobileViewport();
 </script>
