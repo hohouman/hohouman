@@ -1,8 +1,10 @@
 ---
 // 页脚组件
 import profile from '../config/profile.json';
+
+const copyrightText = profile.copyright || null;
 ---
 
 <footer class="site-footer">
-  <p>&copy; 2026 Ho Houman</p>
+  {copyrightText && <p>{copyrightText}</p>}
 </footer>
