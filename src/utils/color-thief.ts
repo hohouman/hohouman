@@ -197,6 +197,25 @@ export function generateColorScheme(dominantColor: string): {
 }
 
 /**
+ * 生成选中文字背景色
+ * @param backgroundColor - 背景颜色
+ * @param textColor - 文字颜色
+ * @param opacity - 透明度 (0-1，默认0.2)
+ * @returns 选中文字背景色的RGBA值
+ */
+export function generateSelectionColor(backgroundColor: string, textColor: string, opacity: number = 0.2): string {
+  const bgRgb = hexToRgb(backgroundColor);
+  const textRgb = hexToRgb(textColor);
+  
+  // 计算背景色和文字色的混合色，偏向文字色以确保可读性
+  const r = Math.round(bgRgb.r * (1 - opacity) + textRgb.r * opacity);
+  const g = Math.round(bgRgb.g * (1 - opacity) + textRgb.g * opacity);
+  const b = Math.round(bgRgb.b * (1 - opacity) + textRgb.b * opacity);
+  
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+}
+
+/**
  * 调整颜色明暗度
  * 使用HSL模型进行更自然的颜色调整
  */

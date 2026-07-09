@@ -59,7 +59,7 @@ img {
 }
 
 ::selection {
-  background: rgba(143, 78, 43, 0.2);
+  background: var(--selection-bg, rgba(143, 78, 43, 0.2));
 }
 
 ::-webkit-scrollbar {

@@ -100,6 +100,39 @@ const pageFrameClass = heroFullscreen ? 'page-frame page-frame--landing' : 'page
           .map((value) => Math.round(clamp(value, 0, 255)).toString(16).padStart(2, '0'))
           .join('')}`;
 
+      // 计算选中文字背景色的函数
+      const calculateSelectionColor = (bgRgb, textRgb, opacity = 0.2) => {
+        const r = Math.round(bgRgb.r * (1 - opacity) + textRgb.r * opacity);
+        const g = Math.round(bgRgb.g * (1 - opacity) + textRgb.g * opacity);
+        const b = Math.round(bgRgb.b * (1 - opacity) + textRgb.b * opacity);
+        
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+      };
+
+      // 更新选中文字背景色
+      const updateSelectionColor = (selectionColor) => {
+        // 移除之前的样式
+        const existingStyle = document.getElementById('dynamic-selection-style');
+        if (existingStyle) {
+          existingStyle.remove();
+        }
+        
+        // 创建新的样式
+        const style = document.createElement('style');
+        style.id = 'dynamic-selection-style';
+        style.textContent = `
+          ::selection {
+            background: ${selectionColor};
+          }
+          
+          ::-moz-selection {
+            background: ${selectionColor};
+          }
+        `;
+        
+        document.head.appendChild(style);
+      };
+
       const sampleThemeColor = async (url) => {
         try {
           const image = new Image();
@@ -162,6 +195,18 @@ const pageFrameClass = heroFullscreen ? 'page-frame page-frame--landing' : 'page
         root.style.setProperty('--theme-color-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`);
         root.style.setProperty('--theme-surface', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.14)`);
         root.style.setProperty('--theme-surface-strong', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.24)`);
+        
+        // 获取页面背景色和文字颜色，计算选中文字背景色
+        const computedBgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#f4efe6';
+        const computedTextColor = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#1f1a17';
+        
+        const bgRgb = hexToRgb(computedBgColor.startsWith('#') ? computedBgColor : '#f4efe6');
+        const textRgb = hexToRgb(computedTextColor.startsWith('#') ? computedTextColor : '#1f1a17');
+        
+        if (bgRgb && textRgb) {
+          const selectionColor = calculateSelectionColor(bgRgb, textRgb, 0.2);
+          updateSelectionColor(selectionColor);
+        }
       };
 
       document.addEventListener('DOMContentLoaded', () => {
