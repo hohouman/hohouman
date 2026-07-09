@@ -244,14 +244,18 @@ async function getDoubanData(doubanId, type, url) {
         'a.nbg img',
         '.nbg img',
         'img[alt*="封面"]',
-        'img[src*="doubanio.com"]'
+        'img[src*="doubanio.com"]',
+        'img[src*="douban.com"]',
+        '#s-lnk-img img',
+        '#sync-adaptor-cover img'
       ];
       
       for (const selector of coverSelectors) {
         const img = document.querySelector(selector);
         if (img) {
-          coverUrl = img.getAttribute('src') || img.getAttribute('data-lazy') || img.getAttribute('data-src');
-          if (coverUrl && !coverUrl.includes('default')) {
+          let tempCoverUrl = img.getAttribute('src') || img.getAttribute('data-lazy') || img.getAttribute('data-src');
+          if (tempCoverUrl && !tempCoverUrl.includes('default')) {
+            coverUrl = tempCoverUrl;
             break;
           }
         }
@@ -261,7 +265,33 @@ async function getDoubanData(doubanId, type, url) {
       if (!coverUrl || coverUrl.includes('default')) {
         const coverLink = document.querySelector('#mainpic a');
         if (coverLink) {
-          coverUrl = coverLink.getAttribute('href');
+          const href = coverLink.getAttribute('href');
+          if (href && href.includes('douban.com/photos/')) {
+            // 如果是相册页面，尝试从相册获取封面
+            // 通过修改URL格式来获取大图
+            const photoMatch = href.match(/\/photos\/(\w+)\//);
+            if (photoMatch) {
+              // 这种情况下需要特殊处理，暂时保留原有URL
+              coverUrl = href;
+            }
+          } else {
+            coverUrl = href;
+          }
+        }
+      }
+      
+      // 再次尝试从页面的其他地方获取封面
+      if (!coverUrl || coverUrl.includes('default')) {
+        const scriptTags = document.querySelectorAll('script[type="application/ld+json"]');
+        if (scriptTags.length > 0) {
+          try {
+            const jsonData = JSON.parse(scriptTags[0].textContent);
+            if (jsonData.image) {
+              coverUrl = jsonData.image;
+            }
+          } catch(e) {
+            // 忽略JSON解析错误
+          }
         }
       }
       
