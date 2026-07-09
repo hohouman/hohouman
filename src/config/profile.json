@@ -10,5 +10,15 @@
     "instagram": "",
     "telegram": "",
     "facebook": ""
-  }
+  },
+  "links": [
+    {
+      "label": "我的博客",
+      "href": "https://blog.houman.top"
+    },
+    {
+      "label": "我的大音劲",
+      "href": "https://9sing.houman.top"
+    }
+  ]
 }

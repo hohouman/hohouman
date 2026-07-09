@@ -38,10 +38,28 @@ const albumCards = albums.length > 0 ? albums : fallbackAlbumNotes.map((item, in
   type: 'album',
 }));
 
-const externalLinks = [
-  { href: 'https://blog.houman.top', label: '我的博客' },
-  { href: 'https://9sing.houman.top', label: '我的大音劲' },
-];
+type ProfileActionLink = {
+  href: string;
+  label: string;
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  rel?: string;
+};
+
+const configuredProfileLinks = (profile as { links?: Partial<ProfileActionLink>[] }).links ?? [];
+const profileLinks = configuredProfileLinks
+  .filter((link): link is ProfileActionLink => Boolean(link.href?.trim() && link.label?.trim()))
+  .map((link) => {
+    const href = link.href.trim();
+    const target = link.target ?? (/^https?:\/\//i.test(href) ? '_blank' : undefined);
+
+    return {
+      ...link,
+      href,
+      label: link.label.trim(),
+      target,
+      rel: link.rel ?? (target === '_blank' ? 'noreferrer' : undefined),
+    };
+  });
 
 const socialLinks = Object.entries(profile.social)
   .filter(([, url]) => Boolean(url))
@@ -127,8 +145,8 @@ function getSocialIcon(platform) {
                 </svg>
               </a>
             ))}
-            {externalLinks.map((link) => (
-              <a href={link.href} target="_blank" class="external-link-button">
+            {profileLinks.map((link) => (
+              <a href={link.href} target={link.target} rel={link.rel} class="external-link-button">
                 {link.label}
               </a>
             ))}
