@@ -144,7 +144,6 @@ function getSocialIcon(platform: string): string {
 
     if (!viewer || !tabs.length || !panels.length) return;
 
-    const keys = tabs.map((tab) => tab.dataset.view);
     const panelMap = Object.fromEntries(panels.map((panel) => [panel.dataset.panel, panel]));
 
     const getCurrentKey = () => viewer.dataset.activeView || 'games';

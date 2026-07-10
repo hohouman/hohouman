@@ -16,10 +16,6 @@ export function getStaticPaths() {
   }));
 }
 
-interface Props {
-  collection: CollectionKey;
-}
-
 const { collection } = Astro.params;
 const config = collections[collection as CollectionKey];
 const items = getCollectionItems(config);
