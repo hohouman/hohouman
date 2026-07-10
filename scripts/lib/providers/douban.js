@@ -1,7 +1,5 @@
 import { delay } from '../util.js';
-
-const USER_AGENT =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+import { USER_AGENT } from '../constants.js';
 
 /**
  * 解决豆瓣的 SHA-512 工作量证明挑战（若存在）。
@@ -50,17 +48,32 @@ async function solveChallenge(page) {
   }
 }
 
-/** 在页面上下文中提取条目信息（DOM 解析） */
-function extractInPage(type) {
-  const extractText = (selector) => {
-    const el = document.querySelector(selector);
-    return el ? el.textContent.trim() : '';
-  };
+/* ---------- 页面内字段提取（在浏览器上下文执行） ---------- */
 
+function extractText(selector) {
+  const el = document.querySelector(selector);
+  return el ? el.textContent.trim() : '';
+}
+
+/** 在 label 之后的文本节点里取值，支持清洗回调 */
+function textAfterLabel(labelSpan, cleaner = (t) => t) {
+  let node = labelSpan.nextSibling;
+  while (node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = cleaner(node.textContent);
+      if (text) return text;
+    }
+    node = node.nextSibling;
+  }
+  return '';
+}
+
+function extractTitle() {
   const titleEl = document.querySelector('h1 span[property="v:itemreviewed"]');
-  const title = titleEl ? titleEl.textContent.trim() : extractText('h1') || '';
+  return titleEl ? titleEl.textContent.trim() : extractText('h1') || '';
+}
 
-  // ---- 封面 ----
+function extractCoverUrl() {
   let coverUrl = '';
   const coverSelectors = [
     '#mainpic img',
@@ -100,103 +113,100 @@ function extractInPage(type) {
   }
   if (coverUrl && coverUrl.includes('douban.com')) coverUrl = coverUrl.replace(/\?.*$/, '');
   if (coverUrl && coverUrl.startsWith('http://')) coverUrl = coverUrl.replace('http://', 'https://');
+  return coverUrl;
+}
 
+function extractMovie() {
   let releaseDate = '';
-  let director = [];
-  let actors = [];
-  let author = [];
-  let artist = [];
-  let publisher = [];
+  const releaseEl = document.querySelector('[property="v:initialReleaseDate"]');
+  if (releaseEl) releaseDate = releaseEl.textContent.trim();
+  const director = Array.from(document.querySelectorAll('[rel="v:directedBy"]')).map((el) => el.textContent.trim());
+  const actors = Array.from(document.querySelectorAll('[rel="v:starring"]')).map((el) => el.textContent.trim());
+  return { releaseDate, director, actors };
+}
 
-  const textAfterLabel = (labelSpan, cleaner = (t) => t) => {
-    let node = labelSpan.nextSibling;
-    while (node) {
-      if (node.nodeType === Node.TEXT_NODE) {
-        const text = cleaner(node.textContent);
-        if (text) return text;
+/** 出版方中需要排除的非出版社字段 */
+const BOOK_INVALID_PUBLISHER = ['出品方', '原作名', 'ISBN', '统一书号', '定价', '页数', '装帧'];
+
+function extractBook() {
+  let releaseDate = '';
+  const author = [];
+  const publisher = [];
+  const info = document.getElementById('info');
+  if (info) {
+    for (const label of info.querySelectorAll('span.pl')) {
+      const text = label.textContent.trim();
+
+      if (text.includes('出版年')) {
+        const raw = textAfterLabel(label, (t) => t);
+        const m = raw.match(/(\d{4}(-\d{1,2}(-\d{1,2})?)?)/);
+        if (m) releaseDate = m[0];
       }
-      node = node.nextSibling;
-    }
-    return '';
-  };
 
-  if (type === 'movie') {
-    const releaseEl = document.querySelector('[property="v:initialReleaseDate"]');
-    if (releaseEl) releaseDate = releaseEl.textContent.trim();
-    director = Array.from(document.querySelectorAll('[rel="v:directedBy"]')).map((el) => el.textContent.trim());
-    actors = Array.from(document.querySelectorAll('[rel="v:starring"]')).map((el) => el.textContent.trim());
-  } else if (type === 'book') {
-    const info = document.getElementById('info');
-    if (info) {
-      for (const label of info.querySelectorAll('span.pl')) {
-        const text = label.textContent.trim();
-
-        if (text.includes('出版年')) {
-          const raw = textAfterLabel(label, (t) => t);
-          const m = raw.match(/(\d{4}(-\d{1,2}(-\d{1,2})?)?)/);
-          if (m) releaseDate = m[0];
-        }
-
-        if (text === '作者' || text === '作者:') {
-          const link = label.nextElementSibling;
-          if (link && link.tagName === 'A') author.push(link.textContent.trim());
-          else {
-            const t = textAfterLabel(label, (s) => s.trim().replace(/^[:：]\s*/, ''));
-            if (t) author.push(t);
-          }
-        }
-
-        if (text === '出版社' || text === '出版社:') {
-          const link = label.nextElementSibling;
-          if (link && link.tagName === 'A') publisher.push(link.textContent.trim());
-          else {
-            const t = textAfterLabel(label, (s) =>
-              s.trim().replace(/^[:：]\s*/, '').replace(/\s+/g, ' '),
-            );
-            const invalid = ['出品方', '原作名', 'ISBN', '统一书号', '定价', '页数', '装帧'];
-            if (t && !invalid.some((k) => t.includes(k))) publisher.push(t);
-          }
+      if (text === '作者' || text === '作者:') {
+        const link = label.nextElementSibling;
+        if (link && link.tagName === 'A') author.push(link.textContent.trim());
+        else {
+          const t = textAfterLabel(label, (s) => s.trim().replace(/^[:：]\s*/, ''));
+          if (t) author.push(t);
         }
       }
 
-      const producer = Array.from(info.querySelectorAll('span.pl')).find(
-        (s) => s.textContent.trim() === '出品方' || s.textContent.trim() === '出品方:',
-      );
-      if (producer) {
-        const link = producer.nextElementSibling;
-        const name =
-          link && link.tagName === 'A'
-            ? link.textContent.trim()
-            : textAfterLabel(producer, (s) => s.trim().replace(/^[:：]\s*/, ''));
-        if (name && !publisher.includes(name)) publisher.push(name);
+      if (text === '出版社' || text === '出版社:') {
+        const link = label.nextElementSibling;
+        if (link && link.tagName === 'A') publisher.push(link.textContent.trim());
+        else {
+          const t = textAfterLabel(label, (s) => s.trim().replace(/^[:：]\s*/, '').replace(/\s+/g, ' '));
+          if (t && !BOOK_INVALID_PUBLISHER.some((k) => t.includes(k))) publisher.push(t);
+        }
       }
     }
-  } else if (type === 'album') {
-    const info = document.getElementById('info');
-    if (info) {
-      for (const span of info.querySelectorAll('span.pl')) {
-        const text = span.textContent.trim();
 
-        if (text.includes('发行时间')) {
-          const raw = textAfterLabel(span, (t) => t.replace(/\u00a0/g, ' '));
-          const m = raw.match(/(\d{4}-\d{2}-\d{2}|\d{4}-\d{2}|\d{4})/);
-          if (m) releaseDate = m[0];
-        }
+    const producer = Array.from(info.querySelectorAll('span.pl')).find(
+      (s) => s.textContent.trim() === '出品方' || s.textContent.trim() === '出品方:',
+    );
+    if (producer) {
+      const link = producer.nextElementSibling;
+      const name =
+        link && link.tagName === 'A'
+          ? link.textContent.trim()
+          : textAfterLabel(producer, (s) => s.trim().replace(/^[:：]\s*/, ''));
+      if (name && !publisher.includes(name)) publisher.push(name);
+    }
+  }
+  return { releaseDate, author, publisher };
+}
 
-        if (text.includes('表演者')) {
-          const links = span.parentElement?.querySelectorAll('a') || [];
-          artist = Array.from(links).map((a) => a.textContent.trim()).filter(Boolean);
-        }
+function extractAlbum() {
+  let releaseDate = '';
+  const artist = [];
+  const publisher = [];
+  const info = document.getElementById('info');
+  if (info) {
+    for (const span of info.querySelectorAll('span.pl')) {
+      const text = span.textContent.trim();
 
-        if (text.includes('出版者')) {
-          const t = textAfterLabel(span, (s) => s.replace(/\u00a0/g, ' ').trim());
-          if (t && !t.includes('<') && !t.includes('\n')) publisher.push(t);
-        }
+      if (text.includes('发行时间')) {
+        const raw = textAfterLabel(span, (t) => t.replace(/\u00a0/g, ' '));
+        const m = raw.match(/(\d{4}-\d{2}-\d{2}|\d{4}-\d{2}|\d{4})/);
+        if (m) releaseDate = m[0];
+      }
+
+      if (text.includes('表演者')) {
+        const links = span.parentElement?.querySelectorAll('a') || [];
+        artist.push(...Array.from(links).map((a) => a.textContent.trim()).filter(Boolean));
+      }
+
+      if (text.includes('出版者')) {
+        const t = textAfterLabel(span, (s) => s.replace(/\u00a0/g, ' ').trim());
+        if (t && !t.includes('<') && !t.includes('\n')) publisher.push(t);
       }
     }
   }
+  return { releaseDate, artist, publisher };
+}
 
-  // ---- 描述 ----
+function extractDescription(type) {
   let desc = '';
   if (type === 'movie') {
     desc =
@@ -232,13 +242,27 @@ function extractInPage(type) {
     desc = desc.replace(/\s+/g, ' ').trim();
     if (desc.length > 500) desc = desc.slice(0, 500) + '...';
   }
+  return desc;
+}
 
-  return { title, coverUrl, releaseDate, director, actors, author, artist, publisher, description: desc };
+/** 按类型抽取页面结构化字段，组装为统一对象 */
+function extractInPage(type) {
+  const fields =
+    type === 'movie' ? extractMovie() : type === 'book' ? extractBook() : extractAlbum();
+  return {
+    title: extractTitle(),
+    coverUrl: extractCoverUrl(),
+    ...fields,
+    description: extractDescription(type),
+  };
 }
 
 /**
  * 从豆瓣抓取电影/书籍/专辑数据。复用外部传入的 browser 实例。
  * @param {import('puppeteer').Browser} browser
+ * @param {string} doubanId
+ * @param {'movie'|'book'|'album'} type
+ * @param {string} [url] 原始链接（优先作为抓取地址，缺省时按类型回退拼装）
  * @returns {Promise<object|null>}
  */
 export async function getDoubanData(browser, doubanId, type, url) {
@@ -255,7 +279,7 @@ export async function getDoubanData(browser, doubanId, type, url) {
     await page.setCookie({ name: 'll', value: '1082896593', domain: '.douban.com', path: '/' });
 
     const host = type === 'movie' ? 'movie' : type === 'book' ? 'book' : 'music';
-    const pageUrl = `https://${host}.douban.com/subject/${doubanId}/`;
+    const pageUrl = url || `https://${host}.douban.com/subject/${doubanId}/`;
 
     await delay(Math.random() * 2000 + 1000);
     await page.goto(pageUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -294,7 +318,6 @@ export async function getDoubanData(browser, doubanId, type, url) {
     return {
       id: doubanId,
       title: data.title,
-      developer: data.director?.length ? data.director : data.author || [],
       director: data.director || [],
       author: data.author || [],
       artist: data.artist || [],

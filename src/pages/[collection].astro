@@ -3,24 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import EntryCard from '../components/EntryCard.astro';
 import profile from '../config/profile.json';
 import {
+  collections,
   collectionList,
   getCollectionItems,
   getCollectionCount,
-  type CollectionConfig,
+  type CollectionKey,
 } from '../lib/collections';
 
 export function getStaticPaths() {
   return collectionList.map((config) => ({
     params: { collection: config.key },
-    props: { config },
   }));
 }
 
 interface Props {
-  config: CollectionConfig;
+  collection: CollectionKey;
 }
 
-const { config } = Astro.props;
+const { collection } = Astro.params;
+const config = collections[collection as CollectionKey];
 const items = getCollectionItems(config);
 const count = getCollectionCount(config);
 

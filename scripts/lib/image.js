@@ -4,15 +4,14 @@ import { Buffer } from 'buffer';
 import sharp from 'sharp';
 import { PUBLIC_GENERATED_DIR } from './paths.js';
 import { backoff } from './util.js';
+import { USER_AGENT } from './constants.js';
 
 const MAX_RETRIES = 3;
-const DOUBAN_UA =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
 
 /** 豆瓣图片需带 Referer 绕过防盗链 */
 function buildHeaders(url) {
   if (url.includes('doubanio.com') || url.includes('douban.com')) {
-    return { Referer: 'https://www.douban.com/', 'User-Agent': DOUBAN_UA };
+    return { Referer: 'https://www.douban.com/', 'User-Agent': USER_AGENT };
   }
   return {};
 }

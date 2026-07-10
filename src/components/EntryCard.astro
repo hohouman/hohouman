@@ -10,13 +10,9 @@ interface Props {
   descFallback?: string;
 }
 
+import { asText, hasValue } from '../utils/format';
+
 const { item, tag, variant, coverKeys, metaFields, descFallback } = Astro.props;
-
-const asText = (value: unknown): string =>
-  Array.isArray(value) ? value.join(', ') : value == null ? '' : String(value);
-
-const hasValue = (value: unknown): boolean =>
-  Array.isArray(value) ? value.length > 0 : Boolean(value);
 
 const cover = coverKeys.map((key) => item[key]).find(hasValue) as string | undefined;
 

@@ -1,7 +1,13 @@
-import gamesData from '../content/_generated/games.json';
-import moviesData from '../content/_generated/movies.json';
-import booksData from '../content/_generated/books.json';
-import albumsData from '../content/_generated/albums.json';
+const generatedModules = import.meta.glob('../content/_generated/*.json', { eager: true }) as Record<
+  string,
+  { default: unknown }
+>;
+
+/** 按集合 key 加载对应的生成数据（与 src/config/<key>.json 同名） */
+function loadGenerated(key: string): unknown {
+  const mod = generatedModules[`../content/_generated/${key}.json`];
+  return mod ? mod.default : [];
+}
 
 /** 单条媒体条目（游戏 / 电影 / 书籍 / 专辑） */
 export interface MediaItem {
@@ -95,7 +101,7 @@ export const collections: Record<CollectionKey, CollectionConfig> = {
     chips: ['Steam', 'Cover-first layout'],
     showCount: true,
     emptyText: 'No games added yet. Check back later!',
-    data: gamesData,
+    data: loadGenerated('games'),
   },
   movies: {
     key: 'movies',
@@ -116,7 +122,7 @@ export const collections: Record<CollectionKey, CollectionConfig> = {
     chips: ['Poster-led cards', 'Cinematic spacing'],
     showCount: true,
     emptyText: 'No movies added yet. Check back later!',
-    data: moviesData,
+    data: loadGenerated('movies'),
   },
   books: {
     key: 'books',
@@ -138,7 +144,7 @@ export const collections: Record<CollectionKey, CollectionConfig> = {
     chips: ['Reading shelf', 'Quiet layout'],
     showCount: true,
     emptyText: 'No books added yet. Check back later!',
-    data: booksData,
+    data: loadGenerated('books'),
   },
   albums: {
     key: 'albums',
@@ -159,7 +165,7 @@ export const collections: Record<CollectionKey, CollectionConfig> = {
     chips: ['Music notes', 'Listening log', 'Album shelf'],
     showCount: false,
     emptyText: 'No albums added yet. Check back later!',
-    data: albumsData,
+    data: loadGenerated('albums'),
     fallbackItems: [
       {
         id: 'album-note-0',
@@ -190,6 +196,15 @@ export const collectionList: CollectionConfig[] = [
   collections.books,
   collections.albums,
 ];
+
+/** “其他”面板的共享文案（首页与 other 页共用，避免重复硬编码） */
+export const OTHER_SECTION = {
+  key: 'other',
+  navLabel: '其他',
+  eyebrow: 'Other',
+  title: '看起来，你想要更加了解我……',
+  desc: 'More about me.',
+} as const;
 
 /** 兼容 `[...]` 与 `{ items: [...] }` 两种数据形态 */
 function normalize(data: unknown): MediaItem[] {

@@ -2,13 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import OtherContent from '../content/posts/other.md';
 import profile from '../config/profile.json';
+import { OTHER_SECTION } from '../lib/collections';
 ---
 
 <Layout title="Other" wallpaper={profile.wallpaper}>
   <div slot="hero" class="page-hero">
     <p class="page-kicker">Collection / Other</p>
     <h1>Other Interests</h1>
-    <p>看起来，你想要更加了解我……</p>
+    <p>{OTHER_SECTION.title}</p>
     <div class="pill-row">
       <span class="stat-chip">Music</span>
       <span class="stat-chip">Travel</span>
@@ -22,7 +23,7 @@ import profile from '../config/profile.json';
         <p class="section-eyebrow">Notes</p>
         <h2 class="section-title">My Other Interests</h2>
       </div>
-      <p class="section-lead">看起来，你想要更加了解我……</p>
+      <p class="section-lead">{OTHER_SECTION.title}</p>
     </div>
 
     <div class="prose-card">

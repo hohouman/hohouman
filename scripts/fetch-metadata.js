@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import puppeteer from 'puppeteer';
 
-import { CONFIG_DIR, GENERATED_DIR, CONFIG_FILES, ensureDirs } from './lib/paths.js';
+import { CONFIG_DIR, GENERATED_DIR, ensureDirs, listConfigFiles } from './lib/paths.js';
 import { delay } from './lib/util.js';
 import { parseUrl } from './lib/url.js';
 import { shouldRefreshItem } from './lib/refresh.js';
@@ -42,6 +42,11 @@ async function fetchByPlatform(parsed) {
     default:
       return null;
   }
+}
+
+/** 归一化 URL，用于合并后按配置顺序排序（忽略末尾斜杠与大小写） */
+function normalizeUrl(url) {
+  return (url || '').replace(/\/+$/, '').toLowerCase();
 }
 
 /** 处理单个 URL：命中缓存则跳过，否则抓取并下载封面 */
@@ -125,13 +130,22 @@ async function processConfigFile(configFile) {
     ...existingData.filter((item) => !resultKeys.has(`${item.platform}_${item.id}`)),
   ];
 
+  // 按配置文件中的 URL 顺序稳定排序（忽略末尾斜杠差异）
+  const order = new Map(urls.map((url, index) => [normalizeUrl(url), index]));
+  merged.sort((a, b) => {
+    const ai = order.get(normalizeUrl(a.url)) ?? Number.MAX_SAFE_INTEGER;
+    const bi = order.get(normalizeUrl(b.url)) ?? Number.MAX_SAFE_INTEGER;
+    return ai - bi;
+  });
+
   await fs.writeFile(generatedFile, JSON.stringify(merged, null, 2));
 }
 
 async function main() {
   await ensureDirs();
   try {
-    for (const configFile of CONFIG_FILES) {
+    const configFiles = await listConfigFiles();
+    for (const configFile of configFiles) {
       await processConfigFile(configFile);
     }
     console.log('所有数据处理完成！');
