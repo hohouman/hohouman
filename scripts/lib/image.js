@@ -3,10 +3,19 @@ import path from 'path';
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 import { PUBLIC_GENERATED_DIR } from './paths.js';
-import { backoff } from './util.js';
+import { delay } from './util.js';
 import { USER_AGENT } from './constants.js';
 
-const MAX_RETRIES = 3;
+const MAX_RETRIES = 5;
+
+/**
+ * 带抖动的退避：基础 2^attempt 秒，乘以 [0.5, 1.5] 随机系数，
+ * 避免在豆瓣限流窗口内所有重试集中在同一时刻撞墙。
+ */
+function jitteredBackoff(attempt) {
+  const base = 2 ** attempt * 1000;
+  return delay(Math.floor(base * (0.5 + Math.random())));
+}
 
 /** 豆瓣图片需带 Referer 绕过防盗链 */
 function buildHeaders(url) {
@@ -33,7 +42,7 @@ export async function downloadAndConvertImage(url, fileName, options = {}) {
           return null;
         }
         if (attempt < MAX_RETRIES) {
-          await backoff(attempt);
+          await jitteredBackoff(attempt);
           continue;
         }
         throw new Error(`下载失败: ${response.statusText}`);
@@ -55,7 +64,7 @@ export async function downloadAndConvertImage(url, fileName, options = {}) {
       return `/generated/${fileName}`;
     } catch (error) {
       console.error(`下载/转换失败 (尝试 ${attempt}/${MAX_RETRIES}) ${url}: ${error.message}`);
-      if (attempt < MAX_RETRIES) await backoff(attempt);
+      if (attempt < MAX_RETRIES) await jitteredBackoff(attempt);
     }
   }
 

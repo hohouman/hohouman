@@ -5,7 +5,7 @@ import puppeteer from 'puppeteer';
 import { CONFIG_DIR, GENERATED_DIR, ensureDirs, listConfigFiles } from './lib/paths.js';
 import { delay } from './lib/util.js';
 import { parseUrl } from './lib/url.js';
-import { shouldRefreshItem } from './lib/refresh.js';
+import { shouldRefreshItem, needsImageOnlyRetry } from './lib/refresh.js';
 import { downloadAndConvertImage } from './lib/image.js';
 import { getSteamData } from './lib/providers/steam.js';
 import { getDoubanData } from './lib/providers/douban.js';
@@ -49,6 +49,24 @@ function normalizeUrl(url) {
   return (url || '').replace(/\/+$/, '').toLowerCase();
 }
 
+/** 仅重试图片下载（元数据已完整、仅本地图片缺失时使用） */
+async function retryImageOnly(cached) {
+  if (cached.coverUrl && !cached.localCoverPath) {
+    cached.localCoverPath = await downloadAndConvertImage(
+      cached.coverUrl,
+      `${cached.type}_${cached.id}_cover.webp`,
+    );
+  }
+  if (cached.posterUrl && !cached.localPosterPath) {
+    cached.localPosterPath = await downloadAndConvertImage(
+      cached.posterUrl,
+      `${cached.type}_${cached.id}_poster.webp`,
+      { width: 600, height: 900 },
+    );
+  }
+  return cached;
+}
+
 /** 处理单个 URL：命中缓存则跳过，否则抓取并下载封面 */
 async function processUrl(url, existingDataMap) {
   const parsed = parseUrl(url);
@@ -59,6 +77,10 @@ async function processUrl(url, existingDataMap) {
 
   const cacheKey = `${parsed.platform}_${parsed.id}`;
   const cached = existingDataMap[cacheKey];
+  // 元数据已完整但图片缺失：只重试图片，避免重新抓取页面触发豆瓣限流
+  if (cached && needsImageOnlyRetry(parsed, cached)) {
+    return retryImageOnly(cached);
+  }
   if (cached && !shouldRefreshItem(parsed, cached)) return cached;
 
   const data = await fetchByPlatform(parsed);
