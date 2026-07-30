@@ -219,7 +219,7 @@
     "type": "movie",
     "platform": "douban",
     "url": "https://movie.douban.com/subject/10864713/",
-    "localCoverPath": null
+    "localCoverPath": "/generated/movie_10864713_cover.webp"
   },
   {
     "id": "20470074",
