@@ -35,13 +35,3 @@ title: More about me
 背景墙纸：https://www.pixiv.net/artworks/81684149
 
 头像：https://www.pixiv.net/artworks/81673857
-
-> 感觉确实得把某些东西Po到网上才能增加认识同好的概率
-
-如果我们兴趣相投，可以交换联系方式认识一下。
-
-我们可以先从抖音（陆抖）开始...
-
-抖音号：Lei_dun
-
-<img style="max-width: 330px; width: 100%; height: auto;" src="https://file.houman.top/mydouyinqrcode.jpg" />
